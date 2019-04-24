@@ -72,10 +72,8 @@ class TestController extends Controller
 
        print_r($request->excelData);
 
-       for($request->excelData in $data)
-       {
-         //iterar cada objeto y hacer algo con el
-       }
+
+
 
     }
 }
