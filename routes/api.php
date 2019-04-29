@@ -20,3 +20,9 @@ use Illuminate\Http\Request;
 Route::get('users','Api\UserController@index');
 
 Route::post('testExcel','Api\TestController@testExcel');
+
+
+/***/
+Route::resource('project', 'Api\ProjectController');
+Route::resource('functional-unit', 'Api\FunctionalUnitController');
+Route::resource('forest-unit', 'Api\ForestUnitController');

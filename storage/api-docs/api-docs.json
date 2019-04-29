@@ -9,10 +9,388 @@
             "url": "http://localhost:8000"
         },
         {
+            "url": "http://localhost:8000"
+        },
+        {
+            "url": "http://localhost:8000"
+        },
+        {
+            "url": "http://localhost:8000"
+        },
+        {
             "url": "http://swagger.local"
         }
     ],
     "paths": {
+        "/api/forest-unit": {
+            "post": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Registrar individuo forestal",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::create",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "inspector": {
+                                        "description": "Interventor",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba SA"
+                                    },
+                                    "code": {
+                                        "description": "Codigo del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "102F"
+                                    },
+                                    "common_name": {
+                                        "description": "Nombre comun del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Torcazo"
+                                    },
+                                    "scientific_name": {
+                                        "description": "Nombre cientifico del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Schefflera morototoni"
+                                    },
+                                    "species": {
+                                        "description": "Especie del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Alchornea sp."
+                                    },
+                                    "family": {
+                                        "description": "Familia del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Euphorbiaceac"
+                                    },
+                                    "cap_cm": {
+                                        "description": "CAP (Medido en cm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "40.0"
+                                    },
+                                    "total_heigth_m": {
+                                        "description": "Altura total (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "commercial_heigth_m": {
+                                        "description": "Altura comercial (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "7.0"
+                                    },
+                                    "cup_diameter_m": {
+                                        "description": "Diametro de copa (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "968455"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1073797"
+                                    },
+                                    "condition": {
+                                        "description": "Estado fisico",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Bueno"
+                                    },
+                                    "health_status": {
+                                        "description": "Estado Sanitario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Bueno"
+                                    },
+                                    "origin": {
+                                        "description": "Origen",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Nativa"
+                                    },
+                                    "cup_density": {
+                                        "description": "Densidad de copa",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Clara"
+                                    },
+                                    "products": {
+                                        "description": "Productos y Posible uso",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Leña"
+                                    },
+                                    "margin": {
+                                        "description": "Margen",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Derecha"
+                                    },
+                                    "treatment": {
+                                        "description": "Tipo de manejo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Tala"
+                                    },
+                                    "state": {
+                                        "description": "Estado",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Talado"
+                                    },
+                                    "resolution": {
+                                        "description": "Resolucion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "0366"
+                                    },
+                                    "general_image": {
+                                        "description": "Foto general",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null"
+                                    },
+                                    "before_image": {
+                                        "description": "Foto del antes",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null"
+                                    },
+                                    "after_image": {
+                                        "description": "Foto del despues",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null"
+                                    },
+                                    "start_treatment": {
+                                        "description": "Fecha de inicio",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2019-04-25"
+                                    },
+                                    "end_treatment": {
+                                        "description": "Fecha de finalizacion",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2019-04-28"
+                                    },
+                                    "note": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Sin observaciones"
+                                    },
+                                    "functional_unit_id": {
+                                        "description": "Id de la unidad funcional",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/functional-unit": {
+            "post": {
+                "tags": [
+                    "Unidad Funcional"
+                ],
+                "summary": "Registrar Unidad Funcional",
+                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la unidad funcional",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "UF1"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project": {
+            "post": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Registrar proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre del proyecto",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Conjuntos Residenciales Marlon Gamba"
+                                    },
+                                    "inspector": {
+                                        "description": "Interventor",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba SA"
+                                    },
+                                    "responsible": {
+                                        "description": "Responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "representative_name": {
+                                        "description": "Nombre del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "representative_position": {
+                                        "description": "Cargo del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Gerente General"
+                                    },
+                                    "administrative_act": {
+                                        "description": "Acto administrativo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Resolucion 0036"
+                                    },
+                                    "enviromental_control": {
+                                        "description": "Autoridad Ambiental",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "ANLA"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada Este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1142274"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada Norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1155849"
+                                    },
+                                    "location": {
+                                        "description": "Localización",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Fase I"
+                                    },
+                                    "phase": {
+                                        "description": "Fase",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "customer_id": {
+                                        "description": "Id del cliente",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/api/testExcel": {
             "post": {
                 "summary": "Probar como llegan los datos de excel desde angular",

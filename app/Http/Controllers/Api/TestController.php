@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
 /**
 * @OA\Server(url="http://localhost:8000")
@@ -71,9 +71,5 @@ class TestController extends Controller
        }
 
        print_r($request->excelData);
-
-
-
-
     }
 }

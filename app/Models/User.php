@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'document', 'name', 'lastname', 'phone', 'address', 'position', 'email', 'password', 'document_type_id',
     ];
 
     /**
@@ -26,4 +26,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function position()
+    {
+        return $this->belongsTo('App\Models\Position');
+    }
+
+    public function document_type()
+    {
+        return $this->belongsTo('App\Models\DocumentType');
+    }
+
+    function contractors()
+    {
+        return $this->hasMany('App\Models\Contractor');
+    }
+
+    function responsabilities()
+    {
+        return $this->hasMany('App\Models\Responsability');
+    }
 }
