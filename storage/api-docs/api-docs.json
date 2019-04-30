@@ -28,7 +28,7 @@
                     "Individuos forestales"
                 ],
                 "summary": "Registrar individuo forestal",
-                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::create",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::store",
                 "requestBody": {
                     "required": false,
                     "content": {
@@ -36,12 +36,6 @@
                             "schema": {
                                 "required": [],
                                 "properties": {
-                                    "inspector": {
-                                        "description": "Interventor",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba SA"
-                                    },
                                     "code": {
                                         "description": "Codigo del individuo",
                                         "type": "string",
@@ -58,19 +52,22 @@
                                         "description": "Nombre cientifico del individuo",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Schefflera morototoni"
+                                        "example": "Schefflera morototoni",
+                                        "nullable": true
                                     },
                                     "species": {
                                         "description": "Especie del individuo",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Alchornea sp."
+                                        "example": "Alchornea sp.",
+                                        "nullable": true
                                     },
                                     "family": {
                                         "description": "Familia del individuo",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Euphorbiaceac"
+                                        "example": "Euphorbiaceac",
+                                        "nullable": true
                                     },
                                     "cap_cm": {
                                         "description": "CAP (Medido en cm)",
@@ -109,64 +106,66 @@
                                         "example": "1073797"
                                     },
                                     "condition": {
-                                        "description": "Estado fisico",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Bueno"
+                                        "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
                                     },
                                     "health_status": {
-                                        "description": "Estado Sanitario",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Bueno"
+                                        "description": "Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
                                     },
                                     "origin": {
-                                        "description": "Origen",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Nativa"
+                                        "description": "Origen (1: Nativa, 2: Exotica)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Clara"
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
                                     },
-                                    "products": {
+                                    "products (1: Leña, 2: Madera)": {
                                         "description": "Productos y Posible uso",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Leña"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
                                     },
                                     "margin": {
-                                        "description": "Margen",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Derecha"
+                                        "description": "Margen (1: Derecha, 2: Izquierda)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
                                     },
                                     "treatment": {
-                                        "description": "Tipo de manejo",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Tala"
+                                        "description": "Tipo de manejo (1: Tala, 2: Perman. Y/poda, 3: Bloque y T. , 4: Plantar)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     },
                                     "state": {
-                                        "description": "Estado",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Talado"
+                                        "description": "Estado (1: Talado, 2: No Talado, 3: En proceso, 4: Sin Iniciar, 5: Inhabilitado, 6: Sin definir)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "4"
                                     },
                                     "resolution": {
-                                        "description": "Resolucion",
+                                        "description": "Resolución",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "0366"
+                                        "example": "0366",
+                                        "nullable": true
                                     },
                                     "general_image": {
                                         "description": "Foto general",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "null"
+                                        "example": "null",
+                                        "nullable": true
                                     },
                                     "before_image": {
                                         "description": "Foto del antes",
@@ -187,7 +186,7 @@
                                         "example": "2019-04-25"
                                     },
                                     "end_treatment": {
-                                        "description": "Fecha de finalizacion",
+                                        "description": "Fecha de finalización",
                                         "type": "string",
                                         "format": "date",
                                         "example": "2019-04-28"
@@ -202,7 +201,363 @@
                                         "description": "Id de la unidad funcional",
                                         "type": "integer",
                                         "format": "int32",
-                                        "example": "5"
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/forest-unit/first-phase": {
+            "post": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Primera fase IF - Creación",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::firstPhase",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "103F"
+                                    },
+                                    "common_name": {
+                                        "description": "Nombre comun del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Torcazo"
+                                    },
+                                    "scientific_name": {
+                                        "description": "Nombre cientifico del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null",
+                                        "nullable": true
+                                    },
+                                    "resolution": {
+                                        "description": "Resolución",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "0377",
+                                        "nullable": true
+                                    },
+                                    "functional_unit_id": {
+                                        "description": "Id de la unidad funcional",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/forest-unit/second-phase/{$id}": {
+            "put": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Segunda fase IF - Datos generales",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::secondPhase",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del IF",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "species": {
+                                        "description": "Especie del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Alchornea sp.",
+                                        "nullable": true
+                                    },
+                                    "family": {
+                                        "description": "Familia del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Euphorbiaceac",
+                                        "nullable": true
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "968455"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1073797"
+                                    },
+                                    "condition": {
+                                        "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "health_status": {
+                                        "description": "Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "treatment": {
+                                        "description": "Tipo de manejo (1: Tala, 2: Perman. Y/poda, 3: Bloque y T. , 4: Plantar)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "state": {
+                                        "description": "Estado (2: No Talado, 4: Sin Iniciar, 5: Inhabilitado)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "4"
+                                    },
+                                    "general_image": {
+                                        "description": "Foto general",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/forest-unit/third-phase/{$id}": {
+            "put": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Tercera fase IF - Antes de intervención",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::thirdPhase",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del IF",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "cap_cm": {
+                                        "description": "CAP (Medido en cm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "40.0"
+                                    },
+                                    "total_heigth_m": {
+                                        "description": "Altura total (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "commercial_heigth_m": {
+                                        "description": "Altura comercial (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "7.0"
+                                    },
+                                    "cup_diameter_m": {
+                                        "description": "Diametro de copa (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "origin": {
+                                        "description": "Origen (1: Nativa, 2: Exotica)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "cup_density": {
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "before_image": {
+                                        "description": "Foto del antes",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null"
+                                    },
+                                    "start_treatment": {
+                                        "description": "Fecha de inicio",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2019-04-25"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/forest-unit/fourth-phase/{$id}": {
+            "put": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Cuarta fase IF - Despues de intervención",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::fourthPhase",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del IF",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "products (1: Leña, 2: Madera)": {
+                                        "description": "Productos y Posible uso",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "margin": {
+                                        "description": "Margen (1: Derecha, 2: Izquierda)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "after_image": {
+                                        "description": "Foto del despues",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "null"
+                                    },
+                                    "end_treatment": {
+                                        "description": "Fecha de finalización",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2019-04-28"
+                                    },
+                                    "note": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Sin observaciones"
                                     }
                                 },
                                 "type": "object"
@@ -248,6 +603,12 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "UF1"
+                                    },
+                                    "type": {
+                                        "description": "Tipo de UF (1: Licencia, 2: Compensación)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     },
                                     "project_id": {
                                         "description": "Id del proyecto",

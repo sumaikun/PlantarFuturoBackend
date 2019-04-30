@@ -13,7 +13,6 @@ class ForestUnitsTableSeeder extends Seeder
     public function run()
     {
         DB::table('forest_units')->insert([
-			'inspector' => 'COVIORIENTE',
 			'code' => '309F',
 			'common_name' => 'Torcazo',
 			'scientific_name' => 'Schefflera morototoni',

@@ -16,6 +16,7 @@ class CreateFunctionalUnitsTable extends Migration
         Schema::create('functional_units', function (Blueprint $table) {
             $table->increments('id');
             $table->char('code', 10);
+            $table->enum('type', ["Licencia", "Compensación"]);
             //Foreigns
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');

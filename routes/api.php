@@ -22,7 +22,13 @@ Route::get('users','Api\UserController@index');
 Route::post('testExcel','Api\TestController@testExcel');
 
 
-/***/
+/*Project Stock*/
 Route::resource('project', 'Api\ProjectController');
 Route::resource('functional-unit', 'Api\FunctionalUnitController');
 Route::resource('forest-unit', 'Api\ForestUnitController');
+
+/*Forest unit proccess*/
+Route::post('forest-unit/first-phase','Api\ForestUnitController@firstPhase');
+Route::put('forest-unit/second-phase/{id}','Api\ForestUnitController@secondPhase');
+Route::put('forest-unit/third-phase/{id}','Api\ForestUnitController@thirdPhase');
+Route::put('forest-unit/fourth-phase/{id}','Api\ForestUnitController@fourthPhase');

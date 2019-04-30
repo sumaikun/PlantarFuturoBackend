@@ -15,35 +15,37 @@ class CreateForestUnitsTable extends Migration
     {
         Schema::create('forest_units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('inspector');
-            $table->char('code', 10);
-            $table->string('common_name');
-            $table->string('scientific_name')->nullable();
-            $table->string('species')->nullable();
-            $table->string('family')->nullable();
-            $table->float('cap_cm');
-            $table->float('total_heigth_m');
-            $table->float('commercial_heigth_m');
-            $table->float('cup_diameter_m');
-            $table->string('north_coord');
-            $table->string('east_coord');
-            $table->enum('condition', ["Malo", "Regular", "Bueno"]);                // 1: Malo, 2: Regular, 3: Bueno
-            $table->enum('health_status', ["Malo", "Regular", "Bueno"]);            // 1: Malo, 2: Regular, 3: Bueno
-            $table->enum('origin', ["Nativa", "Exotica"]);                          // 1: Nativa, 2: Exotica
-            $table->enum('cup_density', ["Clara", "Media", "Espesa"]);              // 1: Clara, 2: Media, 3: Espesa
-            $table->enum('products', ["Leña", "Madera"]);                           // 1: Leña, 2: Madera
-            $table->enum('margin', ["Derecha", "Izquierda"]);                       // 1: Derecha, 2: Izquierda
-            $table->enum('treatment', ["Tala", "Perman. Y/poda", "Bloque y T."]);   // 1: Tala, 2: Perman. Y/poda, 3: Bloque y T.
-            $table->enum('state', ["Talado", "No Talado"]);                         // 1: Talado, 2: No Talado
-            $table->string('resolution')->nullable();
-            $table->string('general_image')->nullable();
-            $table->string('before_image')->nullable();
-            $table->string('after_image')->nullable();
-            $table->date('start_treatment');
-            $table->date('end_treatment');
-            $table->longText('note');
+            $table->char('code', 10); // (1R)
+            $table->string('common_name'); // (1R)
+            $table->string('scientific_name')->nullable(); // Final optional field (1N)
+            $table->string('species')->nullable(); // Final optional field (2N)
+            $table->string('family')->nullable(); // Final optional field (2N)
+            $table->float('cap_cm')->nullable(); // (3R)
+            $table->float('total_heigth_m')->nullable(); // (3R)
+            $table->float('commercial_heigth_m')->nullable(); // (3R)
+            $table->float('cup_diameter_m')->nullable(); // (3R)
+            $table->string('north_coord')->nullable(); // (2R)
+            $table->string('east_coord')->nullable(); // (2R)
+            $table->enum('condition', ["Malo", "Regular", "Bueno"])->nullable();                         // 1: Malo, 2: Regular, 3: Bueno (2R)
+            $table->enum('health_status', ["Malo", "Regular", "Bueno"])->nullable();                     // 1: Malo, 2: Regular, 3: Bueno (2R)
+            $table->enum('origin', ["Nativa", "Exotica"])->nullable();                                   // 1: Nativa, 2: Exotica (3R)
+            $table->enum('cup_density', ["Clara", "Media", "Espesa"])->nullable();                       // 1: Clara, 2: Media, 3: Espesa (3R)
+            $table->enum('products', ["Leña", "Madera"])->nullable();                                    // 1: Leña, 2: Madera (4R)
+            $table->enum('margin', ["Derecha", "Izquierda"])->nullable();                                // 1: Derecha, 2: Izquierda (4R)
+            $table->enum('treatment', ["Tala", "Perman. Y/poda", "Bloque y T.", "Plantar"])         // 1: Tala, 2: Perman. Y/poda, 3: Bloque y T. , 4: Plantar (3R)
+                ->nullable();            
+            $table->enum('state',                                                                        // 1: Talado, 2: No Talado, 3: En proceso, 4: Sin Iniciar, 5: Inhabilitado, 6: Sin definir
+                ["Talado", "No Talado", "En proceso", "Sin iniciar", "Inhabilitado", "Sin definir"])     // (1*) - (2R) - (3*)
+                ->nullable();
+            $table->string('resolution')->nullable(); // Final optional field (1N)
+            $table->string('general_image')->nullable(); // Final optional field (2N)
+            $table->string('before_image')->nullable(); // (3R)
+            $table->string('after_image')->nullable(); // (4R)
+            $table->date('start_treatment')->nullable(); // (3R)
+            $table->date('end_treatment')->nullable(); // (4R)
+            $table->longText('note')->nullable(); // (4N)
             //Foreigns
-            $table->integer('functional_unit_id')->unsigned();
+            $table->integer('functional_unit_id')->unsigned(); // (1R)
             $table->foreign('functional_unit_id')->references('id')->on('functional_units');
             $table->timestamps();
         });
