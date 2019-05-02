@@ -203,7 +203,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="general_image",
                             description="Foto general",
-                            example="null",
                             nullable=true,
                             type="string",
                             format="string"
@@ -212,7 +211,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="before_image",
                             description="Foto del antes",
-                            example="null",
                             type="string",
                             format="string"
                         ),
@@ -220,7 +218,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="after_image",
                             description="Foto del despues",
-                            example="null",
                             type="string",
                             format="string"
                         ),
@@ -356,7 +353,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="scientific_name",
                             description="Nombre cientifico del individuo",
-                            example="null",
                             nullable=true,
                             type="string",
                             format="string"
@@ -428,14 +424,14 @@ class ForestUnitController extends Controller
     /**
         @OA\PUT(
             tags={"Individuos forestales"},
-            path="/api/forest-unit/second-phase/{$id}",
+            path="/api/forest-unit/second-phase/{id}",
             summary="Segunda fase IF - Datos generales",
             @OA\Parameter(
                 name="id",
                 in="path",
                 required=true,
                 description="Id (Primary key) del IF",
-                @OA\Schema(type="string")
+                @OA\Schema(type="integer")
             ),
 
             @OA\RequestBody(
@@ -515,7 +511,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="general_image",
                             description="Foto general",
-                            example="null",
                             nullable=true,
                             type="string",
                             format="string"
@@ -546,9 +541,8 @@ class ForestUnitController extends Controller
         )
     */
 
-    public function secondPhase(Request $request, $id)
+    public function secondPhase(Request $request, ForestUnit $forestUnit)
     {
-        $forestUnit = ForestUnit::find($id)
         $forestUnit->species       = $request->species;
         $forestUnit->family        = $request->family;
         $forestUnit->north_coord   = $request->north_coord;
@@ -566,7 +560,7 @@ class ForestUnitController extends Controller
     /**
         @OA\PUT(
             tags={"Individuos forestales"},
-            path="/api/forest-unit/third-phase/{$id}",
+            path="/api/forest-unit/third-phase/{id}",
             summary="Tercera fase IF - Antes de intervención",
             @OA\Parameter(
                 name="id",
@@ -635,7 +629,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="before_image",
                             description="Foto del antes",
-                            example="null",
                             type="string",
                             format="string"
                         ),
@@ -692,7 +685,7 @@ class ForestUnitController extends Controller
     /**
         @OA\PUT(
             tags={"Individuos forestales"},
-            path="/api/forest-unit/fourth-phase/{$id}",
+            path="/api/forest-unit/fourth-phase/{id}",
             summary="Cuarta fase IF - Despues de intervención",
             @OA\Parameter(
                 name="id",
@@ -729,7 +722,6 @@ class ForestUnitController extends Controller
                         @OA\Property(
                             property="after_image",
                             description="Foto del despues",
-                            example="null",
                             type="string",
                             format="string"
                         ),

@@ -164,20 +164,17 @@
                                         "description": "Foto general",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "null",
                                         "nullable": true
                                     },
                                     "before_image": {
                                         "description": "Foto del antes",
                                         "type": "string",
-                                        "format": "string",
-                                        "example": "null"
+                                        "format": "string"
                                     },
                                     "after_image": {
                                         "description": "Foto del despues",
                                         "type": "string",
-                                        "format": "string",
-                                        "example": "null"
+                                        "format": "string"
                                     },
                                     "start_treatment": {
                                         "description": "Fecha de inicio",
@@ -258,7 +255,6 @@
                                         "description": "Nombre cientifico del individuo",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "null",
                                         "nullable": true
                                     },
                                     "resolution": {
@@ -299,7 +295,7 @@
                 }
             }
         },
-        "/api/forest-unit/second-phase/{$id}": {
+        "/api/forest-unit/second-phase/{id}": {
             "put": {
                 "tags": [
                     "Individuos forestales"
@@ -378,7 +374,6 @@
                                         "description": "Foto general",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "null",
                                         "nullable": true
                                     }
                                 },
@@ -406,7 +401,7 @@
                 }
             }
         },
-        "/api/forest-unit/third-phase/{$id}": {
+        "/api/forest-unit/third-phase/{id}": {
             "put": {
                 "tags": [
                     "Individuos forestales"
@@ -470,8 +465,7 @@
                                     "before_image": {
                                         "description": "Foto del antes",
                                         "type": "string",
-                                        "format": "string",
-                                        "example": "null"
+                                        "format": "string"
                                     },
                                     "start_treatment": {
                                         "description": "Fecha de inicio",
@@ -504,7 +498,7 @@
                 }
             }
         },
-        "/api/forest-unit/fourth-phase/{$id}": {
+        "/api/forest-unit/fourth-phase/{id}": {
             "put": {
                 "tags": [
                     "Individuos forestales"
@@ -544,8 +538,7 @@
                                     "after_image": {
                                         "description": "Foto del despues",
                                         "type": "string",
-                                        "format": "string",
-                                        "example": "null"
+                                        "format": "string"
                                     },
                                     "end_treatment": {
                                         "description": "Fecha de finalización",
@@ -585,6 +578,24 @@
             }
         },
         "/api/functional-unit": {
+            "get": {
+                "tags": [
+                    "Unidad Funcional"
+                ],
+                "summary": "Mostrar lista de unidades funcionales",
+                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Unidad Funcional"
@@ -641,7 +652,126 @@
                 }
             }
         },
+        "/api/project-units/{id}": {
+            "get": {
+                "tags": [
+                    "Unidad Funcional"
+                ],
+                "summary": "Mostrar lista de unidades funcionales por proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::getByProject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "3"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/functional-unit/{id}": {
+            "put": {
+                "tags": [
+                    "Unidad Funcional"
+                ],
+                "summary": "Registrar Unidad Funcional",
+                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary Key) de la unidad funcional",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la unidad funcional",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "UF1"
+                                    },
+                                    "type": {
+                                        "description": "Tipo de UF (1: Licencia, 2: Compensación)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/api/project": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de proyectos",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Proyecto"
@@ -666,6 +796,159 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "Marlon Gamba SA"
+                                    },
+                                    "responsible": {
+                                        "description": "Responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "representative_name": {
+                                        "description": "Nombre del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "representative_position": {
+                                        "description": "Cargo del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Gerente General"
+                                    },
+                                    "administrative_act": {
+                                        "description": "Acto administrativo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Resolucion 0036"
+                                    },
+                                    "enviromental_control": {
+                                        "description": "Autoridad Ambiental",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "ANLA"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada Este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1142274"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada Norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1155849"
+                                    },
+                                    "location": {
+                                        "description": "Localización",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Fase I"
+                                    },
+                                    "phase": {
+                                        "description": "Fase",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "customer_id": {
+                                        "description": "Id del cliente",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Consultar proyecto por ID",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "3"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Editar proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre del proyecto",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Conjuntos Residenciales CAMC"
+                                    },
+                                    "inspector": {
+                                        "description": "Interventor",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "CAMC SA"
                                     },
                                     "responsible": {
                                         "description": "Responsable",
