@@ -23,6 +23,7 @@ Route::group(['middleware' => 'cors'], function() {
 	Route::post('testExcel','Api\TestController@testExcel');
 
 	/*Project Stock*/
+	Route::resource ('customer',							'Api\CustomerController');
 	Route::resource ('project',								'Api\ProjectController');
 	Route::get      ('project/functional-units/{id}',		'Api\ProjectController@functionalUnits');
 	Route::get      ('project/forest-units/{id}',			'Api\ProjectController@forestUnits');

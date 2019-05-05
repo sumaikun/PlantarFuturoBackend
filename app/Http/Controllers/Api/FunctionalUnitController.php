@@ -7,7 +7,7 @@ use App\Models\FunctionalUnit;
 use Illuminate\Http\Request;
 
 /**
-* @OA\Server(url="http://plantarfuturo.com/ws/api")
+* @OA\Server(url="http://plantarfuturo.com/ws")
 */
 
 class FunctionalUnitController extends Controller
