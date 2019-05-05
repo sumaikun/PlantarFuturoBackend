@@ -33,7 +33,11 @@ class ProjectController extends Controller
     */
     public function index()
     {
-        $projects = Project::all();
+        foreach (Project::all() as $project)
+        {
+            $projects[] = $project->setAttribute('customer', $project->customer);
+        }
+
         return ( $projects ) ? $projects : response()->json(null, 204);
     }
 
@@ -204,7 +208,7 @@ class ProjectController extends Controller
                 name="id",
                 in="path",
                 description="id del proyecto",
-                example= "3",
+                example= "2",
                 required= true,
                 @OA\Schema(type="integer", format="int32")
             ),
@@ -226,7 +230,83 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        $project->setAttribute('customer', $project->customer);
+
         return ( $project ) ? $project : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"Proyecto"},
+            path="/api/project/functional-units/{id}",
+            summary="Mostrar lista de unidades funcionales por proyecto",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del proyecto",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+
+            @OA\Response(
+                response=200,
+                description="Mostrar todos los proyectos."
+            ),
+            @OA\Response(
+                response=204,
+                description="No hay resultados que mostrar."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    public function functionalUnits($id)
+    {
+        $functionalUnits = Project::find($id)->functional_units;
+        return ( $functionalUnits ) ? $functionalUnits : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"Proyecto"},
+            path="/api/project/forest-units/{id}",
+            summary="Mostrar lista de individuos forestales por proyecto",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del proyecto",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+
+            @OA\Response(
+                response=200,
+                description="Mostrar todos los proyectos."
+            ),
+            @OA\Response(
+                response=204,
+                description="No hay resultados que mostrar."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    public function forestUnits($id)
+    {
+        foreach (Project::find($id)->functional_units as $functionalUnit)
+        {
+            if ($functionalUnit->forest_units)
+            {
+                $forestUnits[] = $functionalUnit->forest_units;
+            }
+        }
+        return ( $forestUnits ) ? $forestUnits : response()->json(null, 204);
     }
 
     public function edit(Project $project)

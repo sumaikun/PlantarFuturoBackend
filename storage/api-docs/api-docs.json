@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Usuarios",
+        "title": "Plantar Futuro API",
         "version": "1.0"
     },
     "servers": [
@@ -9,7 +9,7 @@
             "url": "http://localhost:8000"
         },
         {
-            "url": "http://localhost:8000"
+            "url": "http://plantarfuturo.com/ws/api"
         },
         {
             "url": "http://localhost:8000"
@@ -23,6 +23,24 @@
     ],
     "paths": {
         "/api/forest-unit": {
+            "get": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Mostrar lista de individuos forestales",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Individuos forestales"
@@ -577,6 +595,251 @@
                 }
             }
         },
+        "/api/forest-unit/{id}": {
+            "get": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Ver individuo forestal",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del individuo forestal",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Editar individuo forestal",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del IF",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "102F"
+                                    },
+                                    "common_name": {
+                                        "description": "Nombre comun del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Torcazo"
+                                    },
+                                    "scientific_name": {
+                                        "description": "Nombre cientifico del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Schefflera morototoni",
+                                        "nullable": true
+                                    },
+                                    "species": {
+                                        "description": "Especie del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Alchornea sp.",
+                                        "nullable": true
+                                    },
+                                    "family": {
+                                        "description": "Familia del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Euphorbiaceac",
+                                        "nullable": true
+                                    },
+                                    "cap_cm": {
+                                        "description": "CAP (Medido en cm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "40.0"
+                                    },
+                                    "total_heigth_m": {
+                                        "description": "Altura total (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "commercial_heigth_m": {
+                                        "description": "Altura comercial (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "7.0"
+                                    },
+                                    "cup_diameter_m": {
+                                        "description": "Diametro de copa (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "968455"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1073797"
+                                    },
+                                    "condition": {
+                                        "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "health_status": {
+                                        "description": "Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "origin": {
+                                        "description": "Origen (1: Nativa, 2: Exotica)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "cup_density": {
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "products (1: Leña, 2: Madera)": {
+                                        "description": "Productos y Posible uso",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "margin": {
+                                        "description": "Margen (1: Derecha, 2: Izquierda)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "treatment": {
+                                        "description": "Tipo de manejo (1: Tala, 2: Perman. Y/poda, 3: Bloque y T. , 4: Plantar)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "state": {
+                                        "description": "Estado (1: Talado, 2: No Talado, 3: En proceso, 4: Sin Iniciar, 5: Inhabilitado, 6: Sin definir)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "4"
+                                    },
+                                    "resolution": {
+                                        "description": "Resolución",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "0366",
+                                        "nullable": true
+                                    },
+                                    "general_image": {
+                                        "description": "Foto general",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "before_image": {
+                                        "description": "Foto del antes",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "after_image": {
+                                        "description": "Foto del despues",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "start_treatment": {
+                                        "description": "Fecha de inicio",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2019-04-25"
+                                    },
+                                    "end_treatment": {
+                                        "description": "Fecha de finalización",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2019-04-28"
+                                    },
+                                    "note": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Sin observaciones"
+                                    },
+                                    "functional_unit_id": {
+                                        "description": "Id de la unidad funcional",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/api/functional-unit": {
             "get": {
                 "tags": [
@@ -652,24 +915,24 @@
                 }
             }
         },
-        "/api/project-units/{id}": {
+        "/api/functional-unit/{id}": {
             "get": {
                 "tags": [
                     "Unidad Funcional"
                 ],
-                "summary": "Mostrar lista de unidades funcionales por proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::getByProject",
+                "summary": "Ver unidad funcional",
+                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::show",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id del proyecto",
+                        "description": "id de la UF",
                         "required": true,
                         "schema": {
                             "type": "integer",
                             "format": "int32"
                         },
-                        "example": "3"
+                        "example": "1"
                     }
                 ],
                 "responses": {
@@ -683,9 +946,7 @@
                         "description": "Ha ocurrido un error."
                     }
                 }
-            }
-        },
-        "/api/functional-unit/{id}": {
+            },
             "put": {
                 "tags": [
                     "Unidad Funcional"
@@ -746,6 +1007,39 @@
                     },
                     "405": {
                         "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/functional-unit/forest-units/{id}": {
+            "get": {
+                "tags": [
+                    "Unidad Funcional"
+                ],
+                "summary": "Mostrar lista de individuos forestales de una UF",
+                "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::forestUnits",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la UF",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -899,7 +1193,7 @@
                             "type": "integer",
                             "format": "int32"
                         },
-                        "example": "3"
+                        "example": "2"
                     }
                 ],
                 "responses": {
@@ -1028,6 +1322,72 @@
                     },
                     "405": {
                         "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/functional-units/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de unidades funcionales por proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::functionalUnits",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/forest-units/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de individuos forestales por proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::forestUnits",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

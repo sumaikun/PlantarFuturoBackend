@@ -7,7 +7,7 @@ use App\Models\FunctionalUnit;
 use Illuminate\Http\Request;
 
 /**
-* @OA\Server(url="http://localhost:8000")
+* @OA\Server(url="http://plantarfuturo.com/ws/api")
 */
 
 class FunctionalUnitController extends Controller
@@ -33,41 +33,11 @@ class FunctionalUnitController extends Controller
     */
     public function index()
     {
-        $functionalUnits = FunctionalUnit::all();
-        return ( $functionalUnits ) ? $functionalUnits : response()->json(null, 204);
-    }
+        foreach (FunctionalUnit::all() as $functionalUnit)
+        {
+            $functionalUnits[] = $functionalUnit->setAttribute('project', $functionalUnit->project);
+        }
 
-    /**
-        @OA\Get(
-            tags={"Unidad Funcional"},
-            path="/api/project-units/{id}",
-            summary="Mostrar lista de unidades funcionales por proyecto",
-            @OA\Parameter(
-                name="id",
-                in="path",
-                description="id del proyecto",
-                example= "3",
-                required= true,
-                @OA\Schema(type="integer", format="int32")
-            ),
-
-            @OA\Response(
-                response=200,
-                description="Mostrar todos los proyectos."
-            ),
-            @OA\Response(
-                response=204,
-                description="No hay resultados que mostrar."
-            ),
-            @OA\Response(
-                response="default",
-                description="Ha ocurrido un error."
-            )
-        )
-    */
-    public function getByProject($id)
-    {
-        $functionalUnits = FunctionalUnit::where('project_id', $id)->get();
         return ( $functionalUnits ) ? $functionalUnits : response()->json(null, 204);
     }
 
@@ -148,9 +118,75 @@ class FunctionalUnitController extends Controller
         return response()->json(["message" => "¡Unidad funcional registrada!", "id" => $functionalUnit->id], 200);
     }
 
+    /**
+        @OA\Get(
+            tags={"Unidad Funcional"},
+            path="/api/functional-unit/{id}",
+            summary="Ver unidad funcional",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id de la UF",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+
+            @OA\Response(
+                response=200,
+                description="Mostrar todos los proyectos."
+            ),
+            @OA\Response(
+                response=204,
+                description="No hay resultados que mostrar."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
     public function show(FunctionalUnit $functionalUnit)
     {
-        //
+        $functionalUnit->setAttribute('project', $functionalUnit->project);
+
+        return ( $functionalUnit ) ? $functionalUnit : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"Unidad Funcional"},
+            path="/api/functional-unit/forest-units/{id}",
+            summary="Mostrar lista de individuos forestales de una UF",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id de la UF",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+
+            @OA\Response(
+                response=200,
+                description="Mostrar todos los proyectos."
+            ),
+            @OA\Response(
+                response=204,
+                description="No hay resultados que mostrar."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
+    public function forestUnits($id)
+    {
+        $forestUnits = FunctionalUnit::find($id)->forest_units;
+        return ( $forestUnits ) ? $forestUnits : response()->json(null, 204);
     }
 
     public function edit(FunctionalUnit $functionalUnit)
