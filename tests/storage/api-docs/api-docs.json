@@ -995,39 +995,6 @@
                 }
             }
         },
-        "/api/forest-unit/pdf/{id}": {
-            "get": {
-                "tags": [
-                    "Individuos forestales"
-                ],
-                "summary": "PDF del individuo forestal",
-                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::getPdf",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del individuo forestal",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los proyectos."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
         "/api/functional-unit": {
             "get": {
                 "tags": [

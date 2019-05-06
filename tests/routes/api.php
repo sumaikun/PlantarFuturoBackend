@@ -30,7 +30,6 @@ Route::group(['middleware' => 'cors'], function() {
 	Route::resource ('functional-unit',						'Api\FunctionalUnitController');
 	Route::get 	    ('functional-unit/forest-units/{id}',	'Api\FunctionalUnitController@forestUnits');
 	Route::resource ('forest-unit',							'Api\ForestUnitController');
-	Route::get 		('forest-unit/pdf/{id}',				'Api\ForestUnitController@getPdf');
 
 	/*Forest unit proccess*/
 	Route::post('forest-unit/first-phase',				  'Api\ForestUnitController@firstPhase');

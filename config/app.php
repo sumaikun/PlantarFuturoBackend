@@ -167,6 +167,8 @@ return [
         /*
          * Package Service Providers...
          */
+        LynX39\LaraPdfMerger\PdfMergerServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,7 +227,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'PdfMerger' => LynX39\LaraPdfMerger\Facades\PdfMerger::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

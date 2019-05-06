@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ForestUnit;
 use App\Models\FunctionalUnit;
 use Illuminate\Http\Request;
+use PDF;
 
 /**
 * @OA\Server(url="http://localhost:8000")
@@ -837,6 +838,52 @@ class ForestUnitController extends Controller
         $forestUnit->setAttribute('functional_unit', $forestUnit->functional_unit);
 
         return ( $forestUnit ) ? $forestUnit : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"Individuos forestales"},
+            path="/api/forest-unit/pdf/{id}",
+            summary="PDF del individuo forestal",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del individuo forestal",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+
+            @OA\Response(
+                response=200,
+                description="Mostrar todos los proyectos."
+            ),
+            @OA\Response(
+                response=204,
+                description="No hay resultados que mostrar."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    public function getPdf($id)
+    {
+        $forestUnit = ForestUnit::find($id);
+        $forestUnit->setAttribute('functional_unit', $forestUnit->functional_unit);
+        $forestUnit->setAttribute('project', $forestUnit->functional_unit->project);
+        if ($forestUnit->updated_at)
+            $forestUnit->setAttribute('date', $forestUnit->updated_at->format("d/m/Y"));
+        else
+            $forestUnit->setAttribute('date', date("d/m/Y", $forestUnit->updated_at));
+        $forestUnit->setAttribute('dap', round(($forestUnit->cap_cm / pi()) / 100, 2));
+        $basalArea = (pi() / 4) * pow($forestUnit->dap, 2); 
+        $forestUnit->setAttribute('commercial_volume_m3', round($forestUnit->commercial_heigth_m * $basalArea * 0.7, 2));
+        $forestUnit->setAttribute('total_volume_m3', round($forestUnit->total_heigth_m * $basalArea * 0.7, 2));
+        $pdf = PDF::loadView('DownloadTemplates/pdf', $forestUnit);
+  
+        return $pdf->download('FichaTecnicaIndividuo' . $forestUnit->code . '.pdf');
     }
 
     public function edit(ForestUnit $forestUnit)
