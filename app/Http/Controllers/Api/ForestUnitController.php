@@ -343,7 +343,7 @@ class ForestUnitController extends Controller
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
-        return response()->json(["message" => "¡Individuo forestal registrado!", "id" => $forestUnit->code], 200);
+        return response()->json(["message" => "¡Individuo forestal registrado!", "id" => $forestUnit->id], 200);
     }
 
     /**
@@ -443,7 +443,7 @@ class ForestUnitController extends Controller
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
-        return response()->json(["message" => "¡Primera fase de IF completada!", "id" => $forestUnit->code], 200);
+        return response()->json(["message" => "¡Primera fase de IF completada!", "id" => $forestUnit->id], 200);
     }
 
     /**
@@ -579,7 +579,7 @@ class ForestUnitController extends Controller
         $forestUnit->general_image = $request->general_image;
         $forestUnit->save();
 
-        return response()->json(["message" => "¡Segunda fase de IF completada!", "id" => $forestUnit->code], 200);
+        return response()->json(["message" => "¡Segunda fase de IF completada!", "id" => $forestUnit->id], 200);
     }
 
     /**
@@ -704,7 +704,7 @@ class ForestUnitController extends Controller
         $forestUnit->start_treatment     = $request->start_treatment;
         $forestUnit->save();
 
-        return response()->json(["message" => "¡Tercera fase de IF completada!", "id" => $forestUnit->code], 200);
+        return response()->json(["message" => "¡Tercera fase de IF completada!", "id" => $forestUnit->id], 200);
     }
 
     /**
@@ -802,7 +802,7 @@ class ForestUnitController extends Controller
         $forestUnit->state               = $this->getState(1);
         $forestUnit->save();
 
-        return response()->json(["message" => "¡Cuarta fase de IF completada!", "id" => $forestUnit->code], 200);
+        return response()->json(["message" => "¡Cuarta fase de IF completada!", "id" => $forestUnit->id], 200);
     }
 
     /**
@@ -1186,7 +1186,7 @@ class ForestUnitController extends Controller
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
-        return response()->json(["message" => "¡Individuo forestal editado correctamente!", "id" => $forestUnit->code], 200);
+        return response()->json(["message" => "¡Individuo forestal editado correctamente!", "id" => $forestUnit->id], 200);
     }
 
     public function destroy(ForestUnit $forestUnit)

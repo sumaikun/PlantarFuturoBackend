@@ -17,16 +17,14 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::group(['middleware' => 'cors'], function() {
-	Route::get('users','Api\UserController@index');
-
-	Route::post('testExcel','Api\TestController@testExcel');
-
+Route::group(['middleware' => 'cors'], function()
+{
 	/*Project Stock*/
 	Route::resource ('customer',							'Api\CustomerController');
 	Route::resource ('project',								'Api\ProjectController');
 	Route::get      ('project/functional-units/{id}',		'Api\ProjectController@functionalUnits');
 	Route::get      ('project/forest-units/{id}',			'Api\ProjectController@forestUnits');
+	Route::post 	('project/massive',						'Api\ProjectController@massive');
 	Route::resource ('functional-unit',						'Api\FunctionalUnitController');
 	Route::get 	    ('functional-unit/forest-units/{id}',	'Api\FunctionalUnitController@forestUnits');
 	Route::resource ('forest-unit',							'Api\ForestUnitController');
@@ -39,7 +37,10 @@ Route::group(['middleware' => 'cors'], function() {
 	Route::put ('forest-unit/fourth-phase/{forest_unit}', 'Api\ForestUnitController@fourthPhase');
 
 	/*users*/
-	Route::any('crudService','Api\CrudController@dispatcher');
-	Route::post('login','Api\AuthController@login');
+	Route::get('users',		 		  'Api\AuthController@index');
+	Route::get('users/projects/{id}', 'Api\AuthController@getProjects');
+	Route::post('users/assignation',  'Api\AuthController@assignation');
+	Route::post('login',	 		  'Api\AuthController@login');
+	Route::any('crudService',		  'Api\CrudController@dispatcher');
 
 });

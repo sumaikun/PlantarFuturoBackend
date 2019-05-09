@@ -28,7 +28,7 @@
         "/api/login": {
             "post": {
                 "tags": [
-                    "usuario"
+                    "Usuario"
                 ],
                 "summary": "Login de usuarios",
                 "operationId": "App\\Http\\Controllers\\Api\\AuthController::login",
@@ -68,6 +68,112 @@
                     },
                     "405": {
                         "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Mostrar usuarios",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users/assignation": {
+            "post": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Asignacion de usuarios de usuarios",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::assignation",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer"
+                                    },
+                                    "users": {
+                                        "description": "Users ID's",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "items": {}
+                                        }
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "project_id": 1,
+                                    "users": [
+                                        1,
+                                        2
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users/projects/{id}": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Listado de proyectos por usuario",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::getProjects",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -1633,26 +1739,121 @@
                 }
             }
         },
-        "/api/testExcel": {
+        "/api/project/massive": {
             "post": {
+                "tags": [
+                    "Proyecto"
+                ],
                 "summary": "Probar como llegan los datos de excel desde angular",
-                "operationId": "App\\Http\\Controllers\\Api\\TestController::testExcel",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::massive",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "id": {
+                                    "arbol": {
                                         "type": "string"
                                     },
-                                    "name": {
+                                    "uf": {
+                                        "type": "string"
+                                    },
+                                    "comun": {
+                                        "type": "string"
+                                    },
+                                    "especie": {
+                                        "type": "string"
+                                    },
+                                    "familia": {
+                                        "type": "string"
+                                    },
+                                    "cap": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "altura_total": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "altura_comercial": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "diametro_copa": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "estado_fisico": {
+                                        "type": "string"
+                                    },
+                                    "estado_sanitario": {
+                                        "type": "string"
+                                    },
+                                    "coor_x": {
+                                        "type": "string"
+                                    },
+                                    "coor_y": {
+                                        "type": "string"
+                                    },
+                                    "origen": {
+                                        "type": "string"
+                                    },
+                                    "densidad_copa": {
+                                        "type": "string"
+                                    },
+                                    "producto": {
+                                        "type": "string"
+                                    },
+                                    "margen": {
+                                        "type": "string"
+                                    },
+                                    "tratamiento": {
+                                        "type": "string"
+                                    },
+                                    "resolucion": {
+                                        "type": "string"
+                                    },
+                                    "observaciones": {
                                         "type": "string"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
-                                    "id": 10,
-                                    "name": "Jessica Smith"
+                                    "excelData": {
+                                        "arbol": "F4",
+                                        "uf": "UF1",
+                                        "comun": "Cedro-Cedro amargo",
+                                        "especie": "Cedrela odorata L.",
+                                        "familia": "Meliaceae",
+                                        "cap": "45.3",
+                                        "altura_total": "10",
+                                        "altura_comercial": "2",
+                                        "diametro_copa": "6",
+                                        "estado_fisico": "Bueno",
+                                        "estado_sanitario": "Bueno",
+                                        "coor_x": "1053823",
+                                        "coor_y": "956015",
+                                        "origen": "Nativa",
+                                        "densidad_copa": "Clara",
+                                        "producto": "Madera",
+                                        "margen": "Izquierda",
+                                        "tratamiento": "Tala",
+                                        "resolucion": "Resolucion 0369",
+                                        "observaciones": "Árbol localizado sobre la margen"
+                                    },
+                                    "projectId": 2
                                 }
                             }
                         }
@@ -1667,20 +1868,6 @@
                     },
                     "405": {
                         "description": "Metodo no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/users": {
-            "get": {
-                "summary": "Mostrar usuarios",
-                "operationId": "App\\Http\\Controllers\\Api\\UserController::index",
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los usuarios."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
