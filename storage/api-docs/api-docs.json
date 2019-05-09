@@ -25,6 +25,56 @@
         }
     ],
     "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "usuario"
+                ],
+                "summary": "Login de usuarios",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::login",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Correo del usuario",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Contraseña del usuario",
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Intento de login rechazado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/api/customer": {
             "get": {
                 "tags": [

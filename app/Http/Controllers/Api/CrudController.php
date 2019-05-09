@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
+use Hash;
 
 class CrudController extends Controller
 {
@@ -518,4 +520,16 @@ class CrudController extends Controller
       return response()->json($array);
 
   }
+
+
+  public function setPassword($request)
+  {
+    $SQL = "update  ".$request->table." set  password = '".Hash::make($request->password)."' where id = ".$request->id;
+     
+     DB::UPDATE(DB::RAW($SQL));
+
+    return array("status"=>1,"message"=>"Contraseña cambiada");
+  }
+
+
 }

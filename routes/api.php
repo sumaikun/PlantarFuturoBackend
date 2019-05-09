@@ -37,4 +37,9 @@ Route::group(['middleware' => 'cors'], function() {
 	Route::put ('forest-unit/second-phase/{forest_unit}', 'Api\ForestUnitController@secondPhase');
 	Route::put ('forest-unit/third-phase/{forest_unit}',  'Api\ForestUnitController@thirdPhase');
 	Route::put ('forest-unit/fourth-phase/{forest_unit}', 'Api\ForestUnitController@fourthPhase');
+
+	/*users*/
+	Route::any('crudService','Api\CrudController@dispatcher');
+	Route::post('login','Api\AuthController@login');
+
 });
