@@ -40,6 +40,7 @@ Route::group(['middleware' => 'cors'], function()
 
 	/*users*/
 	Route::get('users',		 		  'Api\AuthController@index');
+	Route::post('users',		 	  'Api\AuthController@store');
 	Route::get('users/projects/{id}', 'Api\AuthController@getProjects');
 	Route::post('users/assignation',  'Api\AuthController@assignation');
 	Route::delete('users/unassign',   'Api\AuthController@unassign');

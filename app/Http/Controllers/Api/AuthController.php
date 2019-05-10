@@ -179,6 +179,125 @@ class AuthController extends Controller
     }
 
     /**
+        @OA\POST(
+            tags={"Usuario"},
+            path="/api/users",
+            summary="Registrar usuario",
+            @OA\RequestBody(
+                required=false,
+                @OA\MediaType(
+                    mediaType="application/x-www-form-urlencoded",
+                    @OA\Schema(
+                        type="object",
+                        required={},
+
+                        @OA\Property(
+                            property="document",
+                            description="Documento del usuario",
+                            example="ASD123",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="name",
+                            description="Nombre del usuario",
+                            example="CA",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="lastname",
+                            description="Apellido del usuario",
+                            example="MC",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="phone",
+                            description="Telefono del usuario",
+                            example="3145586963",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="address",
+                            description="Direccion del usuario",
+                            example="Cra 1 Call 12",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="position_id",
+                            description="Cargo del usuario",
+                            example="1",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="email",
+                            description="Email del usuario",
+                            example="camc@gmail.com",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="password",
+                            description="Password del usuario",
+                            example="123456",
+                            type="string",
+                            format="string"
+                        ),
+                        @OA\Property(
+                            property="document_type_id",
+                            description="Tipo de documento",
+                            example="1",
+                            type="string",
+                            format="string"
+                        ),
+                    )
+                )
+            ),
+            @OA\Response(
+                response=200,
+                description="Proyecto registrada."
+            ),
+            @OA\Response(
+                response=400,
+                description="Request mal mandado."
+            ),
+            @OA\Response(
+                response=401,
+                description="Ingreso no autorizado."
+            ),
+            @OA\Response(
+                response=405,
+                description="metodo HTTP no permitido."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    
+    public function store(Request $request)
+    {        
+        $user = new User;
+        $user->document         = $request->document;
+        $user->name             = $request->name;
+        $user->lastname         = $request->lastname;
+        $user->phone            = $request->phone;
+        $user->address          = $request->address;
+        $user->position_id      = $request->position_id;
+        $user->email            = $request->email;
+        $user->password         = bcrypt('$request->password');
+        $user->document_type_id = $request->document_type_id;
+        $user->save();
+
+        return response()->json(["message" => "¡Proyecto registrado!", "id" => $user->id], 200);
+    }
+
+    /**
         @OA\DELETE(
             tags={"Usuario"},
             path="/api/users/unassign",

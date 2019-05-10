@@ -90,6 +90,97 @@
                         "description": "Ha ocurrido un error."
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Registrar usuario",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "document": {
+                                        "description": "Documento del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "ASD123"
+                                    },
+                                    "name": {
+                                        "description": "Nombre del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "CA"
+                                    },
+                                    "lastname": {
+                                        "description": "Apellido del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "MC"
+                                    },
+                                    "phone": {
+                                        "description": "Telefono del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "3145586963"
+                                    },
+                                    "address": {
+                                        "description": "Direccion del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Cra 1 Call 12"
+                                    },
+                                    "position_id": {
+                                        "description": "Cargo del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "email": {
+                                        "description": "Email del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "camc@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "Password del usuario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456"
+                                    },
+                                    "document_type_id": {
+                                        "description": "Tipo de documento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
             }
         },
         "/api/users/assignation": {
