@@ -38,9 +38,9 @@ class CreateForestUnitsTable extends Migration
                 ["Talado", "No Talado", "En proceso", "Sin iniciar", "Inhabilitado", "Sin definir"])     // (1*) - (2R) - (3*)
                 ->nullable();
             $table->string('resolution')->nullable(); // Final optional field (1N)
-            $table->string('general_image')->nullable(); // Final optional field (2N)
-            $table->string('before_image')->nullable(); // (3R)
-            $table->string('after_image')->nullable(); // (4R)
+            $table->text('general_image')->nullable(); // Final optional field (2N)
+            $table->text('before_image')->nullable(); // (3R)
+            $table->text('after_image')->nullable(); // (4R)
             $table->date('start_treatment')->nullable(); // (3R)
             $table->date('end_treatment')->nullable(); // (4R)
             $table->longText('note')->nullable(); // (4N)

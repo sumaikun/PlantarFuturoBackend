@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\FunctionalUnit;
 use App\Models\ForestUnit;
+use App\Models\Contractor;
+use App\Models\User;
+use App\Exports\ProjectInventoryExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
 /**
@@ -309,6 +313,75 @@ class ProjectController extends Controller
             }
         }
         return ( $forestUnits ) ? $forestUnits : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"Proyecto"},
+            path="/api/project/users/{id}",
+            summary="Mostrar lista de usuarios asignados a un proyecto",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del proyecto",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+
+            @OA\Response(
+                response=200,
+                description="Mostrar todos los proyectos."
+            ),
+            @OA\Response(
+                response=204,
+                description="No hay resultados que mostrar."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    public function users($id)
+    {
+        $contractors = Contractor::where('project_id', $id)->get();
+        $users = [];
+        foreach ($contractors as $contractor)
+        {
+            if (!in_array($contractor->user, $users))
+                $users[] = $contractor->user;
+        }
+        return ( $users ) ? $users : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"Proyecto"},
+            path="/api/project/export/{id}",
+            summary="Consolidado",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del proyecto",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+            @OA\Response(
+                response=200,
+                description="Consolidado del inventario."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
+    public function export($id)
+    {
+        return Excel::download(new ProjectInventoryExport($id), 'inventario.xls');
     }
 
     public function edit(Project $project)

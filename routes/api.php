@@ -24,6 +24,8 @@ Route::group(['middleware' => 'cors'], function()
 	Route::resource ('project',								'Api\ProjectController');
 	Route::get      ('project/functional-units/{id}',		'Api\ProjectController@functionalUnits');
 	Route::get      ('project/forest-units/{id}',			'Api\ProjectController@forestUnits');
+	Route::get      ('project/users/{id}',					'Api\ProjectController@users');
+	Route::get 		('project/export/{id}',		  			'Api\ProjectController@export');
 	Route::post 	('project/massive',						'Api\ProjectController@massive');
 	Route::resource ('functional-unit',						'Api\FunctionalUnitController');
 	Route::get 	    ('functional-unit/forest-units/{id}',	'Api\FunctionalUnitController@forestUnits');
@@ -40,6 +42,7 @@ Route::group(['middleware' => 'cors'], function()
 	Route::get('users',		 		  'Api\AuthController@index');
 	Route::get('users/projects/{id}', 'Api\AuthController@getProjects');
 	Route::post('users/assignation',  'Api\AuthController@assignation');
+	Route::delete('users/unassign',   'Api\AuthController@unassign');
 	Route::post('login',	 		  'Api\AuthController@login');
 	Route::any('crudService',		  'Api\CrudController@dispatcher');
 

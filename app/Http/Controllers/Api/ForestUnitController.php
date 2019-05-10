@@ -306,6 +306,7 @@ class ForestUnitController extends Controller
 
     public function store(Request $request)
     {
+        return response()->json(["message" => "functional_unit_id: " . $request->functional_unit_id . " Code: " . $request->code], 200);
         if (!$this->validateCode($request->functional_unit_id, $request->code))
             return response()->json([
                 "message" => "Error: ¡El codigo del individuo forestal ya existe!", 
