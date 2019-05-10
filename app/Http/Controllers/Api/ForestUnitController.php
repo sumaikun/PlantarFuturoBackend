@@ -306,11 +306,10 @@ class ForestUnitController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json(["message" => "functional_unit_id: " . $request->functional_unit_id . " Code: " . $request->code], 200);
         if (!$this->validateCode($request->functional_unit_id, $request->code))
             return response()->json([
-                "message" => "Error: ¡El codigo del individuo forestal ya existe!", 
-                "id" => $request->code], 
+                "message" => "Error: ¡El codigo del individuo forestal ya existe!",
+                "id" => $request->code],
                 400
             );
 
@@ -430,8 +429,8 @@ class ForestUnitController extends Controller
     {
         if (!$this->validateCode($request->functional_unit_id, $request->code))
             return response()->json([
-                "message" => "Error: ¡El codigo del individuo forestal ya existe!", 
-                "id" => $request->code], 
+                "message" => "Error: ¡El codigo del individuo forestal ya existe!",
+                "id" => $request->code],
                 400
             );
 
@@ -879,11 +878,11 @@ class ForestUnitController extends Controller
         else
             $forestUnit->setAttribute('date', date("d/m/Y", $forestUnit->updated_at));
         $forestUnit->setAttribute('dap', round(($forestUnit->cap_cm / pi()) / 100, 2));
-        $basalArea = (pi() / 4) * pow($forestUnit->dap, 2); 
+        $basalArea = (pi() / 4) * pow($forestUnit->dap, 2);
         $forestUnit->setAttribute('commercial_volume_m3', round($forestUnit->commercial_heigth_m * $basalArea * 0.7, 2));
         $forestUnit->setAttribute('total_volume_m3', round($forestUnit->total_heigth_m * $basalArea * 0.7, 2));
         $pdf = PDF::loadView('DownloadTemplates/pdf', $forestUnit);
-  
+
         return $pdf->download('FichaTecnicaIndividuo' . $forestUnit->code . '.pdf');
     }
 
