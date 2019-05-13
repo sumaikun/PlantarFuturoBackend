@@ -563,8 +563,14 @@
                                         "format": "float",
                                         "example": "7.0"
                                     },
-                                    "cup_diameter_m": {
-                                        "description": "Diametro de copa (Medido en m)",
+                                    "x_cup_diameter_m": {
+                                        "description": "Diametro de copa X (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "y_cup_diameter_m": {
+                                        "description": "Diametro de copa Y (Medido en m)",
                                         "type": "number",
                                         "format": "float",
                                         "example": "6.0"
@@ -670,6 +676,18 @@
                                         "format": "string",
                                         "example": "Sin observaciones"
                                     },
+                                    "version": {
+                                        "description": "Versión",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1.0"
+                                    },
+                                    "sheet_number": {
+                                        "description": "Numero de planilla",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "5"
+                                    },
                                     "functional_unit_id": {
                                         "description": "Id de la unidad funcional",
                                         "type": "integer",
@@ -706,7 +724,7 @@
                 "tags": [
                     "Individuos forestales"
                 ],
-                "summary": "Primera fase IF - Creación",
+                "summary": "Primera fase IF - INVENTARIO",
                 "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::firstPhase",
                 "requestBody": {
                     "required": false,
@@ -733,12 +751,71 @@
                                         "format": "string",
                                         "nullable": true
                                     },
-                                    "resolution": {
-                                        "description": "Resolución",
+                                    "cap_cm": {
+                                        "description": "CAP (Medido en cm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "40.0"
+                                    },
+                                    "total_heigth_m": {
+                                        "description": "Altura total (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "commercial_heigth_m": {
+                                        "description": "Altura comercial (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "7.0"
+                                    },
+                                    "x_cup_diameter_m": {
+                                        "description": "Diametro de copa X (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "y_cup_diameter_m": {
+                                        "description": "Diametro de copa Y (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "condition": {
+                                        "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "health_status": {
+                                        "description": "Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada norte",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "0377",
-                                        "nullable": true
+                                        "example": "968455"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1073797"
+                                    },
+                                    "version": {
+                                        "description": "Versión",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1.0"
+                                    },
+                                    "sheet_number": {
+                                        "description": "Numero de planilla",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "5"
                                     },
                                     "functional_unit_id": {
                                         "description": "Id de la unidad funcional",

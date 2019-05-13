@@ -23,7 +23,8 @@ class CreateForestUnitsTable extends Migration
             $table->float('cap_cm')->nullable(); // (3R)
             $table->float('total_heigth_m')->nullable(); // (3R)
             $table->float('commercial_heigth_m')->nullable(); // (3R)
-            $table->float('cup_diameter_m')->nullable(); // (3R)
+            $table->float('x_cup_diameter_m')->nullable(); // (3R)
+            $table->float('y_cup_diameter_m')->nullable(); // (3R)
             $table->string('north_coord')->nullable(); // (2R)
             $table->string('east_coord')->nullable(); // (2R)
             $table->enum('condition', ["Malo", "Regular", "Bueno"])->nullable();                         // 1: Malo, 2: Regular, 3: Bueno (2R)
@@ -44,6 +45,8 @@ class CreateForestUnitsTable extends Migration
             $table->date('start_treatment')->nullable(); // (3R)
             $table->date('end_treatment')->nullable(); // (4R)
             $table->longText('note')->nullable(); // (4N)
+            $table->string('version')->nullable(); // Final optional field
+            $table->string('sheet_number')->nullable(); // Final optional field
             //Foreigns
             $table->integer('functional_unit_id')->unsigned(); // (1R)
             $table->foreign('functional_unit_id')->references('id')->on('functional_units');

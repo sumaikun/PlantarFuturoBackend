@@ -129,8 +129,16 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="cup_diameter_m",
-                            description="Diametro de copa (Medido en m)",
+                            property="x_cup_diameter_m",
+                            description="Diametro de copa X (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="y_cup_diameter_m",
+                            description="Diametro de copa Y (Medido en m)",
                             example="6.0",
                             type="number",
                             format="float"
@@ -272,6 +280,22 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="version",
+                            description="Versión",
+                            example="1.0",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="sheet_number",
+                            description="Numero de planilla",
+                            example="5",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="functional_unit_id",
                             description="Id de la unidad funcional",
                             example="2",
@@ -322,7 +346,8 @@ class ForestUnitController extends Controller
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
-        $forestUnit->cup_diameter_m      = $request->cup_diameter_m;
+        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->north_coord         = $request->north_coord;
         $forestUnit->east_coord          = $request->east_coord;
         $forestUnit->condition           = $this->getCondition($request->condition);
@@ -340,6 +365,8 @@ class ForestUnitController extends Controller
         $forestUnit->start_treatment     = $request->start_treatment;
         $forestUnit->end_treatment       = $request->end_treatment;
         $forestUnit->note                = $request->note;
+        $forestUnit->version             = $request->version;
+        $forestUnit->sheet_number        = $request->sheet_number;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
@@ -350,7 +377,7 @@ class ForestUnitController extends Controller
         @OA\POST(
             tags={"Individuos forestales"},
             path="/api/forest-unit/first-phase",
-            summary="Primera fase IF - Creación",
+            summary="Primera fase IF - INVENTARIO",
             @OA\RequestBody(
                 required=false,
                 @OA\MediaType(
@@ -384,10 +411,89 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="resolution",
-                            description="Resolución",
-                            example="0377",
-                            nullable=true,
+                            property="cap_cm",
+                            description="CAP (Medido en cm)",
+                            example="40.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="total_heigth_m",
+                            description="Altura total (Medido en m)",
+                            example="10.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="commercial_heigth_m",
+                            description="Altura comercial (Medido en m)",
+                            example="7.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="x_cup_diameter_m",
+                            description="Diametro de copa X (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="y_cup_diameter_m",
+                            description="Diametro de copa Y (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="condition",
+                            description="Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                            example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="health_status",
+                            description="Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                            example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="north_coord",
+                            description="Coordenada norte",
+                            example="968455",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="east_coord",
+                            description="Coordenada este",
+                            example="1073797",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="version",
+                            description="Versión",
+                            example="1.0",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="sheet_number",
+                            description="Numero de planilla",
+                            example="5",
                             type="string",
                             format="string"
                         ),
@@ -438,8 +544,18 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
+        $forestUnit->cap_cm              = $request->cap_cm;
+        $forestUnit->total_heigth_m      = $request->total_heigth_m;
+        $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
+        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        $forestUnit->condition           = $this->getCondition($request->condition);
+        $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
+        $forestUnit->north_coord         = $request->north_coord;
+        $forestUnit->east_coord          = $request->east_coord;
+        $forestUnit->version             = $request->version;
+        $forestUnit->sheet_number        = $request->sheet_number;
         $forestUnit->state               = $this->getState(6);
-        $forestUnit->resolution          = $request->resolution;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
