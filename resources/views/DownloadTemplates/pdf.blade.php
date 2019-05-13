@@ -132,7 +132,7 @@
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000" height="20" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000">Di&aacute;metro de copa (m):</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000"><br></font></td>
-		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="center" valign=bottom sdval="5" sdnum="1033;0;0.00"><font color="#000000">{{ $cup_diameter_m }}</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="center" valign=bottom sdval="5" sdnum="1033;0;0.00"><font color="#000000"><b>X: </b>{{ $x_cup_diameter_m }} <b>Y: </b> {{ $y_cup_diameter_m }}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="left" valign=bottom><font color="#000000"><br></font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000"><br></font></td>
 			<td style="border-top: 1px solid #000000; border-left: 1px solid #000000" align="left" valign=middle bgcolor="#FFFFFF">
