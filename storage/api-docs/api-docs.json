@@ -1519,7 +1519,7 @@
                 "tags": [
                     "Unidad Funcional"
                 ],
-                "summary": "Registrar Unidad Funcional",
+                "summary": "Editar Unidad Funcional",
                 "operationId": "App\\Http\\Controllers\\Api\\FunctionalUnitController::update",
                 "parameters": [
                     {
@@ -2127,7 +2127,8 @@
                                         "cap": "45.3",
                                         "altura_total": "10",
                                         "altura_comercial": "2",
-                                        "diametro_copa": "6",
+                                        "diametro_copa_x": "6",
+                                        "diametro_copa_y": "6",
                                         "estado_fisico": "Bueno",
                                         "estado_sanitario": "Bueno",
                                         "coor_x": "1053823",

@@ -70,7 +70,7 @@ app.controller('testController', function($scope,trim_all_indexes,$http) {
 
   $scope.sendDataToServer = () =>{
 
-    let request = $http.post("http://localhost:8000/api/project/massive",{excelData:$scope.cleaned_jsondata, projectId: 3});
+    let request = $http.post("http://localhost:8000/api/project/massive",{excelData:$scope.cleaned_jsondata, projectId: 2});
 
     request.then((response)=>{
 

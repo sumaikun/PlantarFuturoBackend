@@ -666,7 +666,8 @@ class ProjectController extends Controller
                                 "cap": "45.3",
                                 "altura_total": "10",
                                 "altura_comercial": "2",
-                                "diametro_copa": "6",
+                                "diametro_copa_x": "6",
+                                "diametro_copa_y": "6",
                                 "estado_fisico": "Bueno",
                                 "estado_sanitario": "Bueno",
                                 "coor_x": "1053823",
@@ -747,7 +748,8 @@ class ProjectController extends Controller
                     $forestUnit->cap_cm              = isset($unit["cap"]) ? $unit["cap"] : null;
                     $forestUnit->total_heigth_m      = isset($unit["altura_total"]) ? $unit["altura_total"] : null;
                     $forestUnit->commercial_heigth_m = isset($unit["altura_comercial"]) ? $unit["altura_comercial"] : null;
-                    $forestUnit->cup_diameter_m      = isset($unit["diametro_copa"]) ? $unit["diametro_copa"] : null;
+                    $forestUnit->x_cup_diameter_m    = isset($unit["diametro_copa_x"]) ? $unit["diametro_copa_x"] : null;
+                    $forestUnit->y_cup_diameter_m    = isset($unit["diametro_copa_y"]) ? $unit["diametro_copa_y"] : null;
                     $forestUnit->condition           = isset($unit["estado_fisico"]) ? $unit["estado_fisico"] : null;
                     $forestUnit->health_status       = isset($unit["estado_sanitario"]) ? $unit["estado_sanitario"] : null;
                     $forestUnit->north_coord         = isset($unit["coor_x"]) ? $unit["coor_x"] : null;
@@ -758,6 +760,8 @@ class ProjectController extends Controller
                     $forestUnit->margin              = isset($unit["margen"]) ? $unit["margen"] : null;
                     $forestUnit->treatment           = isset($unit["tratamiento"]) ? $unit["tratamiento"] : null;
                     $forestUnit->resolution          = isset($unit["resolucion"]) ? $unit["resolucion"] : null;
+                    $forestUnit->version             = isset($unit["version"]) ? $unit["version"] : null;
+                    $forestUnit->sheet_number        = isset($unit["numero_planilla"]) ? $unit["numero_planilla"] : null;
                     $forestUnit->note                = isset($unit["observaciones"]) ? $unit["observaciones"] : null;
                     $forestUnit->functional_unit_id  = $functionalUnit->id;
 

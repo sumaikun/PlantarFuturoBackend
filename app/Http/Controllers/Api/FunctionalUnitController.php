@@ -198,7 +198,7 @@ class FunctionalUnitController extends Controller
         @OA\PUT(
             tags={"Unidad Funcional"},
             path="/api/functional-unit/{id}",
-            summary="Registrar Unidad Funcional",
+            summary="Editar Unidad Funcional",
             @OA\Parameter(
                 name="id",
                 in="path",
