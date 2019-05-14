@@ -575,17 +575,17 @@
                                         "format": "float",
                                         "example": "6.0"
                                     },
-                                    "north_coord": {
-                                        "description": "Coordenada norte",
+                                    "waypoint": {
+                                        "description": "Waypoint",
                                         "type": "string",
                                         "format": "string",
                                         "example": "968455"
                                     },
-                                    "east_coord": {
-                                        "description": "Coordenada este",
+                                    "epiphytes": {
+                                        "description": "Epífitas (1: Si, 2: No)",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "1073797"
+                                        "example": "1"
                                     },
                                     "condition": {
                                         "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
@@ -676,18 +676,6 @@
                                         "format": "string",
                                         "example": "Sin observaciones"
                                     },
-                                    "version": {
-                                        "description": "Versión",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1.0"
-                                    },
-                                    "sheet_number": {
-                                        "description": "Numero de planilla",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "5"
-                                    },
                                     "functional_unit_id": {
                                         "description": "Id de la unidad funcional",
                                         "type": "integer",
@@ -751,6 +739,12 @@
                                         "format": "string",
                                         "nullable": true
                                     },
+                                    "origin": {
+                                        "description": "Origen (1: Nativa, 2: Exotica)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
                                     "cap_cm": {
                                         "description": "CAP (Medido en cm)",
                                         "type": "number",
@@ -769,17 +763,17 @@
                                         "format": "float",
                                         "example": "7.0"
                                     },
-                                    "x_cup_diameter_m": {
-                                        "description": "Diametro de copa X (Medido en m)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "6.0"
+                                    "cup_density": {
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
                                     },
-                                    "y_cup_diameter_m": {
-                                        "description": "Diametro de copa Y (Medido en m)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "6.0"
+                                    "epiphytes": {
+                                        "description": "Epífitas (1: Si, 2: No)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
                                     },
                                     "condition": {
                                         "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
@@ -793,29 +787,175 @@
                                         "format": "int32",
                                         "example": "3"
                                     },
-                                    "north_coord": {
-                                        "description": "Coordenada norte",
+                                    "x_cup_diameter_m": {
+                                        "description": "Diametro de copa X (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "y_cup_diameter_m": {
+                                        "description": "Diametro de copa Y (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "waypoint": {
+                                        "description": "Waypoint",
                                         "type": "string",
                                         "format": "string",
                                         "example": "968455"
                                     },
-                                    "east_coord": {
-                                        "description": "Coordenada este",
+                                    "note": {
+                                        "description": "Observaciones",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "1073797"
+                                        "example": "Sin observaciones"
                                     },
-                                    "version": {
-                                        "description": "Versión",
+                                    "functional_unit_id": {
+                                        "description": "Id de la unidad funcional",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/forest-unit/first-phase/{id}": {
+            "put": {
+                "tags": [
+                    "Individuos forestales"
+                ],
+                "summary": "Editar primera fase de individuo forestal (Inventario)",
+                "operationId": "App\\Http\\Controllers\\Api\\ForestUnitController::firstPhaseUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del IF",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del individuo",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "1.0"
+                                        "example": "103F"
                                     },
-                                    "sheet_number": {
-                                        "description": "Numero de planilla",
+                                    "common_name": {
+                                        "description": "Nombre comun del individuo",
                                         "type": "string",
                                         "format": "string",
-                                        "example": "5"
+                                        "example": "Torcazo"
+                                    },
+                                    "scientific_name": {
+                                        "description": "Nombre cientifico del individuo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "origin": {
+                                        "description": "Origen (1: Nativa, 2: Exotica)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "cap_cm": {
+                                        "description": "CAP (Medido en cm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "40.0"
+                                    },
+                                    "total_heigth_m": {
+                                        "description": "Altura total (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "commercial_heigth_m": {
+                                        "description": "Altura comercial (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "7.0"
+                                    },
+                                    "cup_density": {
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "epiphytes": {
+                                        "description": "Epífitas (1: Si, 2: No)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "condition": {
+                                        "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "health_status": {
+                                        "description": "Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "x_cup_diameter_m": {
+                                        "description": "Diametro de copa X (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "y_cup_diameter_m": {
+                                        "description": "Diametro de copa Y (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "waypoint": {
+                                        "description": "Waypoint",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "968455"
+                                    },
+                                    "note": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Sin observaciones"
                                     },
                                     "functional_unit_id": {
                                         "description": "Id de la unidad funcional",
@@ -2133,6 +2273,8 @@
                                         "estado_sanitario": "Bueno",
                                         "coor_x": "1053823",
                                         "coor_y": "956015",
+                                        "waypoint": "123456asd",
+                                        "epifitas": "Si",
                                         "origen": "Nativa",
                                         "densidad_copa": "Clara",
                                         "producto": "Madera",

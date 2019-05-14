@@ -23,8 +23,10 @@ class ForestUnitsTableSeeder extends Seeder
 			'commercial_heigth_m' => 7.0,
 			'x_cup_diameter_m' => 6.0,
 			'y_cup_diameter_m' => 6.0,
-			'north_coord' => '968455',
-			'east_coord' => '1073797',
+			'north_coord' => null,
+			'east_coord' => null,
+			'waypoint' => "123456789",
+			'epiphytes' => "NO",
 			'condition' => 'Bueno',
 			'health_status' => 'Bueno',
 			'origin' => 'Nativa',
@@ -40,8 +42,6 @@ class ForestUnitsTableSeeder extends Seeder
 			'start_treatment' => Carbon::parse('2019-04-25'),
 			'end_treatment' => Carbon::parse('2019-04-28'),
 			'note' => 'Sin observaciones',
-			'version' => '1.0',
-			'sheet_number' => '5',
 			'functional_unit_id' => 1,
         ]);
     }

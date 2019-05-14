@@ -145,17 +145,17 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="north_coord",
-                            description="Coordenada norte",
+                            property="waypoint",
+                            description="Waypoint",
                             example="968455",
                             type="string",
                             format="string"
                         ),
 
                         @OA\Property(
-                            property="east_coord",
-                            description="Coordenada este",
-                            example="1073797",
+                            property="epiphytes",
+                            description="Epífitas (1: Si, 2: No)",
+                            example="1",
                             type="string",
                             format="string"
                         ),
@@ -280,22 +280,6 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="version",
-                            description="Versión",
-                            example="1.0",
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
-                            property="sheet_number",
-                            description="Numero de planilla",
-                            example="5",
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
                             property="functional_unit_id",
                             description="Id de la unidad funcional",
                             example="2",
@@ -348,8 +332,8 @@ class ForestUnitController extends Controller
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
-        $forestUnit->north_coord         = $request->north_coord;
-        $forestUnit->east_coord          = $request->east_coord;
+        $forestUnit->waypoint            = $request->waypoint;
+        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : "NO";
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
         $forestUnit->origin              = $request->origin == 1 ? "Nativa" : "Exotica";
@@ -365,8 +349,6 @@ class ForestUnitController extends Controller
         $forestUnit->start_treatment     = $request->start_treatment;
         $forestUnit->end_treatment       = $request->end_treatment;
         $forestUnit->note                = $request->note;
-        $forestUnit->version             = $request->version;
-        $forestUnit->sheet_number        = $request->sheet_number;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
@@ -411,6 +393,14 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="origin",
+                            description="Origen (1: Nativa, 2: Exotica)",
+                            example="1",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
                             property="cap_cm",
                             description="CAP (Medido en cm)",
                             example="40.0",
@@ -435,19 +425,19 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="x_cup_diameter_m",
-                            description="Diametro de copa X (Medido en m)",
-                            example="6.0",
-                            type="number",
-                            format="float"
+                            property="cup_density",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            example="3",
+                            type="integer",
+                            format="int32"
                         ),
 
                         @OA\Property(
-                            property="y_cup_diameter_m",
-                            description="Diametro de copa Y (Medido en m)",
-                            example="6.0",
-                            type="number",
-                            format="float"
+                            property="epiphytes",
+                            description="Epífitas (1: Si, 2: No)",
+                            example="1",
+                            type="string",
+                            format="string"
                         ),
 
                         @OA\Property(
@@ -467,33 +457,33 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="north_coord",
-                            description="Coordenada norte",
+                            property="x_cup_diameter_m",
+                            description="Diametro de copa X (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="y_cup_diameter_m",
+                            description="Diametro de copa Y (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="waypoint",
+                            description="Waypoint",
                             example="968455",
                             type="string",
                             format="string"
                         ),
 
                         @OA\Property(
-                            property="east_coord",
-                            description="Coordenada este",
-                            example="1073797",
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
-                            property="version",
-                            description="Versión",
-                            example="1.0",
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
-                            property="sheet_number",
-                            description="Numero de planilla",
-                            example="5",
+                            property="note",
+                            description="Observaciones",
+                            example="Sin observaciones",
                             type="string",
                             format="string"
                         ),
@@ -544,22 +534,220 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
+        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : "Exotica";
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
-        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
-        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
+        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : "NO";
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
-        $forestUnit->north_coord         = $request->north_coord;
-        $forestUnit->east_coord          = $request->east_coord;
-        $forestUnit->version             = $request->version;
-        $forestUnit->sheet_number        = $request->sheet_number;
-        $forestUnit->state               = $this->getState(6);
+        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        $forestUnit->waypoint            = $request->waypoint;
+        $forestUnit->state               = $this->getState(2);
+        $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
         return response()->json(["message" => "¡Primera fase de IF completada!", "id" => $forestUnit->id], 200);
+    }
+
+    /**
+        @OA\PUT(
+            tags={"Individuos forestales"},
+            path="/api/forest-unit/first-phase/{id}",
+            summary="Editar primera fase de individuo forestal (Inventario)",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                required=true,
+                description="Id (Primary key) del IF",
+                @OA\Schema(type="string")
+            ),
+            @OA\RequestBody(
+                required=false,
+                @OA\MediaType(
+                    mediaType="application/x-www-form-urlencoded",
+                    @OA\Schema(
+                        type="object",
+                        required={},
+
+                        @OA\Property(
+                            property="code",
+                            description="Codigo del individuo",
+                            example="103F",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="common_name",
+                            description="Nombre comun del individuo",
+                            example="Torcazo",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="scientific_name",
+                            description="Nombre cientifico del individuo",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="origin",
+                            description="Origen (1: Nativa, 2: Exotica)",
+                            example="1",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="cap_cm",
+                            description="CAP (Medido en cm)",
+                            example="40.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="total_heigth_m",
+                            description="Altura total (Medido en m)",
+                            example="10.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="commercial_heigth_m",
+                            description="Altura comercial (Medido en m)",
+                            example="7.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="cup_density",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="epiphytes",
+                            description="Epífitas (1: Si, 2: No)",
+                            example="1",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="condition",
+                            description="Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
+                            example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="health_status",
+                            description="Estado Sanitario (1: Malo, 2: Regular, 3: Bueno)",
+                            example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="x_cup_diameter_m",
+                            description="Diametro de copa X (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="y_cup_diameter_m",
+                            description="Diametro de copa Y (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="waypoint",
+                            description="Waypoint",
+                            example="968455",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="note",
+                            description="Observaciones",
+                            example="Sin observaciones",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="functional_unit_id",
+                            description="Id de la unidad funcional",
+                            example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+                    )
+                )
+            ),
+            @OA\Response(
+                response=200,
+                description="Proyecto registrada."
+            ),
+            @OA\Response(
+                response=400,
+                description="Request mal mandado."
+            ),
+            @OA\Response(
+                response=401,
+                description="Ingreso no autorizado."
+            ),
+            @OA\Response(
+                response=405,
+                description="metodo HTTP no permitido."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
+    public function firstPhaseUpdate(Request $request, ForestUnit $forestUnit)
+    {
+        $forestUnit->code                = $request->code;
+        $forestUnit->common_name         = $request->common_name;
+        $forestUnit->scientific_name     = $request->scientific_name;
+        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : "Exotica";
+        $forestUnit->cap_cm              = $request->cap_cm;
+        $forestUnit->total_heigth_m      = $request->total_heigth_m;
+        $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
+        $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
+        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : "NO";
+        $forestUnit->condition           = $this->getCondition($request->condition);
+        $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
+        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        $forestUnit->waypoint            = $request->waypoint;
+        $forestUnit->state               = $this->getState(2);
+        $forestUnit->note                = $request->note;
+        $forestUnit->functional_unit_id  = $request->functional_unit_id;
+        $forestUnit->save();
+
+        return response()->json(["message" => "¡Primera fase de individuo forestal editada correctamente!", "id" => $forestUnit->id], 200);
     }
 
     /**

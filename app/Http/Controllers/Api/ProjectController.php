@@ -672,6 +672,8 @@ class ProjectController extends Controller
                                 "estado_sanitario": "Bueno",
                                 "coor_x": "1053823",
                                 "coor_y": "956015",
+                                "waypoint": "123456asd",
+                                "epifitas": "Si",
                                 "origen": "Nativa",
                                 "densidad_copa": "Clara",
                                 "producto": "Madera",
@@ -754,14 +756,14 @@ class ProjectController extends Controller
                     $forestUnit->health_status       = isset($unit["estado_sanitario"]) ? $unit["estado_sanitario"] : null;
                     $forestUnit->north_coord         = isset($unit["coor_x"]) ? $unit["coor_x"] : null;
                     $forestUnit->east_coord          = isset($unit["coor_y"]) ? $unit["coor_y"] : null;
+                    $forestUnit->waypoint            = isset($unit["waypoint"]) ? $unit["waypoint"] : null;
+                    $forestUnit->epiphytes           = isset($unit["epifitas"]) ? $unit["epifitas"] : null;
                     $forestUnit->origin              = isset($unit["origen"]) ? $unit["origen"] : null;
                     $forestUnit->cup_density         = isset($unit["densidad_copa"]) ? $unit["densidad_copa"] : null;
                     $forestUnit->products            = isset($unit["producto"]) ? $unit["producto"] : null;
                     $forestUnit->margin              = isset($unit["margen"]) ? $unit["margen"] : null;
                     $forestUnit->treatment           = isset($unit["tratamiento"]) ? $unit["tratamiento"] : null;
                     $forestUnit->resolution          = isset($unit["resolucion"]) ? $unit["resolucion"] : null;
-                    $forestUnit->version             = isset($unit["version"]) ? $unit["version"] : null;
-                    $forestUnit->sheet_number        = isset($unit["numero_planilla"]) ? $unit["numero_planilla"] : null;
                     $forestUnit->note                = isset($unit["observaciones"]) ? $unit["observaciones"] : null;
                     $forestUnit->functional_unit_id  = $functionalUnit->id;
 
