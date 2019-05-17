@@ -20,7 +20,11 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
     */
     public function collection()
     {
-        return ForestUnit::select('forest_units.code', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.note')
+        /*return ForestUnit::select('forest_units.code', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.note')
+            ->join('functional_units', 'functional_units.id', '=', 'forest_units.functional_unit_id')
+            ->join('projects', 'projects.id', '=', 'functional_units.project_id')
+            ->where('functional_units.project_id', $this->projectId)->get();*/
+        return ForestUnit::select('forest_units.code', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.family', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.products','forest_units.margin','forest_units.treatment','forest_units.resolution','forest_units.state','forest_units.end_treatment','forest_units.note')
             ->join('functional_units', 'functional_units.id', '=', 'forest_units.functional_unit_id')
             ->join('projects', 'projects.id', '=', 'functional_units.project_id')
             ->where('functional_units.project_id', $this->projectId)->get();
@@ -28,7 +32,7 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
 
     public function headings(): array
     {
-        return [
+        /*return [
             'ID',
             'NOMBRE COMÚN',
             'N. CIENTÍFICO',
@@ -43,6 +47,30 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
             'DIÁMETRO DE COPA Y',
             'WAYPOINT',
             'EPÍFITAS',
+            'OBSERVACIONES'
+        ];*/
+        return [
+            'ID',
+            'NOMBRE COMÚN',
+            'N. CIENTÍFICO',
+            'FAMILIA',
+            'CAP',
+            'HT',
+            'HC',
+            'ESTADO FÍSICO',
+            'ESTADO SANITARIO',
+            'ORIGEN',
+            'DENSIDAD DE COPA',
+            'DIÁMETRO DE COPA X',
+            'DIÁMETRO DE COPA Y',
+            'WAYPOINT',
+            'EPÍFITAS',
+            'PRODUCTOS Y POSIBLE USO',
+            'MARGEN',
+            'TRATAMIENTO',
+            'RESOLUCIÓN',
+            'ESTADO',
+            'FECHA DE TRATAMIENTO',
             'OBSERVACIONES'
         ];
     }

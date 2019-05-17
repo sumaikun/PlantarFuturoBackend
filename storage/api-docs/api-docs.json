@@ -531,13 +531,6 @@
                                         "example": "Schefflera morototoni",
                                         "nullable": true
                                     },
-                                    "species": {
-                                        "description": "Especie del individuo",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Alchornea sp.",
-                                        "nullable": true
-                                    },
                                     "family": {
                                         "description": "Familia del individuo",
                                         "type": "string",
@@ -1013,13 +1006,6 @@
                             "schema": {
                                 "required": [],
                                 "properties": {
-                                    "species": {
-                                        "description": "Especie del individuo",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Alchornea sp.",
-                                        "nullable": true
-                                    },
                                     "family": {
                                         "description": "Familia del individuo",
                                         "type": "string",
@@ -1345,13 +1331,6 @@
                                         "example": "Schefflera morototoni",
                                         "nullable": true
                                     },
-                                    "species": {
-                                        "description": "Especie del individuo",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Alchornea sp.",
-                                        "nullable": true
-                                    },
                                     "family": {
                                         "description": "Familia del individuo",
                                         "type": "string",
@@ -1377,8 +1356,14 @@
                                         "format": "float",
                                         "example": "7.0"
                                     },
-                                    "cup_diameter_m": {
-                                        "description": "Diametro de copa (Medido en m)",
+                                    "x_cup_diameter_m": {
+                                        "description": "Diametro de copa X (Medido en m)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "6.0"
+                                    },
+                                    "y_cup_diameter_m": {
+                                        "description": "Diametro de copa Y (Medido en m)",
                                         "type": "number",
                                         "format": "float",
                                         "example": "6.0"
@@ -2200,7 +2185,7 @@
                                     "comun": {
                                         "type": "string"
                                     },
-                                    "especie": {
+                                    "cientifico": {
                                         "type": "string"
                                     },
                                     "familia": {
@@ -2252,6 +2237,12 @@
                                     "resolucion": {
                                         "type": "string"
                                     },
+                                    "inicio_tratamiento": {
+                                        "type": "string"
+                                    },
+                                    "fin_tratamiento": {
+                                        "type": "string"
+                                    },
                                     "observaciones": {
                                         "type": "string"
                                     }
@@ -2262,7 +2253,7 @@
                                         "arbol": "F4",
                                         "uf": "UF1",
                                         "comun": "Cedro-Cedro amargo",
-                                        "especie": "Cedrela odorata L.",
+                                        "cientifico": "Cedrela odorata L.",
                                         "familia": "Meliaceae",
                                         "cap": "45.3",
                                         "altura_total": "10",
@@ -2281,6 +2272,8 @@
                                         "margen": "Izquierda",
                                         "tratamiento": "Tala",
                                         "resolucion": "Resolucion 0369",
+                                        "inicio_tratamiento": "14/05/2019",
+                                        "fin_tratamiento": "16/05/2019",
                                         "observaciones": "Árbol localizado sobre la margen"
                                     },
                                     "projectId": 2

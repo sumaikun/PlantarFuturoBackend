@@ -12,6 +12,7 @@ use App\Exports\ProjectInventoryExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 /**
 * @OA\Server(url="http://localhost:8000")
 */
@@ -584,7 +585,7 @@ class ProjectController extends Controller
                             type="string"
                         ),
                         @OA\Property(
-                            property="especie",
+                            property="cientifico",
                             type="string"
                         ),
                         @OA\Property(
@@ -652,6 +653,14 @@ class ProjectController extends Controller
                             type="string"
                         ),
                         @OA\Property(
+                            property="inicio_tratamiento",
+                            type="string"
+                        ),
+                        @OA\Property(
+                            property="fin_tratamiento",
+                            type="string"
+                        ),
+                        @OA\Property(
                             property="observaciones",
                             type="string"
                         ),
@@ -661,7 +670,7 @@ class ProjectController extends Controller
                                 "arbol": "F4",
                                 "uf": "UF1",
                                 "comun": "Cedro-Cedro amargo",
-                                "especie": "Cedrela odorata L.",
+                                "cientifico": "Cedrela odorata L.",
                                 "familia": "Meliaceae",
                                 "cap": "45.3",
                                 "altura_total": "10",
@@ -680,6 +689,8 @@ class ProjectController extends Controller
                                 "margen": "Izquierda",
                                 "tratamiento": "Tala",
                                 "resolucion": "Resolucion 0369",
+                                "inicio_tratamiento": "14/05/2019",
+                                "fin_tratamiento": "16/05/2019",
                                 "observaciones": "Árbol localizado sobre la margen"
                             },
                             "projectId": 2
@@ -745,26 +756,29 @@ class ProjectController extends Controller
                 {
                     $forestUnit->code                = isset($unit["arbol"]) ? $unit["arbol"] : null;
                     $forestUnit->common_name         = isset($unit["comun"]) ? $unit["comun"] : null;
-                    $forestUnit->species             = isset($unit["especie"]) ? $unit["especie"] : null;
+                    $forestUnit->scientific_name     = isset($unit["cientifico"]) ? $unit["cientifico"] : null;
                     $forestUnit->family              = isset($unit["familia"]) ? $unit["familia"] : null;
                     $forestUnit->cap_cm              = isset($unit["cap"]) ? $unit["cap"] : null;
                     $forestUnit->total_heigth_m      = isset($unit["altura_total"]) ? $unit["altura_total"] : null;
                     $forestUnit->commercial_heigth_m = isset($unit["altura_comercial"]) ? $unit["altura_comercial"] : null;
                     $forestUnit->x_cup_diameter_m    = isset($unit["diametro_copa_x"]) ? $unit["diametro_copa_x"] : null;
                     $forestUnit->y_cup_diameter_m    = isset($unit["diametro_copa_y"]) ? $unit["diametro_copa_y"] : null;
-                    $forestUnit->condition           = isset($unit["estado_fisico"]) ? $unit["estado_fisico"] : null;
-                    $forestUnit->health_status       = isset($unit["estado_sanitario"]) ? $unit["estado_sanitario"] : null;
                     $forestUnit->north_coord         = isset($unit["coor_x"]) ? $unit["coor_x"] : null;
                     $forestUnit->east_coord          = isset($unit["coor_y"]) ? $unit["coor_y"] : null;
                     $forestUnit->waypoint            = isset($unit["waypoint"]) ? $unit["waypoint"] : null;
                     $forestUnit->epiphytes           = isset($unit["epifitas"]) ? $unit["epifitas"] : null;
+                    $forestUnit->condition           = isset($unit["estado_fisico"]) ? $unit["estado_fisico"] : null;
+                    $forestUnit->health_status       = isset($unit["estado_sanitario"]) ? $unit["estado_sanitario"] : null;
                     $forestUnit->origin              = isset($unit["origen"]) ? $unit["origen"] : null;
                     $forestUnit->cup_density         = isset($unit["densidad_copa"]) ? $unit["densidad_copa"] : null;
+                    $forestUnit->state               = "No Talado";
                     $forestUnit->products            = isset($unit["producto"]) ? $unit["producto"] : null;
                     $forestUnit->margin              = isset($unit["margen"]) ? $unit["margen"] : null;
                     $forestUnit->treatment           = isset($unit["tratamiento"]) ? $unit["tratamiento"] : null;
                     $forestUnit->resolution          = isset($unit["resolucion"]) ? $unit["resolucion"] : null;
                     $forestUnit->note                = isset($unit["observaciones"]) ? $unit["observaciones"] : null;
+                    $forestUnit->start_treatment     = isset($unit["inicio_tratamiento"]) ? Carbon::createFromFormat('d/m/Y', $unit["inicio_tratamiento"]) : null;
+                    $forestUnit->end_treatment       = isset($unit["fin_tratamiento"]) ? Carbon::createFromFormat('d/m/Y', $unit["fin_tratamiento"]) : null;
                     $forestUnit->functional_unit_id  = $functionalUnit->id;
 
                     $forestUnit->save();

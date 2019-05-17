@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FunctionalUnitsTableSeeder::class);
         $this->call(ForestUnitsTableSeeder::class);
         $this->call(ResponsabilitiesTableSeeder::class);
-        $this->call(SpeciesTableSeeder::class);
+        //$this->call(SpeciesTableSeeder::class);
         $this->call(FamiliesTableSeeder::class);
         $this->call(ForestalNamesTableSeeder::class);
     }

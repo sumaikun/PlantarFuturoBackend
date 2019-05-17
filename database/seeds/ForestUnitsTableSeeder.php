@@ -16,7 +16,6 @@ class ForestUnitsTableSeeder extends Seeder
 			'code' => '309F',
 			'common_name' => 'Torcazo',
 			'scientific_name' => 'Schefflera morototoni',
-			'species' => 'Alchornea sp.',
 			'family' => 'Euphorbiaceac',
 			'cap_cm' => 44.0,
 			'total_heigth_m' => 10.0,

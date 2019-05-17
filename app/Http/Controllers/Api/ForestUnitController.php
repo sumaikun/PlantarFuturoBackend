@@ -87,15 +87,6 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="species",
-                            description="Especie del individuo",
-                            example="Alchornea sp.",
-                            nullable=true,
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
                             property="family",
                             description="Familia del individuo",
                             example="Euphorbiaceac",
@@ -325,7 +316,6 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->species             = $request->species;
         $forestUnit->family              = $request->family;
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
@@ -772,15 +762,6 @@ class ForestUnitController extends Controller
                         required={},
 
                         @OA\Property(
-                            property="species",
-                            description="Especie del individuo",
-                            example="Alchornea sp.",
-                            nullable=true,
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
                             property="family",
                             description="Familia del individuo",
                             example="Euphorbiaceac",
@@ -872,7 +853,6 @@ class ForestUnitController extends Controller
 
     public function secondPhase(Request $request, ForestUnit $forestUnit)
     {
-        $forestUnit->species       = $request->species;
         $forestUnit->family        = $request->family;
         $forestUnit->north_coord   = $request->north_coord;
         $forestUnit->east_coord    = $request->east_coord;
@@ -1242,15 +1222,6 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="species",
-                            description="Especie del individuo",
-                            example="Alchornea sp.",
-                            nullable=true,
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
                             property="family",
                             description="Familia del individuo",
                             example="Euphorbiaceac",
@@ -1284,8 +1255,16 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="cup_diameter_m",
-                            description="Diametro de copa (Medido en m)",
+                            property="x_cup_diameter_m",
+                            description="Diametro de copa X (Medido en m)",
+                            example="6.0",
+                            type="number",
+                            format="float"
+                        ),
+
+                        @OA\Property(
+                            property="y_cup_diameter_m",
+                            description="Diametro de copa Y (Medido en m)",
                             example="6.0",
                             type="number",
                             format="float"
@@ -1464,12 +1443,12 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->species             = $request->species;
         $forestUnit->family              = $request->family;
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
-        $forestUnit->cup_diameter_m      = $request->cup_diameter_m;
+        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->north_coord         = $request->north_coord;
         $forestUnit->east_coord          = $request->east_coord;
         $forestUnit->condition           = $this->getCondition($request->condition);
