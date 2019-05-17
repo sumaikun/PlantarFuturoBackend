@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
             'position_id' => 1,
             'document_type_id' => 1,
         ]);
-
+        /*INSERT INTO `users` (`id`, `document`, `name`, `lastname`, `phone`, `address`, `email`, `password`, `position_id`, `document_type_id`, `remember_token`, `created_at`, `updated_at`) VALUES (NULL, '2', 'Tito', 'Garcia', '123', 'Plantar futuro', 'forestito@gmail.com', '$2y$10$K6d/2x5Lx0JwYIlt1aUjQuK6SzAw4K838mPEMAV1RMg0P.uIniPeu', '3', '1', NULL, '2019-05-14 13:41:30', '2019-05-14 13:41:30'), (NULL, '3', 'Laura Carolina', 'Segura Triana', '123', 'Plantar futuro', 'lauraseguratriana@gmail.com', '$2y$10$K6d/2x5Lx0JwYIlt1aUjQuK6SzAw4K838mPEMAV1RMg0P.uIniPeu', '5', '1', NULL, '2019-05-14 13:42:09', '2019-05-14 13:42:09'), (NULL, '4', 'Dennys Alexandra', 'Prada Cruz', '123', 'Plantar futuro', 'alexandra.pradacruz@gmail.com', '$2y$10$K6d/2x5Lx0JwYIlt1aUjQuK6SzAw4K838mPEMAV1RMg0P.uIniPeu', '5', '1', NULL, '2019-05-14 13:42:43', '2019-05-14 13:42:43'), (NULL, '5', 'Jaime Harley', 'Gonzalez Cardenas', '123', 'Plantar futuro', 'harforest@gmail.com', '$2y$10$K6d/2x5Lx0JwYIlt1aUjQuK6SzAw4K838mPEMAV1RMg0P.uIniPeu', '5', '1', NULL, '2019-05-14 13:43:04', '2019-05-14 13:43:04'), (NULL, '6', 'Jonathan Eduardo', 'Arenas Cabrera', '123', 'Plantar futuro', 'jo.arenas93@gmail.com', '$2y$10$K6d/2x5Lx0JwYIlt1aUjQuK6SzAw4K838mPEMAV1RMg0P.uIniPeu', '5', '1', NULL, '2019-05-14 13:43:42', '2019-05-14 13:43:42')*/
         DB::table('users')->insert([
             'document' => '456',
             'name' => 'Pedro',

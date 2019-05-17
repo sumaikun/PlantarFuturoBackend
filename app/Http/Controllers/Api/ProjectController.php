@@ -771,7 +771,7 @@ class ProjectController extends Controller
                     $forestUnit->health_status       = isset($unit["estado_sanitario"]) ? $unit["estado_sanitario"] : null;
                     $forestUnit->origin              = isset($unit["origen"]) ? $unit["origen"] : null;
                     $forestUnit->cup_density         = isset($unit["densidad_copa"]) ? $unit["densidad_copa"] : null;
-                    $forestUnit->state               = "No Talado";
+                    $forestUnit->state               = "Sin iniciar";
                     $forestUnit->products            = isset($unit["producto"]) ? $unit["producto"] : null;
                     $forestUnit->margin              = isset($unit["margen"]) ? $unit["margen"] : null;
                     $forestUnit->treatment           = isset($unit["tratamiento"]) ? $unit["tratamiento"] : null;

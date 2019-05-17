@@ -674,6 +674,12 @@
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -797,6 +803,12 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "968455"
+                                    },
+                                    "general_image": {
+                                        "description": "Foto general",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
                                     },
                                     "note": {
                                         "description": "Observaciones",
@@ -943,6 +955,12 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "968455"
+                                    },
+                                    "general_image": {
+                                        "description": "Foto general",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
                                     },
                                     "note": {
                                         "description": "Observaciones",
@@ -1474,6 +1492,12 @@
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"

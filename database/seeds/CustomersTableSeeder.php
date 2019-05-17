@@ -12,7 +12,7 @@ class CustomersTableSeeder extends Seeder
     public function run()
     {
         DB::table('customers')->insert([
-            'name' => 'Servinc - ETA',
+            'name' => 'N/A',
         ]);
     }
 }

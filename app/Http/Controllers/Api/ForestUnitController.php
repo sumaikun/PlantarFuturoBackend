@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\ForestUnit;
 use App\Models\FunctionalUnit;
+use App\Models\Responsability;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -277,6 +278,14 @@ class ForestUnitController extends Controller
                             type="integer",
                             format="int32"
                         ),
+
+                        @OA\Property(
+                            property="user_id",
+                            description="Id del usuario logueado",
+                            example="1",
+                            type="integer",
+                            format="int32"
+                        ),
                     )
                 )
             ),
@@ -341,6 +350,15 @@ class ForestUnitController extends Controller
         $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
+
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('user_id', $request->user_id)->first()))
+        {
+            $responsability = new Responsability;
+            $responsability->forest_unit_id = $forestUnit->id;
+            $responsability->user_id        = $request->user_id;
+            $responsability->t_responsible  = "T1";
+            $responsability->save();
+        }
 
         return response()->json(["message" => "¡Individuo forestal registrado!", "id" => $forestUnit->id], 200);
     }
@@ -471,6 +489,14 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="general_image",
+                            description="Foto general",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="note",
                             description="Observaciones",
                             example="Sin observaciones",
@@ -535,7 +561,8 @@ class ForestUnitController extends Controller
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->waypoint            = $request->waypoint;
-        $forestUnit->state               = $this->getState(2);
+        $forestUnit->state               = $this->getState(4);
+        $forestUnit->general_image       = $request->general_image;
         $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
@@ -676,6 +703,14 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="general_image",
+                            description="Foto general",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="note",
                             description="Observaciones",
                             example="Sin observaciones",
@@ -732,8 +767,9 @@ class ForestUnitController extends Controller
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->waypoint            = $request->waypoint;
-        $forestUnit->state               = $this->getState(2);
+        $forestUnit->state               = $this->getState(4);
         $forestUnit->note                = $request->note;
+        $forestUnit->general_image       = $request->general_image;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
@@ -1412,6 +1448,14 @@ class ForestUnitController extends Controller
                             type="integer",
                             format="int32"
                         ),
+
+                        @OA\Property(
+                            property="user_id",
+                            description="Id del usuario logueado",
+                            example="1",
+                            type="integer",
+                            format="int32"
+                        ),
                     )
                 )
             ),
@@ -1440,6 +1484,8 @@ class ForestUnitController extends Controller
 
     public function update(Request $request, ForestUnit $forestUnit)
     {
+        $state = $forestUnit->state;
+
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
@@ -1468,6 +1514,19 @@ class ForestUnitController extends Controller
         $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
+
+        if (isset($request->user_id) && 
+            empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('user_id', $request->user_id)->first()) && 
+            $state != "Sin iniciar" && 
+            $state != "En proceso" && 
+            $this->getState($request->state) != "Inhabilitado")
+        {
+            $responsability = new Responsability;
+            $responsability->forest_unit_id = $forestUnit->id;
+            $responsability->user_id        = $request->user_id;
+            $responsability->t_responsible  = $state == "Sin iniciar" ? "T1" : $state == "En proceso" ? "T1" : "T2";
+            $responsability->save();
+        }
 
         return response()->json(["message" => "¡Individuo forestal editado correctamente!", "id" => $forestUnit->id], 200);
     }
