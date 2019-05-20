@@ -11,6 +11,9 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
+    	/*
+		INSERT INTO `projects` (`id`, `name`, `inspector`, `responsible`, `representative_name`, `representative_position`, `administrative_act`, `enviromental_control`, `east_coord`, `north_coord`, `location`, `phase`, `customer_id`, `created_at`, `updated_at`) VALUES (NULL, 'Inventario Conexión Pacifico 1', 'Linda Linares', 'Linda Linares', 'Tito Garcia', 'Coordinador inventario', 'NA', 'ANLA', '1156117.93197', '1160429.0514', 'Antioquia', '1', '1', '2019-05-17 19:40:31', '2019-05-17 19:40:31')
+    	*/
         DB::table('projects')->insert([
             'name' => 'Conexión Pacífico 1',
 			'inspector' => 'Servinc - ETA',

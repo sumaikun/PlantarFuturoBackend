@@ -298,7 +298,7 @@ class AuthController extends Controller
     }
 
     /**
-        @OA\DELETE(
+        @OA\POST(
             tags={"Usuario"},
             path="/api/users/unassign",
             summary="Desasignacion de usuarios de proyectos",

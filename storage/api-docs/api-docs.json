@@ -240,7 +240,7 @@
             }
         },
         "/api/users/unassign": {
-            "delete": {
+            "post": {
                 "tags": [
                     "Usuario"
                 ],
