@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\FunctionalUnit;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 /**
@@ -67,14 +68,6 @@ class FunctionalUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="type",
-                            description="Tipo de UF (1: Licencia, 2: Compensación)",
-                            example="1",
-                            type="integer",
-                            format="int32"
-                        ),
-
-                        @OA\Property(
                             property="project_id",
                             description="Id del proyecto",
                             example="2",
@@ -111,7 +104,7 @@ class FunctionalUnitController extends Controller
     {
         $functionalUnit = new FunctionalUnit;
         $functionalUnit->code       = $request->code;
-        $functionalUnit->type       = $request->type == 1 ? "Licencia" : "Compensación";
+        $functionalUnit->type       = Project::find($request->project_id)->phase == 3 ? "Compensación" : "Licencia";
         $functionalUnit->project_id = $request->project_id;
         $functionalUnit->save();
 
@@ -223,14 +216,6 @@ class FunctionalUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="type",
-                            description="Tipo de UF (1: Licencia, 2: Compensación)",
-                            example="1",
-                            type="integer",
-                            format="int32"
-                        ),
-
-                        @OA\Property(
                             property="project_id",
                             description="Id del proyecto",
                             example="2",
@@ -266,7 +251,7 @@ class FunctionalUnitController extends Controller
     public function update(Request $request, FunctionalUnit $functionalUnit)
     {
         $functionalUnit->code       = $request->code;
-        $functionalUnit->type       = $request->type == 1 ? "Licencia" : "Compensación";
+        $functionalUnit->type       = Project::find($request->project_id)->phase == 3 ? "Compensación" : "Licencia";
         $functionalUnit->project_id = $request->project_id;
         $functionalUnit->save();
 

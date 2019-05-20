@@ -40,6 +40,7 @@ class ForestUnitsTableSeeder extends Seeder
 			'after_image' => null,
 			'start_treatment' => Carbon::parse('2019-04-25'),
 			'end_treatment' => Carbon::parse('2019-04-28'),
+			'compensation_site' => 'El Tablon-Lote 10',
 			'note' => 'Sin observaciones',
 			'functional_unit_id' => 1,
         ]);

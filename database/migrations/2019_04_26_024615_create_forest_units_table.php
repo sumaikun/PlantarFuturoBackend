@@ -37,8 +37,8 @@ class CreateForestUnitsTable extends Migration
             $table->enum('margin', ["Derecha", "Izquierda"])->nullable();                                // 1: Derecha, 2: Izquierda (4R)
             $table->enum('treatment', ["Tala", "Perman. Y/poda", "Bloque y T.", "Plantar"])         // 1: Tala, 2: Perman. Y/poda, 3: Bloque y T. , 4: Plantar (3R)
                 ->nullable();            
-            $table->enum('state',                                                                        // 1: Talado, 2: No Talado, 3: En proceso, 4: Sin Iniciar, 5: Inhabilitado, 6: Sin definir
-                ["Talado", "No Talado", "En proceso", "Sin iniciar", "Inhabilitado", "Sin definir"])     // (1*) - (2R) - (3*)
+            $table->enum('state',                                                                        // 1: Talado, 2: No Talado, 3: En proceso, 4: Sin Iniciar, 5: Inhabilitado, 6: Sin definir 7: Plantado
+                ["Talado", "No Talado", "En proceso", "Sin iniciar", "Inhabilitado", "Sin definir", "Plantado"])     // (1*) - (2R) - (3*)
                 ->nullable();
             $table->string('resolution')->nullable(); // Final optional field (1N)
             $table->text('general_image')->nullable(); // Final optional field (2N)
@@ -46,6 +46,7 @@ class CreateForestUnitsTable extends Migration
             $table->text('after_image')->nullable(); // (4R)
             $table->date('start_treatment')->nullable(); // (3R)
             $table->date('end_treatment')->nullable(); // (4R)
+            $table->string('compensation_site')->nullable(); // Final optional field (1N)
             $table->longText('note')->nullable(); // (4N)
             //Foreigns
             $table->integer('functional_unit_id')->unsigned(); // (1R)

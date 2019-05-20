@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
-	public function __construct(int $projectId)
+    public function __construct(int $projectId)
     {
         $this->projectId = $projectId;
     }
@@ -20,11 +20,11 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
     */
     public function collection()
     {
-        /*return ForestUnit::select('forest_units.code', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.note')
+        /*return ForestUnit::select('forest_units.code', 'functional_units.code', forest_units.common_name', 'forest_units.scientific_name', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.note')
             ->join('functional_units', 'functional_units.id', '=', 'forest_units.functional_unit_id')
             ->join('projects', 'projects.id', '=', 'functional_units.project_id')
             ->where('functional_units.project_id', $this->projectId)->get();*/
-        return ForestUnit::select('forest_units.code', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.family', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.products','forest_units.margin','forest_units.treatment','forest_units.resolution','forest_units.state','forest_units.end_treatment','forest_units.note')
+        return ForestUnit::select('forest_units.code', 'functional_units.code as UF', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.family', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.products','forest_units.margin','forest_units.treatment','forest_units.resolution','forest_units.state','forest_units.end_treatment','forest_units.note')
             ->join('functional_units', 'functional_units.id', '=', 'forest_units.functional_unit_id')
             ->join('projects', 'projects.id', '=', 'functional_units.project_id')
             ->where('functional_units.project_id', $this->projectId)->get();
@@ -34,6 +34,7 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
     {
         /*return [
             'ID',
+            'UF',
             'NOMBRE COMÚN',
             'N. CIENTÍFICO',
             'CAP',
@@ -51,6 +52,7 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
         ];*/
         return [
             'ID',
+            'UF',
             'NOMBRE COMÚN',
             'N. CIENTÍFICO',
             'FAMILIA',
