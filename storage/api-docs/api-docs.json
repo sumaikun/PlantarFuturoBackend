@@ -604,8 +604,8 @@
                                         "format": "int32",
                                         "example": "3"
                                     },
-                                    "products (1: Leña, 2: Madera)": {
-                                        "description": "Productos y Posible uso",
+                                    "products": {
+                                        "description": "Productos y Posible uso  (1: Leña, 2: Madera)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "2"
@@ -1123,6 +1123,18 @@
                                         "format": "string",
                                         "example": "1073797"
                                     },
+                                    "waypoint": {
+                                        "description": "Waypoint",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "968455"
+                                    },
+                                    "epiphytes": {
+                                        "description": "Epífitas (1: Si, 2: No)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
                                     "condition": {
                                         "description": "Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
                                         "type": "integer",
@@ -1147,8 +1159,8 @@
                                         "format": "int32",
                                         "example": "3"
                                     },
-                                    "products (1: Leña, 2: Madera)": {
-                                        "description": "Productos y Posible uso",
+                                    "products": {
+                                        "description": "Productos y Posible uso (1: Leña, 2: Madera)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "2"

@@ -242,7 +242,7 @@ class ForestUnitController extends Controller
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : $request->epiphytes == 1 ? "NO" : null;
+        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
@@ -443,12 +443,12 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : $request->origin == 2 ? "Exotica" : null;
+        $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : $request->epiphytes == 1 ? "NO" : null;
+        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
@@ -599,8 +599,8 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="products (1: Leña, 2: Madera)",
-                            description="Productos y Posible uso",
+                            property="products",
+                            description="Productos y Posible uso  (1: Leña, 2: Madera)",
                             example="2",
                             type="integer",
                             format="int32"
@@ -746,13 +746,13 @@ class ForestUnitController extends Controller
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->waypoint            = $request->waypoint;
-        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : $request->epiphytes == 1 ? "NO" : null;
+        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
-        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : $request->origin == 2 ? "Exotica" : null;
+        $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->products            = $request->products == 1 ? "Leña" : $request->products == 2 ? "Madera" : null;
-        $forestUnit->margin              = $request->margin == 1 ? "Derecha" : $request->margin == 2 ? "Izquierda" : null;
+        $forestUnit->products            = $this->getProducts($request->products);
+        $forestUnit->margin              = $this->getMargin($request->margin);
         $forestUnit->treatment           = $this->getTreatment($request->treatment);
         $forestUnit->state               = $this->getState($request->state);
         $forestUnit->resolution          = $request->resolution;
@@ -889,6 +889,22 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="waypoint",
+                            description="Waypoint",
+                            example="968455",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="epiphytes",
+                            description="Epífitas (1: Si, 2: No)",
+                            example="1",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="condition",
                             description="Estado fisico (1: Malo, 2: Regular, 3: Bueno)",
                             example="3",
@@ -921,8 +937,8 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="products (1: Leña, 2: Madera)",
-                            description="Productos y Posible uso",
+                            property="products",
+                            description="Productos y Posible uso (1: Leña, 2: Madera)",
                             example="2",
                             type="integer",
                             format="int32"
@@ -1061,14 +1077,16 @@ class ForestUnitController extends Controller
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        $forestUnit->waypoint            = $request->waypoint;
         $forestUnit->north_coord         = $request->north_coord;
         $forestUnit->east_coord          = $request->east_coord;
+        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
-        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : $request->origin == 2 ? "Exotica" : null;
+        $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->products            = $request->products == 1 ? "Leña" : $request->products == 2 ? "Madera" : null;
-        $forestUnit->margin              = $request->margin == 1 ? "Derecha" : $request->margin == 2 ? "Izquierda" : null;
+        $forestUnit->products            = $this->getProducts($request->products);
+        $forestUnit->margin              = $this->getMargin($request->margin);
         $forestUnit->treatment           = $this->getTreatment($request->treatment);
         $forestUnit->state               = $this->getState($request->state);
         $forestUnit->resolution          = $request->resolution;
@@ -1292,12 +1310,12 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : $request->origin == 2 ? "Exotica" : null;
+        $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : $request->epiphytes == 1 ? "NO" : null;
+        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
@@ -1507,12 +1525,12 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : $request->origin == 2 ? "Exotica" : null;
+        $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->epiphytes           = $request->epiphytes == 1 ? "SI" : $request->epiphytes == 1 ? "NO" : null;
+        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
         $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
@@ -1636,6 +1654,8 @@ class ForestUnitController extends Controller
                 return "Regular";
             case 3:
                 return "Bueno";
+            default:
+                return null;
         }
     }
 
@@ -1648,6 +1668,8 @@ class ForestUnitController extends Controller
                 return "Regular";
             case 3:
                 return "Bueno";
+            default:
+                return null;
         }
     }
 
@@ -1660,6 +1682,8 @@ class ForestUnitController extends Controller
                 return "Media";
             case 3:
                 return "Espesa";
+            default:
+                return null;
         }
     }
 
@@ -1674,6 +1698,8 @@ class ForestUnitController extends Controller
                 return "Bloque y T.";
             case 4:
                 return "Plantar";
+            default:
+                return null;
         }
     }
 
@@ -1694,6 +1720,56 @@ class ForestUnitController extends Controller
                 return "Sin definir";
             case 7:
                 return "Plantado";
+            default:
+                return null;
+        }
+    }
+
+    public function getEpiphytes($epiphytes)
+    {
+        switch ($epiphytes) {
+            case 1:
+                return "SI";
+            case 2:
+                return "NO";
+            default:
+                return null;
+        }
+    }
+
+    public function getOrigin($origin)
+    {
+        switch ($origin) {
+            case 1:
+                return "Nativa";
+            case 2:
+                return "Exotica";
+            default:
+                return null;
+        }
+    }
+
+    public function getProducts($products)
+    {
+        switch ($products) {
+            case 1:
+                return "Leña";
+            case 2:
+                return "Madera";
+            default:
+                return null;
+        }
+    }
+
+    public function getMargin($margin)
+    {
+        switch ($margin) {
+            case 1:
+                return "Derecha";
+            case 2:
+                return "Izquierda";
+            default:
+                return null;
         }
     }
 }
