@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use DB;
 
 class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
@@ -24,9 +25,11 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
             ->join('functional_units', 'functional_units.id', '=', 'forest_units.functional_unit_id')
             ->join('projects', 'projects.id', '=', 'functional_units.project_id')
             ->where('functional_units.project_id', $this->projectId)->get();*/
-        return ForestUnit::select('forest_units.code', 'functional_units.code as UF', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.family', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.products','forest_units.margin','forest_units.treatment','forest_units.resolution','forest_units.state','forest_units.end_treatment','forest_units.note')
-            ->join('functional_units', 'functional_units.id', '=', 'forest_units.functional_unit_id')
-            ->join('projects', 'projects.id', '=', 'functional_units.project_id')
+        return ForestUnit::select('forest_units.code', 'functional_units.code as UF', 'forest_units.common_name', 'forest_units.scientific_name', 'forest_units.family', 'forest_units.cap_cm', 'forest_units.total_heigth_m', 'forest_units.commercial_heigth_m', 'forest_units.condition', 'forest_units.health_status', 'forest_units.origin','forest_units.cup_density', 'forest_units.x_cup_diameter_m', 'forest_units.y_cup_diameter_m', 'forest_units.waypoint', 'forest_units.epiphytes', 'forest_units.products','forest_units.margin','forest_units.treatment','forest_units.resolution','forest_units.state','forest_units.end_treatment','forest_units.note')//, DB::raw("CONCAT(users.name,' ',users.lastname) as responsible"))
+            ->join('functional_units',  'functional_units.id', '=', 'forest_units.functional_unit_id')
+            ->join('projects',          'projects.id',         '=', 'functional_units.project_id')
+            ->join('responsabilities',  'forest_units.id',     '=', 'responsabilities.forest_unit_id')
+            //->join('users',             'users.id',            '=', 'responsabilities.user_id')
             ->where('functional_units.project_id', $this->projectId)->get();
     }
 

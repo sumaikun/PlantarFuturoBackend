@@ -635,19 +635,20 @@
                                         "example": "0366",
                                         "nullable": true
                                     },
-                                    "general_image": {
-                                        "description": "Foto general",
+                                    "id_image": {
+                                        "description": "Foto del id",
                                         "type": "string",
                                         "format": "string",
                                         "nullable": true
                                     },
-                                    "before_image": {
-                                        "description": "Foto del antes",
+                                    "general_image": {
+                                        "description": "Foto general del arbol",
                                         "type": "string",
-                                        "format": "string"
+                                        "format": "string",
+                                        "nullable": true
                                     },
                                     "after_image": {
-                                        "description": "Foto del despues",
+                                        "description": "Foto del despues del aprovechamiento",
                                         "type": "string",
                                         "format": "string"
                                     },
@@ -804,8 +805,20 @@
                                         "format": "string",
                                         "example": "968455"
                                     },
+                                    "id_image": {
+                                        "description": "Foto del id",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
                                     "general_image": {
-                                        "description": "Foto general",
+                                        "description": "Foto general del arbol",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "reference_image": {
+                                        "description": "Foto de referencia para identificarlo",
                                         "type": "string",
                                         "format": "string",
                                         "nullable": true
@@ -821,6 +834,12 @@
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -956,8 +975,20 @@
                                         "format": "string",
                                         "example": "968455"
                                     },
+                                    "id_image": {
+                                        "description": "Foto del id",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
                                     "general_image": {
-                                        "description": "Foto general",
+                                        "description": "Foto general del arbol",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "reference_image": {
+                                        "description": "Foto de referencia para identificarlo",
                                         "type": "string",
                                         "format": "string",
                                         "nullable": true
@@ -973,6 +1004,12 @@
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -1190,19 +1227,20 @@
                                         "example": "0366",
                                         "nullable": true
                                     },
-                                    "general_image": {
-                                        "description": "Foto general",
+                                    "id_image": {
+                                        "description": "Foto del id",
                                         "type": "string",
                                         "format": "string",
                                         "nullable": true
                                     },
-                                    "before_image": {
-                                        "description": "Foto del antes",
+                                    "general_image": {
+                                        "description": "Foto general del arbol",
                                         "type": "string",
-                                        "format": "string"
+                                        "format": "string",
+                                        "nullable": true
                                     },
                                     "after_image": {
-                                        "description": "Foto del despues",
+                                        "description": "Foto del despues del aprovechamiento",
                                         "type": "string",
                                         "format": "string"
                                     },
@@ -1382,6 +1420,12 @@
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -1540,6 +1584,12 @@
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"

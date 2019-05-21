@@ -12,13 +12,15 @@ class ResponsabilitiesTableSeeder extends Seeder
     public function run()
     {
         DB::table('responsabilities')->insert([
-            't_responsible' => 'T1',
+            'module' => 'Inventario',
+            'action' => 'Crear',
             'forest_unit_id' => 1,
             'user_id' => 3,
         ]);
 
         DB::table('responsabilities')->insert([
-            't_responsible' => 'T2',
+            'module' => 'Aprovechamiento',
+            'action' => 'Editar',
             'forest_unit_id' => 1,
             'user_id' => 4,
         ]);

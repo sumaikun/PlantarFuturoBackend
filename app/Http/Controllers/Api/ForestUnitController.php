@@ -176,8 +176,24 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="id_image",
+                            description="Foto del id",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="general_image",
-                            description="Foto general",
+                            description="Foto general del arbol",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="reference_image",
+                            description="Foto de referencia para identificarlo",
                             nullable=true,
                             type="string",
                             format="string"
@@ -195,6 +211,14 @@ class ForestUnitController extends Controller
                             property="functional_unit_id",
                             description="Id de la unidad funcional",
                             example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="user_id",
+                            description="Id del usuario logueado",
+                            example="1",
                             type="integer",
                             format="int32"
                         ),
@@ -237,7 +261,7 @@ class ForestUnitController extends Controller
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->origin              = $request->origin == 1 ? "Nativa" : $request->origin == 2 ? "Exotica" : null;
+        $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
         $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
@@ -249,10 +273,22 @@ class ForestUnitController extends Controller
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->waypoint            = $request->waypoint;
         $forestUnit->state               = $this->getState(4);
+        $forestUnit->id_image            = $request->id_image;
         $forestUnit->general_image       = $request->general_image;
+        $forestUnit->reference_image     = $request->reference_image;
         $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
+
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('module', "Inventario")->where('user_id', $request->user_id)->first()))
+        {
+            $responsability = new Responsability;
+            $responsability->forest_unit_id = $forestUnit->id;
+            $responsability->user_id        = $request->user_id;
+            $responsability->module         = $this->getModule(1);
+            $responsability->action         = $this->getAction(1);
+            $responsability->save();
+        }
 
         return response()->json(["message" => "¡Primera fase de IF completada!", "id" => $forestUnit->id], 200);
     }
@@ -390,8 +426,24 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="id_image",
+                            description="Foto del id",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="general_image",
-                            description="Foto general",
+                            description="Foto general del arbol",
+                            nullable=true,
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="reference_image",
+                            description="Foto de referencia para identificarlo",
                             nullable=true,
                             type="string",
                             format="string"
@@ -409,6 +461,14 @@ class ForestUnitController extends Controller
                             property="functional_unit_id",
                             description="Id de la unidad funcional",
                             example="3",
+                            type="integer",
+                            format="int32"
+                        ),
+
+                        @OA\Property(
+                            property="user_id",
+                            description="Id del usuario logueado",
+                            example="1",
                             type="integer",
                             format="int32"
                         ),
@@ -442,23 +502,36 @@ class ForestUnitController extends Controller
     {
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
-        $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->origin              = $this->getOrigin($request->origin);
-        $forestUnit->cap_cm              = $request->cap_cm;
-        $forestUnit->total_heigth_m      = $request->total_heigth_m;
-        $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
-        $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
-        $forestUnit->condition           = $this->getCondition($request->condition);
-        $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
-        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
-        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
-        $forestUnit->waypoint            = $request->waypoint;
         $forestUnit->state               = $this->getState(4);
-        $forestUnit->note                = $request->note;
-        $forestUnit->general_image       = $request->general_image;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
+        if(isset($request->scientific_name))     $forestUnit->scientific_name     = $request->scientific_name;
+        if(isset($request->origin))              $forestUnit->origin              = $this->getOrigin($request->origin);
+        if(isset($request->cap_cm))              $forestUnit->cap_cm              = $request->cap_cm;
+        if(isset($request->total_heigth_m))      $forestUnit->total_heigth_m      = $request->total_heigth_m;
+        if(isset($request->commercial_heigth_m)) $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
+        if(isset($request->cup_density))         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
+        if(isset($request->epiphytes))           $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
+        if(isset($request->condition))           $forestUnit->condition           = $this->getCondition($request->condition);
+        if(isset($request->health_status))       $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
+        if(isset($request->x_cup_diameter_m))    $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        if(isset($request->y_cup_diameter_m))    $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        if(isset($request->waypoint))            $forestUnit->waypoint            = $request->waypoint;
+        if(isset($request->note))                $forestUnit->note                = $request->note;
+        if(isset($request->id_image))            $forestUnit->id_image            = $request->id_image;
+        if(isset($request->general_image))       $forestUnit->general_image       = $request->general_image;
+        if(isset($request->reference_image))     $forestUnit->reference_image     = $request->reference_image;
+        
         $forestUnit->save();
+
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('module', "Inventario")->where('user_id', $request->user_id)->where('action', 'Editar')->first()))
+        {
+            $responsability = new Responsability;
+            $responsability->forest_unit_id = $forestUnit->id;
+            $responsability->user_id        = $request->user_id;
+            $responsability->module         = $this->getModule(1);
+            $responsability->action         = $this->getAction(2);
+            $responsability->save();
+        }
 
         return response()->json(["message" => "¡Primera fase de individuo forestal editada correctamente!", "id" => $forestUnit->id], 200);
     }
@@ -640,23 +713,24 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="general_image",
-                            description="Foto general",
+                            property="id_image",
+                            description="Foto del id",
                             nullable=true,
                             type="string",
                             format="string"
                         ),
 
                         @OA\Property(
-                            property="before_image",
-                            description="Foto del antes",
+                            property="general_image",
+                            description="Foto general del arbol",
+                            nullable=true,
                             type="string",
                             format="string"
                         ),
 
                         @OA\Property(
                             property="after_image",
-                            description="Foto del despues",
+                            description="Foto del despues del aprovechamiento",
                             type="string",
                             format="string"
                         ),
@@ -756,8 +830,8 @@ class ForestUnitController extends Controller
         $forestUnit->treatment           = $this->getTreatment($request->treatment);
         $forestUnit->state               = $this->getState($request->state);
         $forestUnit->resolution          = $request->resolution;
+        $forestUnit->id_image            = $request->id_image;
         $forestUnit->general_image       = $request->general_image;
-        $forestUnit->before_image        = $request->before_image;
         $forestUnit->after_image         = $request->after_image;
         $forestUnit->start_treatment     = $request->start_treatment;
         $forestUnit->end_treatment       = $request->end_treatment;
@@ -765,12 +839,13 @@ class ForestUnitController extends Controller
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
 
-        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('user_id', $request->user_id)->first()))
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('module', "Aprovechamiento")->where('user_id', $request->user_id)->first()))
         {
             $responsability = new Responsability;
             $responsability->forest_unit_id = $forestUnit->id;
             $responsability->user_id        = $request->user_id;
-            $responsability->t_responsible  = "T1";
+            $responsability->module         = $this->getModule(2);
+            $responsability->action         = $this->getAction(1);
             $responsability->save();
         }
 
@@ -978,23 +1053,24 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
-                            property="general_image",
-                            description="Foto general",
+                            property="id_image",
+                            description="Foto del id",
                             nullable=true,
                             type="string",
                             format="string"
                         ),
 
                         @OA\Property(
-                            property="before_image",
-                            description="Foto del antes",
+                            property="general_image",
+                            description="Foto general del arbol",
+                            nullable=true,
                             type="string",
                             format="string"
                         ),
 
                         @OA\Property(
                             property="after_image",
-                            description="Foto del despues",
+                            description="Foto del despues del aprovechamiento",
                             type="string",
                             format="string"
                         ),
@@ -1070,45 +1146,43 @@ class ForestUnitController extends Controller
 
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
-        $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->family              = $request->family;
-        $forestUnit->cap_cm              = $request->cap_cm;
-        $forestUnit->total_heigth_m      = $request->total_heigth_m;
-        $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
-        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
-        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
-        $forestUnit->waypoint            = $request->waypoint;
-        $forestUnit->north_coord         = $request->north_coord;
-        $forestUnit->east_coord          = $request->east_coord;
-        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
-        $forestUnit->condition           = $this->getCondition($request->condition);
-        $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
-        $forestUnit->origin              = $this->getOrigin($request->origin);
-        $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->products            = $this->getProducts($request->products);
-        $forestUnit->margin              = $this->getMargin($request->margin);
-        $forestUnit->treatment           = $this->getTreatment($request->treatment);
-        $forestUnit->state               = $this->getState($request->state);
-        $forestUnit->resolution          = $request->resolution;
-        $forestUnit->general_image       = $request->general_image;
-        $forestUnit->before_image        = $request->before_image;
-        $forestUnit->after_image         = $request->after_image;
-        $forestUnit->start_treatment     = $request->start_treatment;
-        $forestUnit->end_treatment       = $request->end_treatment;
-        $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
+        if(isset($request->scientific_name))     $forestUnit->scientific_name     = $request->scientific_name;
+        if(isset($request->family))              $forestUnit->family              = $request->family;
+        if(isset($request->cap_cm))              $forestUnit->cap_cm              = $request->cap_cm;
+        if(isset($request->total_heigth_m))      $forestUnit->total_heigth_m      = $request->total_heigth_m;
+        if(isset($request->commercial_heigth_m)) $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
+        if(isset($request->x_cup_diameter_m))    $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        if(isset($request->y_cup_diameter_m))    $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        if(isset($request->waypoint))            $forestUnit->waypoint            = $request->waypoint;
+        if(isset($request->north_coord))         $forestUnit->north_coord         = $request->north_coord;
+        if(isset($request->east_coord))          $forestUnit->east_coord          = $request->east_coord;
+        if(isset($request->epiphytes))           $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
+        if(isset($request->condition))           $forestUnit->condition           = $this->getCondition($request->condition);
+        if(isset($request->health_status))       $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
+        if(isset($request->origin))              $forestUnit->origin              = $this->getOrigin($request->origin);
+        if(isset($request->cup_density))         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
+        if(isset($request->products))            $forestUnit->products            = $this->getProducts($request->products);
+        if(isset($request->margin))              $forestUnit->margin              = $this->getMargin($request->margin);
+        if(isset($request->treatment))           $forestUnit->treatment           = $this->getTreatment($request->treatment);
+        if(isset($request->state))               $forestUnit->state               = $this->getState($request->state);
+        if(isset($request->resolution))          $forestUnit->resolution          = $request->resolution;
+        if(isset($request->id_image))            $forestUnit->id_image            = $request->id_image;
+        if(isset($request->general_image))       $forestUnit->general_image       = $request->general_image;
+        if(isset($request->after_image))         $forestUnit->after_image         = $request->after_image;
+        if(isset($request->start_treatment))     $forestUnit->start_treatment     = $request->start_treatment;
+        if(isset($request->end_treatment))       $forestUnit->end_treatment       = $request->end_treatment;
+        if(isset($request->note))                $forestUnit->note                = $request->note;
+        
         $forestUnit->save();
 
-        if (isset($request->user_id) && 
-            empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('user_id', $request->user_id)->first()) && 
-            $state != "Sin iniciar" && 
-            $state != "En proceso" && 
-            $this->getState($request->state) != "Inhabilitado")
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('module', "Aprovechamiento")->where('user_id', $request->user_id)->where('action', 'Editar')->first()))
         {
             $responsability = new Responsability;
             $responsability->forest_unit_id = $forestUnit->id;
             $responsability->user_id        = $request->user_id;
-            $responsability->t_responsible  = $state == "Sin iniciar" ? "T1" : $state == "En proceso" ? "T1" : "T2";
+            $responsability->module         = $this->getModule(2);
+            $responsability->action         = $this->getAction(2);
             $responsability->save();
         }
 
@@ -1271,6 +1345,14 @@ class ForestUnitController extends Controller
                             type="integer",
                             format="int32"
                         ),
+
+                        @OA\Property(
+                            property="user_id",
+                            description="Id del usuario logueado",
+                            example="1",
+                            type="integer",
+                            format="int32"
+                        ),
                     )
                 )
             ),
@@ -1327,6 +1409,16 @@ class ForestUnitController extends Controller
         $forestUnit->note                = $request->note;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
         $forestUnit->save();
+
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('module', "Compensación")->where('user_id', $request->user_id)->first()))
+        {
+            $responsability = new Responsability;
+            $responsability->forest_unit_id = $forestUnit->id;
+            $responsability->user_id        = $request->user_id;
+            $responsability->module         = $this->getModule(1);
+            $responsability->action         = $this->getAction(1);
+            $responsability->save();
+        }
 
         return response()->json(["message" => "¡Tercera fase de IF completada!", "id" => $forestUnit->id], 200);
     }
@@ -1494,6 +1586,14 @@ class ForestUnitController extends Controller
                             type="integer",
                             format="int32"
                         ),
+
+                        @OA\Property(
+                            property="user_id",
+                            description="Id del usuario logueado",
+                            example="1",
+                            type="integer",
+                            format="int32"
+                        ),
                     )
                 )
             ),
@@ -1524,24 +1624,34 @@ class ForestUnitController extends Controller
     {
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
-        $forestUnit->scientific_name     = $request->scientific_name;
-        $forestUnit->origin              = $this->getOrigin($request->origin);
-        $forestUnit->cap_cm              = $request->cap_cm;
-        $forestUnit->total_heigth_m      = $request->total_heigth_m;
-        $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
-        $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
-        $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
-        $forestUnit->condition           = $this->getCondition($request->condition);
-        $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
-        $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
-        $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
-        $forestUnit->waypoint            = $request->waypoint;
-        $forestUnit->compensation_site   = $request->compensation_site;
         $forestUnit->state               = $this->getState(4);
-        $forestUnit->note                = $request->note;
-        $forestUnit->general_image       = $request->general_image;
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
+        if(isset($request->scientific_name))     $forestUnit->scientific_name     = $request->scientific_name;
+        if(isset($request->origin))              $forestUnit->origin              = $this->getOrigin($request->origin);
+        if(isset($request->cap_cm))              $forestUnit->cap_cm              = $request->cap_cm;
+        if(isset($request->total_heigth_m))      $forestUnit->total_heigth_m      = $request->total_heigth_m;
+        if(isset($request->commercial_heigth_m)) $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
+        if(isset($request->cup_density))         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
+        if(isset($request->epiphytes))           $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
+        if(isset($request->condition))           $forestUnit->condition           = $this->getCondition($request->condition);
+        if(isset($request->health_status))       $forestUnit->health_status       = $this->getHealthStatus($request->health_status);
+        if(isset($request->x_cup_diameter_m))    $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
+        if(isset($request->y_cup_diameter_m))    $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
+        if(isset($request->waypoint))            $forestUnit->waypoint            = $request->waypoint;
+        if(isset($request->compensation_site))   $forestUnit->compensation_site   = $request->compensation_site;
+        if(isset($request->note))                $forestUnit->note                = $request->note;
+        if(isset($request->general_image))       $forestUnit->general_image       = $request->general_image;
         $forestUnit->save();
+
+        if (isset($request->user_id) && empty(Responsability::where('forest_unit_id', $forestUnit->id)->where('module', "Compensación")->where('user_id', $request->user_id)->where('action', 'Editar')->first()))
+        {
+            $responsability = new Responsability;
+            $responsability->forest_unit_id = $forestUnit->id;
+            $responsability->user_id        = $request->user_id;
+            $responsability->module         = $this->getModule(3);
+            $responsability->action         = $this->getAction(2);
+            $responsability->save();
+        }
 
         return response()->json(["message" => "¡Tercera fase de individuo forestal editada correctamente!", "id" => $forestUnit->id], 200);
     }
@@ -1768,6 +1878,32 @@ class ForestUnitController extends Controller
                 return "Derecha";
             case 2:
                 return "Izquierda";
+            default:
+                return null;
+        }
+    }
+
+    public function getModule($module)
+    {
+        switch ($module) {
+            case 1:
+                return "Inventario";
+            case 2:
+                return "Aprovechamiento";
+            case 3:
+                return "Compensación";
+            default:
+                return null;
+        }
+    }
+
+    public function getAction($action)
+    {
+        switch ($action) {
+            case 1:
+                return "Crear";
+            case 2:
+                return "Editar";
             default:
                 return null;
         }

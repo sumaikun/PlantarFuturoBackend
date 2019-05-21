@@ -15,7 +15,8 @@ class CreateResponsabilitiesTable extends Migration
     {
         Schema::create('responsabilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('t_responsible', ["T1", "T2"]); // 1: Tecnico Responsable I, 2: Tecnico responsable II
+            $table->enum('module', ["Inventario", "Aprovechamiento", "Compensación"]); // 1: Inventario, 2: Aprovechamiento, 3: Compensacion, 4:
+            $table->enum('action', ["Crear", "Editar"]); // 1: Crear, 2: Editar
             //Foreigns
             $table->integer('forest_unit_id')->unsigned();
             $table->foreign('forest_unit_id')->references('id')->on('forest_units');
