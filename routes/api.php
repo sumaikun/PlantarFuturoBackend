@@ -46,5 +46,8 @@ Route::group(['middleware' => 'cors'], function()
 	Route::post('users/unassign',   'Api\AuthController@unassign');
 	Route::post('login',	 		  'Api\AuthController@login');
 	Route::any('crudService',		  'Api\CrudController@dispatcher');
-
+	Route::get('timezone', function()
+	{
+		dd(date("Y m d H:i:s"));
+	});
 });

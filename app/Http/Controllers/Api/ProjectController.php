@@ -382,7 +382,9 @@ class ProjectController extends Controller
 
     public function export($id)
     {
-        return Excel::download(new ProjectInventoryExport($id), 'inventario.xls');
+        $project = Project::find($id);
+        $phase   = $this->getModule($project->phase); 
+        return Excel::download(new ProjectInventoryExport($id, $phase), $project->name . '-' . $phase . '.xls');
     }
 
     public function edit(Project $project)
@@ -799,5 +801,19 @@ class ProjectController extends Controller
             if ($code == $unit->code) return false;
         }
         return true;
+    }
+
+    public function getModule($module)
+    {
+        switch ($module) {
+            case 1:
+                return "Inventario";
+            case 2:
+                return "Aprovechamiento";
+            case 3:
+                return "Compensación";
+            default:
+                return null;
+        }
     }
 }

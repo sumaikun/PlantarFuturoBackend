@@ -13,9 +13,10 @@ use DB;
 
 class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
-    public function __construct(int $projectId)
+    public function __construct(int $projectId, string $phase)
     {
         $this->projectId = $projectId;
+        $this->phase = $phase;
     }
     /**
     * @return \Illuminate\Support\Collection
@@ -36,7 +37,7 @@ class ProjectInventoryExport implements FromCollection, WithHeadings, ShouldAuto
         {
             foreach (Responsability::where('forest_unit_id', $forestUnit->id)->get() as $key => $responsability)
             {
-                if ($responsability->action == "Crear")
+                if ($responsability->action == "Crear" && $responsability->module == $this->phase)
                     $forestUnit->setAttribute('responsible', $responsability->user->name . ' ' . $responsability->user->lastname);
             }
         }

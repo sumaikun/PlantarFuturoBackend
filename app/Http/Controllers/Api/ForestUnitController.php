@@ -36,7 +36,7 @@ class ForestUnitController extends Controller
     */
     public function index()
     {
-        $forest = ForestUnit::select('code', 'common_name', 'scientific_name', 'family', 'cap_cm', 'total_heigth_m', 'commercial_heigth_m', 'condition', 'health_status', 'origin','cup_density', 'x_cup_diameter_m', 'y_cup_diameter_m', 'waypoint', 'epiphytes', 'products','margin','treatment','resolution','state','end_treatment','note')->get();
+        $forest = ForestUnit::select('id', 'code', 'common_name', 'scientific_name', 'state', 'end_treatment', 'note', 'created_at', 'updated_at', 'functional_unit_id')->get();
         foreach ($forest as $forestUnit)
         {
             $forestUnits[] = $forestUnit->setAttribute('functional_unit', $forestUnit->functional_unit);
@@ -121,7 +121,7 @@ class ForestUnitController extends Controller
 
                         @OA\Property(
                             property="cup_density",
-                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                             example="3",
                             type="integer",
                             format="int32"
@@ -371,7 +371,7 @@ class ForestUnitController extends Controller
 
                         @OA\Property(
                             property="cup_density",
-                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                             example="3",
                             type="integer",
                             format="int32"
@@ -665,7 +665,7 @@ class ForestUnitController extends Controller
 
                         @OA\Property(
                             property="cup_density",
-                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                             example="3",
                             type="integer",
                             format="int32"
@@ -1005,7 +1005,7 @@ class ForestUnitController extends Controller
 
                         @OA\Property(
                             property="cup_density",
-                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                             example="3",
                             type="integer",
                             format="int32"
@@ -1260,7 +1260,7 @@ class ForestUnitController extends Controller
 
                         @OA\Property(
                             property="cup_density",
-                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                             example="3",
                             type="integer",
                             format="int32"
@@ -1501,7 +1501,7 @@ class ForestUnitController extends Controller
 
                         @OA\Property(
                             property="cup_density",
-                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                            description="Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                             example="3",
                             type="integer",
                             format="int32"
@@ -1792,6 +1792,8 @@ class ForestUnitController extends Controller
                 return "Media";
             case 3:
                 return "Espesa";
+            case 4:
+                return "No aplica";
             default:
                 return null;
         }
