@@ -15,13 +15,16 @@ class CreatePrecipitationsTable extends Migration
     {
         Schema::create('precipitations', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('code', 10);
             $table->dateTime('report_date');
             $table->enum('type', ["Llovizna", "Lluvia", "Lluvia Torrencial", "Tormenta"])->nullable(); //1-Llovizna, 2-Lluvia, 3-Lluvia Torrencial, 4-Tormenta
-            $table->integer('hours')->nullable();
-            $table->time('start')->nullable();
-            $table->time('finish')->nullable();
+            $table->integer('mm_hours')->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('finish')->nullable();
+            $table->tinyInteger('level')->nullable();
+            $table->string('responsible_name')->nullable();
+            $table->string('responsible_id')->nullable();
             $table->longText('observations')->nullable();
-            $table->enum('level', ["1", "2", "3", "4", "5"])->nullable();
             //Foreigns
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');

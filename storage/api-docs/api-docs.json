@@ -599,7 +599,7 @@
                                         "example": "1"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
@@ -764,7 +764,7 @@
                                         "example": "7.0"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
@@ -934,7 +934,7 @@
                                         "example": "7.0"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
@@ -1191,7 +1191,7 @@
                                         "example": "1"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
@@ -1356,7 +1356,7 @@
                                         "example": "7.0"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
@@ -1520,7 +1520,7 @@
                                         "example": "7.0"
                                     },
                                     "cup_density": {
-                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa)",
+                                        "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
                                         "type": "integer",
                                         "format": "int32",
                                         "example": "3"
@@ -2395,6 +2395,648 @@
                     },
                     "405": {
                         "description": "Metodo no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-displacement": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Mostrar lista de desplazamiento de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los desplazamiento de ladera."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Registrar desplazamiento de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del desplazamiento de ladera (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "DL01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "longitude": {
+                                        "description": "Longitud de la grieta (medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "width": {
+                                        "description": "Ancho de la grieta (Medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "3.5"
+                                    },
+                                    "new": {
+                                        "description": "Grieta (1: Nueva, 2: Existente)",
+                                        "type": "boolean",
+                                        "format": "boolean",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Ubicacion de la grieta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 25 del inicio de la ladera"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "N/A"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-displacement/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Lista de las desplazamiento de ladera de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Editar desplazamiento de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) de la Desplazamiento de ladera",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del desplazamiento de ladera (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "DL01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "longitude": {
+                                        "description": "Longitud de la grieta (medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "width": {
+                                        "description": "Ancho de la grieta (Medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "3.5"
+                                    },
+                                    "new": {
+                                        "description": "Grieta (1: Nueva, 2: Existente)",
+                                        "type": "boolean",
+                                        "format": "boolean",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Ubicacion de la grieta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 25 del inicio de la ladera"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "N/A"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-displacement/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/tunnel-deformation": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Deformaciones al interior tunel"
+                ],
+                "summary": "Mostrar lista de deformaciones en tunel",
+                "operationId": "App\\Http\\Controllers\\Api\\TunnelDeformationController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las deformaciones en tunel."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Deformaciones al interior tunel"
+                ],
+                "summary": "Registrar deformacion en tunel",
+                "operationId": "App\\Http\\Controllers\\Api\\TunnelDeformationController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la deformacion en tunel (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "DF01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "longitude": {
+                                        "description": "Longitud de la grieta (medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "width": {
+                                        "description": "Ancho de la grieta (Medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "3.5"
+                                    },
+                                    "new": {
+                                        "description": "Grieta (1: Nueva, 2: Existente)",
+                                        "type": "boolean",
+                                        "format": "boolean",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Ubicacion de la grieta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Al principio del tunel 13"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "N/A"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/tunnel-deformation/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Deformaciones al interior tunel"
+                ],
+                "summary": "Lista de las deformaciones en tunel de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\TunnelDeformationController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Deformaciones al interior tunel"
+                ],
+                "summary": "Editar deformacion en tunel",
+                "operationId": "App\\Http\\Controllers\\Api\\TunnelDeformationController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) de la deformacion de tunel",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la deformacion en tunel (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "DF01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "longitude": {
+                                        "description": "Longitud de la grieta (medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "width": {
+                                        "description": "Ancho de la grieta (Medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "3.5"
+                                    },
+                                    "new": {
+                                        "description": "Grieta (1: Nueva, 2: Existente)",
+                                        "type": "boolean",
+                                        "format": "boolean",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Ubicacion de la grieta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Al principio del tunel 13"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "N/A"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/tunnel-deformation/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Deformaciones al interior tunel"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\TunnelDeformationController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

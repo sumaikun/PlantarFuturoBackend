@@ -46,6 +46,14 @@ Route::group(['middleware' => 'cors'], function()
 	Route::post('users/unassign',   'Api\AuthController@unassign');
 	Route::post('login',	 		  'Api\AuthController@login');
 	Route::any('crudService',		  'Api\CrudController@dispatcher');
+
+	/*Risks*/
+	Route::resource ('risks/tunnel-deformation', 'Api\TunnelDeformationController');
+	Route::get 		('risks/tunnel-deformation/export/{id}', 'Api\TunnelDeformationController@export');
+
+	Route::resource ('risks/hillside-displacement', 'Api\HillsideDisplacementController');
+	Route::get 		('risks/hillside-displacement/export/{id}', 'Api\HillsideDisplacementController@export');
+
 	Route::get('timezone', function()
 	{
 		dd(date("Y m d H:i:s"));

@@ -23,4 +23,29 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Contractor');
     }
+
+    function tunnel_deformations()
+    {
+        return $this->hasMany('App\Models\TunnelDeformation');
+    }
+
+    function hillside_displacements()
+    {
+        return $this->hasMany('App\Models\HillsideDisplacement');
+    }
+
+    function hillside_rounds()
+    {
+        return $this->hasMany('App\Models\HillsideRounds');
+    }
+
+    function dry_ravine_rounds()
+    {
+        return $this->hasMany('App\Models\DryRavineRounds');
+    }
+
+    function precipitations()
+    {
+        return $this->hasMany('App\Models\Precipitations');
+    }
 }

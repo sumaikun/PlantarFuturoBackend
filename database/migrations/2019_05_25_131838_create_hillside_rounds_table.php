@@ -15,6 +15,20 @@ class CreateHillsideRoundsTable extends Migration
     {
         Schema::create('hillside_rounds', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('code', 10);
+            $table->boolean('landslides')->nullable();
+            $table->string('ls_location')->nullable();
+            $table->longText('ls_description')->nullable();
+            $table->boolean('rockfall')->nullable();
+            $table->string('rf_location')->nullable();
+            $table->longText('rf_description')->nullable();
+            $table->boolean('noises')->nullable();
+            $table->string('ns_location')->nullable();
+            $table->longText('ns_description')->nullable();
+            $table->tinyInteger('level')->nullable();
+            $table->string('responsible_name')->nullable();
+            $table->string('responsible_id')->nullable();
+            $table->longText('observations')->nullable();
             //Foreigns
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');
