@@ -54,6 +54,15 @@ Route::group(['middleware' => 'cors'], function()
 	Route::resource ('risks/hillside-displacement', 'Api\HillsideDisplacementController');
 	Route::get 		('risks/hillside-displacement/export/{id}', 'Api\HillsideDisplacementController@export');
 
+	Route::resource ('risks/hillside-round', 'Api\HillsideRoundController');
+	Route::get 		('risks/hillside-round/export/{id}', 'Api\HillsideRoundController@export');
+
+	Route::resource ('risks/dryravine-round', 'Api\DryRavineRoundController');
+	Route::get 		('risks/dryravine-round/export/{id}', 'Api\DryRavineRoundController@export');
+
+	Route::resource ('risks/precipitation', 'Api\PrecipitationController');
+	Route::get 		('risks/precipitation/export/{id}', 'Api\PrecipitationController@export');
+
 	Route::get('timezone', function()
 	{
 		dd(date("Y m d H:i:s"));

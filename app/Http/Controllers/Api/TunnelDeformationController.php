@@ -437,7 +437,7 @@ class TunnelDeformationController extends Controller
     public function export($id)
     {
         $project = Project::find($id);
-        return Excel::download(new TunnelDeformationsExport($id), 'Deformaciones de tunel -' . $project->name . '.xls');
+        return Excel::download(new TunnelDeformationsExport($id), $project->name . ' - Deformaciones de tunel.xls');
     }
 
     public function validateLevel($level)

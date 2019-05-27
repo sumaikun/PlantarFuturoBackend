@@ -480,6 +480,375 @@
                 }
             }
         },
+        "/api/risks/dryravine-round": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Mostrar lista de recorridos de quebrada",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los recorridos de quebrada."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Registrar recorrido de quebrada",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del recorrido de quebrada (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "RQ01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "waterdam": {
+                                        "description": "Represamientos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "wd_location": {
+                                        "description": "Ubicación del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 3 de la quebrada"
+                                    },
+                                    "wd_description": {
+                                        "description": "Descripción del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se generó un represamiento"
+                                    },
+                                    "materialdrag": {
+                                        "description": "Arrastre de material (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "md_location": {
+                                        "description": "Ubicación de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 5 de la quebrada"
+                                    },
+                                    "md_description": {
+                                        "description": "Descripción de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se arrastro material de construccion"
+                                    },
+                                    "noises": {
+                                        "description": "Presencia de ruidos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ns_location": {
+                                        "description": "Ubicación de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 10 de la quebrada"
+                                    },
+                                    "ns_description": {
+                                        "description": "Descripción de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Un ruido estruendoso"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/dryravine-round/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Lista de los recorridos de quebrada de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Editar recorrido de quebrada",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del Recorrido de quebrada",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del recorrido de quebrada (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "RQ01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "waterdam": {
+                                        "description": "Represamientos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "wd_location": {
+                                        "description": "Ubicación del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 3 de la quebrada"
+                                    },
+                                    "wd_description": {
+                                        "description": "Descripción del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se generó un represamiento"
+                                    },
+                                    "materialdrag": {
+                                        "description": "Arrastre de material (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "md_location": {
+                                        "description": "Ubicación de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 5 de la quebrada"
+                                    },
+                                    "md_description": {
+                                        "description": "Descripción de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se cayeron 5 rocas"
+                                    },
+                                    "noises": {
+                                        "description": "Presencia de ruidos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ns_location": {
+                                        "description": "Ubicación de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 10 de la quebrada"
+                                    },
+                                    "ns_description": {
+                                        "description": "Descripción de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Un ruido estruendoso"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/dryravine-round/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/api/forest-unit": {
             "get": {
                 "tags": [
@@ -1844,6 +2213,1005 @@
                 }
             }
         },
+        "/api/risks/hillside-displacement": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Mostrar lista de desplazamiento de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los desplazamiento de ladera."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Registrar desplazamiento de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del desplazamiento de ladera (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "DL01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "longitude": {
+                                        "description": "Longitud de la grieta (medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "width": {
+                                        "description": "Ancho de la grieta (Medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "3.5"
+                                    },
+                                    "new": {
+                                        "description": "Grieta (1: Nueva, 2: Existente)",
+                                        "type": "boolean",
+                                        "format": "boolean",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Ubicacion de la grieta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 25 del inicio de la ladera"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "N/A"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-displacement/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Lista de las desplazamiento de ladera de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Editar desplazamiento de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) de la Desplazamiento de ladera",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del desplazamiento de ladera (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "DL01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "longitude": {
+                                        "description": "Longitud de la grieta (medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "width": {
+                                        "description": "Ancho de la grieta (Medido en mm)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "3.5"
+                                    },
+                                    "new": {
+                                        "description": "Grieta (1: Nueva, 2: Existente)",
+                                        "type": "boolean",
+                                        "format": "boolean",
+                                        "example": "1"
+                                    },
+                                    "location": {
+                                        "description": "Ubicacion de la grieta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 25 del inicio de la ladera"
+                                    },
+                                    "description": {
+                                        "description": "Descripcion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "N/A"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-displacement/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Desplazamientos de ladera"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-round": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a la ladera"
+                ],
+                "summary": "Mostrar lista de recorridos de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideRoundController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los recorridos de ladera."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a la ladera"
+                ],
+                "summary": "Registrar recorrido de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideRoundController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del recorrido de ladera (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "RL01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "landslides": {
+                                        "description": "Deslizamientos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ls_location": {
+                                        "description": "Ubicación del deslizamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 3 de la ladera"
+                                    },
+                                    "ls_description": {
+                                        "description": "Descripción del deslizamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se generó un deslizamiento"
+                                    },
+                                    "rockfall": {
+                                        "description": "Caida de rocas (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "rf_location": {
+                                        "description": "Ubicación de la caida de rocas",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 5 de la ladera"
+                                    },
+                                    "rf_description": {
+                                        "description": "Descripción de la caida de rocas",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se cayeron 5 rocas"
+                                    },
+                                    "noises": {
+                                        "description": "Presencia de ruidos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ns_location": {
+                                        "description": "Ubicación de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 10 de la ladera"
+                                    },
+                                    "ns_description": {
+                                        "description": "Descripción de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Un ruido estruendoso"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-round/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a la ladera"
+                ],
+                "summary": "Lista de los recorridos de ladera de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideRoundController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a la ladera"
+                ],
+                "summary": "Editar recorrido de ladera",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideRoundController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del Recorrido de ladera",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del recorrido de ladera (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "RL01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "landslides": {
+                                        "description": "Deslizamientos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ls_location": {
+                                        "description": "Ubicación del deslizamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 3 de la ladera"
+                                    },
+                                    "ls_description": {
+                                        "description": "Descripción del deslizamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se generó un deslizamiento"
+                                    },
+                                    "rockfall": {
+                                        "description": "Caida de rocas (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "rf_location": {
+                                        "description": "Ubicación de la caida de rocas",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 5 de la ladera"
+                                    },
+                                    "rf_description": {
+                                        "description": "Descripción de la caida de rocas",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se cayeron 5 rocas"
+                                    },
+                                    "noises": {
+                                        "description": "Presencia de ruidos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ns_location": {
+                                        "description": "Ubicación de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 10 de la ladera"
+                                    },
+                                    "ns_description": {
+                                        "description": "Descripción de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Un ruido estruendoso"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/hillside-round/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a la ladera"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\HillsideRoundController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/precipitation": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Precipitación"
+                ],
+                "summary": "Mostrar lista de precipitaciones",
+                "operationId": "App\\Http\\Controllers\\Api\\PrecipitationController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las precipitaciones."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Precipitación"
+                ],
+                "summary": "Registrar precipitación",
+                "operationId": "App\\Http\\Controllers\\Api\\PrecipitationController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la precipitación (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "PR01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "type": {
+                                        "description": "Tipo (1: Llovizna, 2: Lluviam, 3: Lluvia Torrencial, 4: Tormenta)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "mm_hours": {
+                                        "description": "milimetros / hora",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "start": {
+                                        "description": "Fecha y hora del inicio de la precipitación (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 22:46"
+                                    },
+                                    "finish": {
+                                        "description": "Fecha y hora del final de la precipitación (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-27 00:45"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/precipitation/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Precipitación"
+                ],
+                "summary": "Lista de las precipitaciones de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\PrecipitationController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Precipitación"
+                ],
+                "summary": "Editar precipitación",
+                "operationId": "App\\Http\\Controllers\\Api\\PrecipitationController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) de la Precipitación",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la precipitación (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "PR01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "type": {
+                                        "description": "Tipo (1: Llovizna, 2: Lluviam, 3: Lluvia Torrencial, 4: Tormenta)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "mm_hours": {
+                                        "description": "milimetros / hora",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10.0"
+                                    },
+                                    "start": {
+                                        "description": "Fecha y hora del inicio de la precipitación (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 22:46"
+                                    },
+                                    "finish": {
+                                        "description": "Fecha y hora del final de la precipitación (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-27 00:45"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/precipitation/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Precipitación"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\PrecipitationController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/api/project": {
             "get": {
                 "tags": [
@@ -2395,327 +3763,6 @@
                     },
                     "405": {
                         "description": "Metodo no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/risks/hillside-displacement": {
-            "get": {
-                "tags": [
-                    "[Riesgos] Desplazamientos de ladera"
-                ],
-                "summary": "Mostrar lista de desplazamiento de ladera",
-                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::index",
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los desplazamiento de ladera."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "[Riesgos] Desplazamientos de ladera"
-                ],
-                "summary": "Registrar desplazamiento de ladera",
-                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::store",
-                "requestBody": {
-                    "required": false,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "required": [],
-                                "properties": {
-                                    "code": {
-                                        "description": "Codigo del desplazamiento de ladera (max 10ch)",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "DL01"
-                                    },
-                                    "report_date": {
-                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2019-05-26 13:45"
-                                    },
-                                    "longitude": {
-                                        "description": "Longitud de la grieta (medido en mm)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "10.0"
-                                    },
-                                    "width": {
-                                        "description": "Ancho de la grieta (Medido en mm)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "3.5"
-                                    },
-                                    "new": {
-                                        "description": "Grieta (1: Nueva, 2: Existente)",
-                                        "type": "boolean",
-                                        "format": "boolean",
-                                        "example": "1"
-                                    },
-                                    "location": {
-                                        "description": "Ubicacion de la grieta",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "En el metro 25 del inicio de la ladera"
-                                    },
-                                    "description": {
-                                        "description": "Descripcion",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "N/A"
-                                    },
-                                    "level": {
-                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "3"
-                                    },
-                                    "responsible_name": {
-                                        "description": "Nombre del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "responsible_id": {
-                                        "description": "Identificacion del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "123456789"
-                                    },
-                                    "observations": {
-                                        "description": "Observaciones",
-                                        "type": "string",
-                                        "format": "string",
-                                        "nullable": true
-                                    },
-                                    "project_id": {
-                                        "description": "Id del proyecto",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "2"
-                                    },
-                                    "user_id": {
-                                        "description": "Id del usuario logueado",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Cliente registrada."
-                    },
-                    "400": {
-                        "description": "Request mal mandado."
-                    },
-                    "401": {
-                        "description": "Ingreso no autorizado."
-                    },
-                    "405": {
-                        "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/risks/hillside-displacement/{id}": {
-            "get": {
-                "tags": [
-                    "[Riesgos] Desplazamientos de ladera"
-                ],
-                "summary": "Lista de las desplazamiento de ladera de un proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::show",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Consolidado del inventario."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "[Riesgos] Desplazamientos de ladera"
-                ],
-                "summary": "Editar desplazamiento de ladera",
-                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::update",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id (Primary key) de la Desplazamiento de ladera",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": false,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "required": [],
-                                "properties": {
-                                    "code": {
-                                        "description": "Codigo del desplazamiento de ladera (max 10ch)",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "DL01"
-                                    },
-                                    "report_date": {
-                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2019-05-26 13:45"
-                                    },
-                                    "longitude": {
-                                        "description": "Longitud de la grieta (medido en mm)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "10.0"
-                                    },
-                                    "width": {
-                                        "description": "Ancho de la grieta (Medido en mm)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "3.5"
-                                    },
-                                    "new": {
-                                        "description": "Grieta (1: Nueva, 2: Existente)",
-                                        "type": "boolean",
-                                        "format": "boolean",
-                                        "example": "1"
-                                    },
-                                    "location": {
-                                        "description": "Ubicacion de la grieta",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "En el metro 25 del inicio de la ladera"
-                                    },
-                                    "description": {
-                                        "description": "Descripcion",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "N/A"
-                                    },
-                                    "level": {
-                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "3"
-                                    },
-                                    "responsible_name": {
-                                        "description": "Nombre del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "responsible_id": {
-                                        "description": "Identificacion del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "123456789"
-                                    },
-                                    "observations": {
-                                        "description": "Observaciones",
-                                        "type": "string",
-                                        "format": "string",
-                                        "nullable": true
-                                    },
-                                    "project_id": {
-                                        "description": "Id del proyecto",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "2"
-                                    },
-                                    "user_id": {
-                                        "description": "Id del usuario logueado",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Cliente registrada."
-                    },
-                    "400": {
-                        "description": "Request mal mandado."
-                    },
-                    "401": {
-                        "description": "Ingreso no autorizado."
-                    },
-                    "405": {
-                        "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/risks/hillside-displacement/export/{id}": {
-            "get": {
-                "tags": [
-                    "[Riesgos] Desplazamientos de ladera"
-                ],
-                "summary": "Consolidado",
-                "operationId": "App\\Http\\Controllers\\Api\\HillsideDisplacementController::export",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Consolidado del inventario."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

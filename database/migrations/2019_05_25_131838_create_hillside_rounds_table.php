@@ -16,13 +16,14 @@ class CreateHillsideRoundsTable extends Migration
         Schema::create('hillside_rounds', function (Blueprint $table) {
             $table->increments('id');
             $table->char('code', 10);
-            $table->boolean('landslides')->nullable();
+            $table->dateTime('report_date');
+            $table->enum('landslides', ["Si", "No"])->nullable();
             $table->string('ls_location')->nullable();
             $table->longText('ls_description')->nullable();
-            $table->boolean('rockfall')->nullable();
+            $table->enum('rockfall', ["Si", "No"])->nullable();
             $table->string('rf_location')->nullable();
             $table->longText('rf_description')->nullable();
-            $table->boolean('noises')->nullable();
+            $table->enum('noises', ["Si", "No"])->nullable();
             $table->string('ns_location')->nullable();
             $table->longText('ns_description')->nullable();
             $table->tinyInteger('level')->nullable();

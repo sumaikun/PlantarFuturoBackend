@@ -16,13 +16,14 @@ class CreateDryRavineRoundsTable extends Migration
         Schema::create('dry_ravine_rounds', function (Blueprint $table) {
             $table->increments('id');
             $table->char('code', 10);
-            $table->boolean('waterdam')->nullable();
+            $table->dateTime('report_date');
+            $table->enum('waterdam', ["Si", "No"])->nullable();
             $table->string('wd_location')->nullable();
             $table->longText('wd_description')->nullable();
-            $table->boolean('materialdrag')->nullable();
+            $table->enum('materialdrag', ["Si", "No"])->nullable();
             $table->string('md_location')->nullable();
             $table->longText('md_description')->nullable();
-            $table->boolean('noises')->nullable();
+            $table->enum('noises', ["Si", "No"])->nullable();
             $table->string('ns_location')->nullable();
             $table->longText('ns_description')->nullable();
             $table->tinyInteger('level')->nullable();

@@ -437,7 +437,7 @@ class HillsideDisplacementController extends Controller
     public function export($id)
     {
         $project = Project::find($id);
-        return Excel::download(new HillsideDisplacementsExport($id), 'Desplazamientos de ladera -' . $project->name . '.xls');
+        return Excel::download(new HillsideDisplacementsExport($id), $project->name . ' - Desplazamientos de ladera.xls');
     }
 
     public function validateLevel($level)

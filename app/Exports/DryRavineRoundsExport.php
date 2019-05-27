@@ -2,14 +2,14 @@
 
 namespace App\Exports;
 
-use App\Models\HillsideRound;
+use App\Models\DryRavineRound;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class HillsideRoundsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
+class DryRavineRoundsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
 	public function __construct(int $projectId)
     {
@@ -21,7 +21,7 @@ class HillsideRoundsExport implements FromCollection, WithHeadings, ShouldAutoSi
     */
     public function collection()
     {
-        return HillsideRound::select('code','report_date','landslides','ls_location','ls_description','rockfall','rf_location','rf_description','noises','ns_location','ns_description','level','responsible_name','responsible_id','observations')->where('project_id', $this->projectId)->get();
+        return DryRavineRound::select('code','report_date','waterdam','wd_location','wd_description','materialdrag','md_location','md_description','noises','ns_location','ns_description','level','responsible_name','responsible_id','observations')->where('project_id', $this->projectId)->get();
     }
 
     public function headings(): array
@@ -29,10 +29,10 @@ class HillsideRoundsExport implements FromCollection, WithHeadings, ShouldAutoSi
         return [
             'ID',
             'FECHA DE REPORTE',
-            'DESLIZAMIENTOS',
+            'REPRESAMIENTO',
             'UBICACIÓN',
             'DESCRIPCIÓN',
-            'CAIDA DE ROCAS',
+            'ARRASTRE DE MATERIAL',
             'UBICACIÓN',
             'DESCRIPCIÓN',
             'PRESENCIA DE RUIDOS',
