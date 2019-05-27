@@ -43,7 +43,7 @@ Route::group(['middleware' => 'cors'], function()
 	Route::post('users',		 	  'Api\AuthController@store');
 	Route::get('users/projects/{id}', 'Api\AuthController@getProjects');
 	Route::post('users/assignation',  'Api\AuthController@assignation');
-	Route::post('users/unassign',   'Api\AuthController@unassign');
+	Route::post('users/unassign',     'Api\AuthController@unassign');
 	Route::post('login',	 		  'Api\AuthController@login');
 	Route::any('crudService',		  'Api\CrudController@dispatcher');
 
@@ -62,6 +62,8 @@ Route::group(['middleware' => 'cors'], function()
 
 	Route::resource ('risks/precipitation', 'Api\PrecipitationController');
 	Route::get 		('risks/precipitation/export/{id}', 'Api\PrecipitationController@export');
+
+	Route::get 		('project/risks/{id}', 'Api\ProjectController@risks');	
 
 	Route::get('timezone', function()
 	{

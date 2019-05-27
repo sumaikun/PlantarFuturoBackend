@@ -36,16 +36,16 @@ class Project extends Model
 
     function hillside_rounds()
     {
-        return $this->hasMany('App\Models\HillsideRounds');
+        return $this->hasMany('App\Models\HillsideRound');
     }
 
     function dry_ravine_rounds()
     {
-        return $this->hasMany('App\Models\DryRavineRounds');
+        return $this->hasMany('App\Models\DryRavineRound');
     }
 
     function precipitations()
     {
-        return $this->hasMany('App\Models\Precipitations');
+        return $this->hasMany('App\Models\Precipitation');
     }
 }

@@ -8,6 +8,13 @@ use App\Models\FunctionalUnit;
 use App\Models\ForestUnit;
 use App\Models\Contractor;
 use App\Models\User;
+//INI Risks
+use App\Models\TunnelDeformation;
+use App\Models\Precipitation;
+use App\Models\HillsideRound;
+use App\Models\HillsideDisplacement;
+use App\Models\DryRavineRound;
+//END Risks
 use App\Exports\ProjectInventoryExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -147,7 +154,7 @@ class ProjectController extends Controller
 
                         @OA\Property(
                             property="phase",
-                            description="Fase",
+                            description="Fase (1: Inventario, 2: Aprovechamiento, 3: Compensación, 4: Gestión de riesgos)",
                             example="1",
                             type="string",
                             format="string"
@@ -387,6 +394,70 @@ class ProjectController extends Controller
         return Excel::download(new ProjectInventoryExport($id, $phase), $project->name . '-' . $phase . '.xls');
     }
 
+    /**
+        @OA\Get(
+            tags={"Proyecto"},
+            path="/api/project/risks/{id}",
+            summary="Reporte de riesgos APP",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del proyecto",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+            @OA\Response(
+                response=200,
+                description="Consolidado del inventario."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
+    public function risks($id)
+    {
+        $project = Project::find($id);
+        $tunnelDeformations    = $this->reduceLevel($project->tunnel_deformations);
+        $hillsideDisplacements = $this->reduceLevel($project->hillside_displacements);
+        $hillsideRounds        = $this->reduceLevel($project->hillside_rounds);
+        $dryRavineRounds       = $this->reduceLevel($project->dry_ravine_rounds);
+        $precipitations        = $this->reduceLevel($project->precipitations);
+
+        $report = (object) [
+            'tunnel_deformations' => [
+                'avg' => $tunnelDeformations[0] / $tunnelDeformations[1],
+                'round_avg' => round($tunnelDeformations[0] / $tunnelDeformations[1]),
+                'count' => $tunnelDeformations[1]
+            ],
+            'hillside_displacements' => [
+                'avg' => $hillsideDisplacements[0] / $hillsideDisplacements[1],
+                'round_avg' => round($hillsideDisplacements[0] / $hillsideDisplacements[1]),
+                'count' => $hillsideDisplacements[1]
+            ],
+            'hillside_rounds' => [
+                'avg' => $hillsideRounds[0] / $hillsideRounds[1],
+                'round_avg' => round($hillsideRounds[0] / $hillsideRounds[1]),
+                'count' => $hillsideRounds[1]
+            ],
+            'dry_ravine_rounds' => [
+                'avg' => $dryRavineRounds[0] / $dryRavineRounds[1],
+                'round_avg' => round($dryRavineRounds[0] / $dryRavineRounds[1]),
+                'count' => $dryRavineRounds[1]
+            ],
+            'precipitations' => [
+                'avg' => $precipitations[0] / $precipitations[1],
+                'round_avg' => round($precipitations[0] / $precipitations[1]),
+                'count' => $precipitations[1]
+            ]
+        ];
+        $report = json_encode($report);
+        return ( $report ) ? $report : response()->json(null, 204);
+    }
+
     public function edit(Project $project)
     {
         //
@@ -494,7 +565,7 @@ class ProjectController extends Controller
 
                         @OA\Property(
                             property="phase",
-                            description="Fase",
+                            description="Fase (1: Inventario, 2: Aprovechamiento, 3: Compensación, 4: Gestión de riesgos)",
                             example="1",
                             type="string",
                             format="string"
@@ -801,6 +872,13 @@ class ProjectController extends Controller
             if ($code == $unit->code) return false;
         }
         return true;
+    }
+
+    public function reduceLevel($collection)
+    {
+        return [$collection->reduce(function ($carry, $item) {
+            return $carry + $item->level;
+        }), $collection->count()];
     }
 
     public function getModule($module)
