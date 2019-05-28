@@ -18,6 +18,8 @@ class ProjectsTableSeeder extends Seeder
         INSERT INTO `projects` (`id`, `name`, `inspector`, `responsible`, `representative_name`, `representative_position`, `administrative_act`, `enviromental_control`, `east_coord`, `north_coord`, `location`, `phase`, `customer_id`, `created_at`, `updated_at`) VALUES (NULL, 'Inventario Amagá', 'Claudia Gomez', 'Linda Linares', 'Tito Garcia', 'Coordinador inventario', 'N/A', 'ANLA', '1152594', '1158561', 'Amagá, Antioquia', '1', '1', '2019-05-21 02:22:03', '2019-05-21 02:22:03');
 
         INSERT INTO `projects` (`id`, `name`, `inspector`, `responsible`, `representative_name`, `representative_position`, `administrative_act`, `enviromental_control`, `east_coord`, `north_coord`, `location`, `phase`, `customer_id`, `created_at`, `updated_at`) VALUES (NULL, 'Proyecto Prueba Inventario', 'Marlon', 'Camilo', 'Jesus', 'Representante', 'Acto', 'ANLA', '123456', '123456', 'Bogota', '1', '1', '2019-05-21 04:51:05', '2019-05-21 04:51:05');
+
+        INSERT INTO `projects` (`id`, `name`, `inspector`, `responsible`, `representative_name`, `representative_position`, `administrative_act`, `enviromental_control`, `east_coord`, `north_coord`, `location`, `phase`, `customer_id`, `created_at`, `updated_at`) VALUES (NULL, 'Gestión de riesgos', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', 'Plantar Futuro', '4', '1', NULL, NULL)
         */
         DB::table('projects')->insert([
             'name' => 'Conexión Pacífico 1',

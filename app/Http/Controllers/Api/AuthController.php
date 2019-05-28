@@ -62,7 +62,7 @@ class AuthController extends Controller
     */
 
     public function login(Request $request)
-    {  
+    {
         /*$validator = Validator::make($data, [
             'email'       => 'required|string|email',
             'password'    => 'required|string',
@@ -90,6 +90,8 @@ class AuthController extends Controller
         else
             $usuario = User::where('email', '=', $request->email)->get()->first();
 
+        $usuario->setAttribute('risk', Contractor::where('user_id', $usuario->id)->where('role_id', 7)->count() ? true : false);        
+
         return response()->json(
             $usuario
         );
@@ -114,6 +116,68 @@ class AuthController extends Controller
     public function index()
     {
         return User::all();
+    }
+
+    /**
+        @OA\POST(
+            tags={"Usuario"},
+            path="/api/users/risk-assignation",
+            summary="Asignacion de usuarios a proyectos de riesgos",
+            @OA\RequestBody(
+                @OA\MediaType(
+                    mediaType="application/json",
+                    @OA\Schema(
+                        @OA\Property(
+                            property="project_id",
+                            type="integer",
+                            description="Id del proyecto",
+                        ),
+                        @OA\Property(
+                            property="users",
+                            type="array",
+                            @OA\Items(
+                                type="integer",
+                                @OA\Items()
+                            ),
+                            description="Users ID's"
+                        ),
+                        example={"project_id": 1, "users": {1, 2}}
+                    )
+                )
+            ),
+            @OA\Response(
+                response=200,
+                description="Cliente registrada."
+            ),
+            @OA\Response(
+                response=400,
+                description="Request mal mandado."
+            ),
+            @OA\Response(
+                response=401,
+                description="Ingreso no autorizado."
+            ),
+            @OA\Response(
+                response=405,
+                description="metodo HTTP no permitido."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
+    public function riskAssignation(Request $request)
+    {  
+        foreach ($request->users as $user) {
+            $contractor = new Contractor;
+            $contractor->project_id = $request->project_id;
+            $contractor->role_id    = 7;
+            $contractor->user_id    = $user;
+            $contractor->save();
+        }
+        return response()->json(["message" => "¡Usuarios asignados exitosamente al proyecto de riesgos: " . $request->project_id . "!", "usuarios" => $request->users], 200);
     }
 
     /**
