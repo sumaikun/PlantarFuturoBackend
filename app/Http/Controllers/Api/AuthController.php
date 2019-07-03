@@ -90,7 +90,7 @@ class AuthController extends Controller
         else
             $usuario = User::where('email', '=', $request->email)->get()->first();
 
-        $usuario->setAttribute('risk', Contractor::where('user_id', $usuario->id)->where('role_id', 7)->count() ? true : false);        
+        $usuario->setAttribute('risk', Contractor::where('user_id', $usuario->id)->where('role_id', 7)->count() ? true : false);
 
         return response()->json(
             $usuario
@@ -169,7 +169,7 @@ class AuthController extends Controller
     */
 
     public function riskAssignation(Request $request)
-    {  
+    {
         foreach ($request->users as $user) {
             $contractor = new Contractor;
             $contractor->project_id = $request->project_id;
@@ -231,7 +231,7 @@ class AuthController extends Controller
     */
 
     public function assignation(Request $request)
-    {  
+    {
         foreach ($request->users as $user) {
             $contractor = new Contractor;
             $contractor->project_id = $request->project_id;
@@ -343,9 +343,9 @@ class AuthController extends Controller
             )
         )
     */
-    
+
     public function store(Request $request)
-    {        
+    {
         $user = new User;
         $user->document         = $request->document;
         $user->name             = $request->name;
@@ -412,7 +412,7 @@ class AuthController extends Controller
     */
 
     public function unassign(Request $request)
-    {  
+    {
         Contractor::where('project_id', $request->project_id)->whereIn('user_id', $request->users)->delete();
         return response()->json(["message" => "¡Usuarios desasignados exitosamente del proyecto " . $request->project_id . "!", "usuarios" => $request->users], 200);
     }
@@ -452,8 +452,16 @@ class AuthController extends Controller
         $projects = [];
         foreach ($contractors as $contractor)
         {
-            if (!in_array($contractor->project, $projects))
-                $projects[] = $contractor->project;
+            $result =  array_filter($projects, function($project) use ($contractor) {
+                  return $project->id == $contractor->project->id;
+              });
+
+            if (count($result) == 0 )
+            {
+              $contractor->project->setAttribute('customer', $contractor->project->customer);
+              $projects[] = $contractor->project;
+            }
+
         }
         return ( $projects ) ? $projects : response()->json(null, 204);
     }
