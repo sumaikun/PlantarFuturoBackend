@@ -1211,6 +1211,14 @@ class ForestUnitController extends Controller
                         ),
 
                         @OA\Property(
+                            property="compensation_site",
+                            description="Sitio de compensacion",
+                            example="El Tablon-Lote 10",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
                             property="common_name",
                             description="Nombre comun del individuo",
                             example="Torcazo",
@@ -1246,14 +1254,6 @@ class ForestUnitController extends Controller
                             property="total_heigth_m",
                             description="Altura total (Medido en m)",
                             example="10.0",
-                            type="number",
-                            format="float"
-                        ),
-
-                        @OA\Property(
-                            property="commercial_heigth_m",
-                            description="Altura comercial (Medido en m)",
-                            example="7.0",
                             type="number",
                             format="float"
                         ),
@@ -1310,14 +1310,6 @@ class ForestUnitController extends Controller
                             property="waypoint",
                             description="Waypoint",
                             example="968455",
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
-                            property="compensation_site",
-                            description="Sitio de compensacion",
-                            example="El Tablon-Lote 10",
                             type="string",
                             format="string"
                         ),
@@ -1390,12 +1382,12 @@ class ForestUnitController extends Controller
 
         $forestUnit = new ForestUnit;
         $forestUnit->code                = $request->code;
+        $forestUnit->compensation_site   = $request->compensation_site;
         $forestUnit->common_name         = $request->common_name;
         $forestUnit->scientific_name     = $request->scientific_name;
         $forestUnit->origin              = $this->getOrigin($request->origin);
         $forestUnit->cap_cm              = $request->cap_cm;
         $forestUnit->total_heigth_m      = $request->total_heigth_m;
-        $forestUnit->commercial_heigth_m = $request->commercial_heigth_m;
         $forestUnit->cup_density         = $this->getCupDensity($request->cup_density);
         $forestUnit->epiphytes           = $this->getEpiphytes($request->epiphytes);
         $forestUnit->condition           = $this->getCondition($request->condition);
@@ -1403,7 +1395,6 @@ class ForestUnitController extends Controller
         $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         $forestUnit->waypoint            = $request->waypoint;
-        $forestUnit->compensation_site   = $request->compensation_site;
         $forestUnit->state               = $this->getState(7);
         $forestUnit->general_image       = $request->general_image;
         $forestUnit->note                = $request->note;
@@ -1415,7 +1406,7 @@ class ForestUnitController extends Controller
             $responsability = new Responsability;
             $responsability->forest_unit_id = $forestUnit->id;
             $responsability->user_id        = $request->user_id;
-            $responsability->module         = $this->getModule(1);
+            $responsability->module         = $this->getModule(3);
             $responsability->action         = $this->getAction(1);
             $responsability->save();
         }
@@ -1447,6 +1438,14 @@ class ForestUnitController extends Controller
                             property="code",
                             description="Codigo del individuo",
                             example="103F",
+                            type="string",
+                            format="string"
+                        ),
+
+                        @OA\Property(
+                            property="compensation_site",
+                            description="Sitio de compensacion",
+                            example="El Tablon-Lote 10",
                             type="string",
                             format="string"
                         ),
@@ -1487,14 +1486,6 @@ class ForestUnitController extends Controller
                             property="total_heigth_m",
                             description="Altura total (Medido en m)",
                             example="10.0",
-                            type="number",
-                            format="float"
-                        ),
-
-                        @OA\Property(
-                            property="commercial_heigth_m",
-                            description="Altura comercial (Medido en m)",
-                            example="7.0",
                             type="number",
                             format="float"
                         ),
@@ -1551,14 +1542,6 @@ class ForestUnitController extends Controller
                             property="waypoint",
                             description="Waypoint",
                             example="968455",
-                            type="string",
-                            format="string"
-                        ),
-
-                        @OA\Property(
-                            property="compensation_site",
-                            description="Sitio de compensacion",
-                            example="El Tablon-Lote 10",
                             type="string",
                             format="string"
                         ),
@@ -1624,8 +1607,9 @@ class ForestUnitController extends Controller
     {
         $forestUnit->code                = $request->code;
         $forestUnit->common_name         = $request->common_name;
-        $forestUnit->state               = $this->getState(4);
+        $forestUnit->state               = $this->getState(7);
         $forestUnit->functional_unit_id  = $request->functional_unit_id;
+        if(isset($request->compensation_site))   $forestUnit->compensation_site   = $request->compensation_site;
         if(isset($request->scientific_name))     $forestUnit->scientific_name     = $request->scientific_name;
         if(isset($request->origin))              $forestUnit->origin              = $this->getOrigin($request->origin);
         if(isset($request->cap_cm))              $forestUnit->cap_cm              = $request->cap_cm;
@@ -1638,7 +1622,6 @@ class ForestUnitController extends Controller
         if(isset($request->x_cup_diameter_m))    $forestUnit->x_cup_diameter_m    = $request->x_cup_diameter_m;
         if(isset($request->y_cup_diameter_m))    $forestUnit->y_cup_diameter_m    = $request->y_cup_diameter_m;
         if(isset($request->waypoint))            $forestUnit->waypoint            = $request->waypoint;
-        if(isset($request->compensation_site))   $forestUnit->compensation_site   = $request->compensation_site;
         if(isset($request->note))                $forestUnit->note                = $request->note;
         if(isset($request->general_image))       $forestUnit->general_image       = $request->general_image;
         $forestUnit->save();

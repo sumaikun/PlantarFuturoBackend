@@ -15,7 +15,7 @@
             "url": "http://plantarfuturo.com/ws"
         },
         {
-            "url": "http://localhost:8000"
+            "url": "http://plantarfuturo.com/test"
         },
         {
             "url": "http://localhost:8000"
@@ -529,375 +529,6 @@
                     },
                     "405": {
                         "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/risks/dryravine-round": {
-            "get": {
-                "tags": [
-                    "[Riesgos] Recorrido de inspección a quebrada seca"
-                ],
-                "summary": "Mostrar lista de recorridos de quebrada",
-                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::index",
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los recorridos de quebrada."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "[Riesgos] Recorrido de inspección a quebrada seca"
-                ],
-                "summary": "Registrar recorrido de quebrada",
-                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::store",
-                "requestBody": {
-                    "required": false,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "required": [],
-                                "properties": {
-                                    "code": {
-                                        "description": "Codigo del recorrido de quebrada (max 10ch)",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "RQ01"
-                                    },
-                                    "report_date": {
-                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2019-05-26 13:45"
-                                    },
-                                    "waterdam": {
-                                        "description": "Represamientos (1: Si, 2: No)",
-                                        "type": "number",
-                                        "format": "int32",
-                                        "example": "1"
-                                    },
-                                    "wd_location": {
-                                        "description": "Ubicación del represamiento",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "En el metro 3 de la quebrada"
-                                    },
-                                    "wd_description": {
-                                        "description": "Descripción del represamiento",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Se generó un represamiento"
-                                    },
-                                    "materialdrag": {
-                                        "description": "Arrastre de material (1: Si, 2: No)",
-                                        "type": "number",
-                                        "format": "int32",
-                                        "example": "1"
-                                    },
-                                    "md_location": {
-                                        "description": "Ubicación de la arrastre de material",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Desde el metro 5 de la quebrada"
-                                    },
-                                    "md_description": {
-                                        "description": "Descripción de la arrastre de material",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Se arrastro material de construccion"
-                                    },
-                                    "noises": {
-                                        "description": "Presencia de ruidos (1: Si, 2: No)",
-                                        "type": "number",
-                                        "format": "int32",
-                                        "example": "1"
-                                    },
-                                    "ns_location": {
-                                        "description": "Ubicación de la presencia de ruidos",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Desde el metro 10 de la quebrada"
-                                    },
-                                    "ns_description": {
-                                        "description": "Descripción de la presencia de ruidos",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Un ruido estruendoso"
-                                    },
-                                    "level": {
-                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "3"
-                                    },
-                                    "responsible_name": {
-                                        "description": "Nombre del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "responsible_id": {
-                                        "description": "Identificacion del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "123456789"
-                                    },
-                                    "observations": {
-                                        "description": "Observaciones",
-                                        "type": "string",
-                                        "format": "string",
-                                        "nullable": true
-                                    },
-                                    "project_id": {
-                                        "description": "Id del proyecto",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "2"
-                                    },
-                                    "user_id": {
-                                        "description": "Id del usuario logueado",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Cliente registrada."
-                    },
-                    "400": {
-                        "description": "Request mal mandado."
-                    },
-                    "401": {
-                        "description": "Ingreso no autorizado."
-                    },
-                    "405": {
-                        "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/risks/dryravine-round/{id}": {
-            "get": {
-                "tags": [
-                    "[Riesgos] Recorrido de inspección a quebrada seca"
-                ],
-                "summary": "Lista de los recorridos de quebrada de un proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::show",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Consolidado del inventario."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "[Riesgos] Recorrido de inspección a quebrada seca"
-                ],
-                "summary": "Editar recorrido de quebrada",
-                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::update",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id (Primary key) del Recorrido de quebrada",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": false,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "required": [],
-                                "properties": {
-                                    "code": {
-                                        "description": "Codigo del recorrido de quebrada (max 10ch)",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "RQ01"
-                                    },
-                                    "report_date": {
-                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2019-05-26 13:45"
-                                    },
-                                    "waterdam": {
-                                        "description": "Represamientos (1: Si, 2: No)",
-                                        "type": "number",
-                                        "format": "int32",
-                                        "example": "1"
-                                    },
-                                    "wd_location": {
-                                        "description": "Ubicación del represamiento",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "En el metro 3 de la quebrada"
-                                    },
-                                    "wd_description": {
-                                        "description": "Descripción del represamiento",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Se generó un represamiento"
-                                    },
-                                    "materialdrag": {
-                                        "description": "Arrastre de material (1: Si, 2: No)",
-                                        "type": "number",
-                                        "format": "int32",
-                                        "example": "1"
-                                    },
-                                    "md_location": {
-                                        "description": "Ubicación de la arrastre de material",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Desde el metro 5 de la quebrada"
-                                    },
-                                    "md_description": {
-                                        "description": "Descripción de la arrastre de material",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Se cayeron 5 rocas"
-                                    },
-                                    "noises": {
-                                        "description": "Presencia de ruidos (1: Si, 2: No)",
-                                        "type": "number",
-                                        "format": "int32",
-                                        "example": "1"
-                                    },
-                                    "ns_location": {
-                                        "description": "Ubicación de la presencia de ruidos",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Desde el metro 10 de la quebrada"
-                                    },
-                                    "ns_description": {
-                                        "description": "Descripción de la presencia de ruidos",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Un ruido estruendoso"
-                                    },
-                                    "level": {
-                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "3"
-                                    },
-                                    "responsible_name": {
-                                        "description": "Nombre del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "responsible_id": {
-                                        "description": "Identificacion del responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "123456789"
-                                    },
-                                    "observations": {
-                                        "description": "Observaciones",
-                                        "type": "string",
-                                        "format": "string",
-                                        "nullable": true
-                                    },
-                                    "project_id": {
-                                        "description": "Id del proyecto",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "2"
-                                    },
-                                    "user_id": {
-                                        "description": "Id del usuario logueado",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Cliente registrada."
-                    },
-                    "400": {
-                        "description": "Request mal mandado."
-                    },
-                    "401": {
-                        "description": "Ingreso no autorizado."
-                    },
-                    "405": {
-                        "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/risks/dryravine-round/export/{id}": {
-            "get": {
-                "tags": [
-                    "[Riesgos] Recorrido de inspección a quebrada seca"
-                ],
-                "summary": "Consolidado",
-                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::export",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Consolidado del inventario."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -1744,6 +1375,12 @@
                                         "format": "string",
                                         "example": "103F"
                                     },
+                                    "compensation_site": {
+                                        "description": "Sitio de compensacion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "El Tablon-Lote 10"
+                                    },
                                     "common_name": {
                                         "description": "Nombre comun del individuo",
                                         "type": "string",
@@ -1773,12 +1410,6 @@
                                         "type": "number",
                                         "format": "float",
                                         "example": "10.0"
-                                    },
-                                    "commercial_heigth_m": {
-                                        "description": "Altura comercial (Medido en m)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "7.0"
                                     },
                                     "cup_density": {
                                         "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
@@ -1821,12 +1452,6 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "968455"
-                                    },
-                                    "compensation_site": {
-                                        "description": "Sitio de compensacion",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "El Tablon-Lote 10"
                                     },
                                     "general_image": {
                                         "description": "Foto general",
@@ -1908,6 +1533,12 @@
                                         "format": "string",
                                         "example": "103F"
                                     },
+                                    "compensation_site": {
+                                        "description": "Sitio de compensacion",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "El Tablon-Lote 10"
+                                    },
                                     "common_name": {
                                         "description": "Nombre comun del individuo",
                                         "type": "string",
@@ -1937,12 +1568,6 @@
                                         "type": "number",
                                         "format": "float",
                                         "example": "10.0"
-                                    },
-                                    "commercial_heigth_m": {
-                                        "description": "Altura comercial (Medido en m)",
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "7.0"
                                     },
                                     "cup_density": {
                                         "description": "Densidad de copa (1: Clara, 2: Media, 3: Espesa, 4: No aplica)",
@@ -1985,12 +1610,6 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "968455"
-                                    },
-                                    "compensation_site": {
-                                        "description": "Sitio de compensacion",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "El Tablon-Lote 10"
                                     },
                                     "general_image": {
                                         "description": "Foto general",
@@ -2262,6 +1881,963 @@
                     },
                     "204": {
                         "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de proyectos",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Registrar proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre del proyecto",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Conjuntos Residenciales Marlon Gamba"
+                                    },
+                                    "inspector": {
+                                        "description": "Interventor",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba SA"
+                                    },
+                                    "responsible": {
+                                        "description": "Responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "representative_name": {
+                                        "description": "Nombre del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "representative_position": {
+                                        "description": "Cargo del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Gerente General"
+                                    },
+                                    "administrative_act": {
+                                        "description": "Acto administrativo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Resolucion 0036"
+                                    },
+                                    "enviromental_control": {
+                                        "description": "Autoridad Ambiental",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "ANLA"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada Este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1142274"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada Norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1155849"
+                                    },
+                                    "location": {
+                                        "description": "Localización",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Fase I"
+                                    },
+                                    "phase": {
+                                        "description": "Fase (1: Inventario, 2: Aprovechamiento, 3: Compensación, 4: Gestión de riesgos)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "customer_id": {
+                                        "description": "Id del cliente",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Consultar proyecto por ID",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Editar proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre del proyecto",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Conjuntos Residenciales CAMC"
+                                    },
+                                    "inspector": {
+                                        "description": "Interventor",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "CAMC SA"
+                                    },
+                                    "responsible": {
+                                        "description": "Responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "representative_name": {
+                                        "description": "Nombre del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "representative_position": {
+                                        "description": "Cargo del representante",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Gerente General"
+                                    },
+                                    "administrative_act": {
+                                        "description": "Acto administrativo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Resolucion 0036"
+                                    },
+                                    "enviromental_control": {
+                                        "description": "Autoridad Ambiental",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "ANLA"
+                                    },
+                                    "east_coord": {
+                                        "description": "Coordenada Este",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1142274"
+                                    },
+                                    "north_coord": {
+                                        "description": "Coordenada Norte",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1155849"
+                                    },
+                                    "location": {
+                                        "description": "Localización",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Fase I"
+                                    },
+                                    "phase": {
+                                        "description": "Fase (1: Inventario, 2: Aprovechamiento, 3: Compensación, 4: Gestión de riesgos)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "customer_id": {
+                                        "description": "Id del cliente",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/functional-units/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de unidades funcionales por proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::functionalUnits",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/forest-units/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de individuos forestales por proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::forestUnits",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/users/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Mostrar lista de usuarios asignados a un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::users",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los proyectos."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/export/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/risks/{id}": {
+            "get": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Reporte de riesgos APP",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::risks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/project/massive": {
+            "post": {
+                "tags": [
+                    "Proyecto"
+                ],
+                "summary": "Probar como llegan los datos de excel desde angular",
+                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::massive",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "arbol": {
+                                        "type": "string"
+                                    },
+                                    "uf": {
+                                        "type": "string"
+                                    },
+                                    "comun": {
+                                        "type": "string"
+                                    },
+                                    "cientifico": {
+                                        "type": "string"
+                                    },
+                                    "familia": {
+                                        "type": "string"
+                                    },
+                                    "cap": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "altura_total": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "altura_comercial": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "diametro_copa": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "estado_fisico": {
+                                        "type": "string"
+                                    },
+                                    "estado_sanitario": {
+                                        "type": "string"
+                                    },
+                                    "coor_x": {
+                                        "type": "string"
+                                    },
+                                    "coor_y": {
+                                        "type": "string"
+                                    },
+                                    "origen": {
+                                        "type": "string"
+                                    },
+                                    "densidad_copa": {
+                                        "type": "string"
+                                    },
+                                    "producto": {
+                                        "type": "string"
+                                    },
+                                    "margen": {
+                                        "type": "string"
+                                    },
+                                    "tratamiento": {
+                                        "type": "string"
+                                    },
+                                    "resolucion": {
+                                        "type": "string"
+                                    },
+                                    "inicio_tratamiento": {
+                                        "type": "string"
+                                    },
+                                    "fin_tratamiento": {
+                                        "type": "string"
+                                    },
+                                    "observaciones": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "excelData": {
+                                        "arbol": "F4",
+                                        "uf": "UF1",
+                                        "comun": "Cedro-Cedro amargo",
+                                        "cientifico": "Cedrela odorata L.",
+                                        "familia": "Meliaceae",
+                                        "cap": "45.3",
+                                        "altura_total": "10",
+                                        "altura_comercial": "2",
+                                        "diametro_copa_x": "6",
+                                        "diametro_copa_y": "6",
+                                        "estado_fisico": "Bueno",
+                                        "estado_sanitario": "Bueno",
+                                        "coor_x": "1053823",
+                                        "coor_y": "956015",
+                                        "waypoint": "123456asd",
+                                        "epifitas": "Si",
+                                        "origen": "Nativa",
+                                        "densidad_copa": "Clara",
+                                        "producto": "Madera",
+                                        "margen": "Izquierda",
+                                        "tratamiento": "Tala",
+                                        "resolucion": "Resolucion 0369",
+                                        "inicio_tratamiento": "14/05/2019",
+                                        "fin_tratamiento": "16/05/2019",
+                                        "observaciones": "Árbol localizado sobre la margen"
+                                    },
+                                    "projectId": 2
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Muestra el resultado."
+                    },
+                    "400": {
+                        "description": "Indica que no se mandarón bien los parametros."
+                    },
+                    "405": {
+                        "description": "Metodo no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/dryravine-round": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Mostrar lista de recorridos de quebrada",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los recorridos de quebrada."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Registrar recorrido de quebrada",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del recorrido de quebrada (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "RQ01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "waterdam": {
+                                        "description": "Represamientos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "wd_location": {
+                                        "description": "Ubicación del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 3 de la quebrada"
+                                    },
+                                    "wd_description": {
+                                        "description": "Descripción del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se generó un represamiento"
+                                    },
+                                    "materialdrag": {
+                                        "description": "Arrastre de material (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "md_location": {
+                                        "description": "Ubicación de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 5 de la quebrada"
+                                    },
+                                    "md_description": {
+                                        "description": "Descripción de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se arrastro material de construccion"
+                                    },
+                                    "noises": {
+                                        "description": "Presencia de ruidos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ns_location": {
+                                        "description": "Ubicación de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 10 de la quebrada"
+                                    },
+                                    "ns_description": {
+                                        "description": "Descripción de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Un ruido estruendoso"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/dryravine-round/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Lista de los recorridos de quebrada de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Editar recorrido de quebrada",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary key) del Recorrido de quebrada",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo del recorrido de quebrada (max 10ch)",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "RQ01"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "waterdam": {
+                                        "description": "Represamientos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "wd_location": {
+                                        "description": "Ubicación del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "En el metro 3 de la quebrada"
+                                    },
+                                    "wd_description": {
+                                        "description": "Descripción del represamiento",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se generó un represamiento"
+                                    },
+                                    "materialdrag": {
+                                        "description": "Arrastre de material (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "md_location": {
+                                        "description": "Ubicación de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 5 de la quebrada"
+                                    },
+                                    "md_description": {
+                                        "description": "Descripción de la arrastre de material",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Se cayeron 5 rocas"
+                                    },
+                                    "noises": {
+                                        "description": "Presencia de ruidos (1: Si, 2: No)",
+                                        "type": "number",
+                                        "format": "int32",
+                                        "example": "1"
+                                    },
+                                    "ns_location": {
+                                        "description": "Ubicación de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Desde el metro 10 de la quebrada"
+                                    },
+                                    "ns_description": {
+                                        "description": "Descripción de la presencia de ruidos",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Un ruido estruendoso"
+                                    },
+                                    "level": {
+                                        "description": "Nivel de emergencia (Se mide de 1 a 5)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "3"
+                                    },
+                                    "responsible_name": {
+                                        "description": "Nombre del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "responsible_id": {
+                                        "description": "Identificacion del responsable",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "123456789"
+                                    },
+                                    "observations": {
+                                        "description": "Observaciones",
+                                        "type": "string",
+                                        "format": "string",
+                                        "nullable": true
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "user_id": {
+                                        "description": "Id del usuario logueado",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/risks/dryravine-round/export/{id}": {
+            "get": {
+                "tags": [
+                    "[Riesgos] Recorrido de inspección a quebrada seca"
+                ],
+                "summary": "Consolidado",
+                "operationId": "App\\Http\\Controllers\\Api\\DryRavineRoundController::export",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -3261,594 +3837,6 @@
                 "responses": {
                     "200": {
                         "description": "Consolidado del inventario."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Mostrar lista de proyectos",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::index",
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los proyectos."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Registrar proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::store",
-                "requestBody": {
-                    "required": false,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "required": [],
-                                "properties": {
-                                    "name": {
-                                        "description": "Nombre del proyecto",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Conjuntos Residenciales Marlon Gamba"
-                                    },
-                                    "inspector": {
-                                        "description": "Interventor",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba SA"
-                                    },
-                                    "responsible": {
-                                        "description": "Responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Pedro Alarcon"
-                                    },
-                                    "representative_name": {
-                                        "description": "Nombre del representante",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "representative_position": {
-                                        "description": "Cargo del representante",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Gerente General"
-                                    },
-                                    "administrative_act": {
-                                        "description": "Acto administrativo",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Resolucion 0036"
-                                    },
-                                    "enviromental_control": {
-                                        "description": "Autoridad Ambiental",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "ANLA"
-                                    },
-                                    "east_coord": {
-                                        "description": "Coordenada Este",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1142274"
-                                    },
-                                    "north_coord": {
-                                        "description": "Coordenada Norte",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1155849"
-                                    },
-                                    "location": {
-                                        "description": "Localización",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Fase I"
-                                    },
-                                    "phase": {
-                                        "description": "Fase (1: Inventario, 2: Aprovechamiento, 3: Compensación, 4: Gestión de riesgos)",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1"
-                                    },
-                                    "customer_id": {
-                                        "description": "Id del cliente",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Proyecto registrada."
-                    },
-                    "400": {
-                        "description": "Request mal mandado."
-                    },
-                    "401": {
-                        "description": "Ingreso no autorizado."
-                    },
-                    "405": {
-                        "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/{id}": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Consultar proyecto por ID",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::show",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "2"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los proyectos."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Editar proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::update",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id (Primary key) del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": false,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "required": [],
-                                "properties": {
-                                    "name": {
-                                        "description": "Nombre del proyecto",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Conjuntos Residenciales CAMC"
-                                    },
-                                    "inspector": {
-                                        "description": "Interventor",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "CAMC SA"
-                                    },
-                                    "responsible": {
-                                        "description": "Responsable",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Pedro Alarcon"
-                                    },
-                                    "representative_name": {
-                                        "description": "Nombre del representante",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "representative_position": {
-                                        "description": "Cargo del representante",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Gerente General"
-                                    },
-                                    "administrative_act": {
-                                        "description": "Acto administrativo",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Resolucion 0036"
-                                    },
-                                    "enviromental_control": {
-                                        "description": "Autoridad Ambiental",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "ANLA"
-                                    },
-                                    "east_coord": {
-                                        "description": "Coordenada Este",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1142274"
-                                    },
-                                    "north_coord": {
-                                        "description": "Coordenada Norte",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1155849"
-                                    },
-                                    "location": {
-                                        "description": "Localización",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Fase I"
-                                    },
-                                    "phase": {
-                                        "description": "Fase (1: Inventario, 2: Aprovechamiento, 3: Compensación, 4: Gestión de riesgos)",
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "1"
-                                    },
-                                    "customer_id": {
-                                        "description": "Id del cliente",
-                                        "type": "integer",
-                                        "format": "int32",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Proyecto registrada."
-                    },
-                    "400": {
-                        "description": "Request mal mandado."
-                    },
-                    "401": {
-                        "description": "Ingreso no autorizado."
-                    },
-                    "405": {
-                        "description": "metodo HTTP no permitido."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/functional-units/{id}": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Mostrar lista de unidades funcionales por proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::functionalUnits",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los proyectos."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/forest-units/{id}": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Mostrar lista de individuos forestales por proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::forestUnits",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los proyectos."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/users/{id}": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Mostrar lista de usuarios asignados a un proyecto",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::users",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mostrar todos los proyectos."
-                    },
-                    "204": {
-                        "description": "No hay resultados que mostrar."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/export/{id}": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Consolidado",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::export",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Consolidado del inventario."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/risks/{id}": {
-            "get": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Reporte de riesgos APP",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::risks",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Consolidado del inventario."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
-                    }
-                }
-            }
-        },
-        "/api/project/massive": {
-            "post": {
-                "tags": [
-                    "Proyecto"
-                ],
-                "summary": "Probar como llegan los datos de excel desde angular",
-                "operationId": "App\\Http\\Controllers\\Api\\ProjectController::massive",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id del proyecto",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "example": "1"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "arbol": {
-                                        "type": "string"
-                                    },
-                                    "uf": {
-                                        "type": "string"
-                                    },
-                                    "comun": {
-                                        "type": "string"
-                                    },
-                                    "cientifico": {
-                                        "type": "string"
-                                    },
-                                    "familia": {
-                                        "type": "string"
-                                    },
-                                    "cap": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "altura_total": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "altura_comercial": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "diametro_copa": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "estado_fisico": {
-                                        "type": "string"
-                                    },
-                                    "estado_sanitario": {
-                                        "type": "string"
-                                    },
-                                    "coor_x": {
-                                        "type": "string"
-                                    },
-                                    "coor_y": {
-                                        "type": "string"
-                                    },
-                                    "origen": {
-                                        "type": "string"
-                                    },
-                                    "densidad_copa": {
-                                        "type": "string"
-                                    },
-                                    "producto": {
-                                        "type": "string"
-                                    },
-                                    "margen": {
-                                        "type": "string"
-                                    },
-                                    "tratamiento": {
-                                        "type": "string"
-                                    },
-                                    "resolucion": {
-                                        "type": "string"
-                                    },
-                                    "inicio_tratamiento": {
-                                        "type": "string"
-                                    },
-                                    "fin_tratamiento": {
-                                        "type": "string"
-                                    },
-                                    "observaciones": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object",
-                                "example": {
-                                    "excelData": {
-                                        "arbol": "F4",
-                                        "uf": "UF1",
-                                        "comun": "Cedro-Cedro amargo",
-                                        "cientifico": "Cedrela odorata L.",
-                                        "familia": "Meliaceae",
-                                        "cap": "45.3",
-                                        "altura_total": "10",
-                                        "altura_comercial": "2",
-                                        "diametro_copa_x": "6",
-                                        "diametro_copa_y": "6",
-                                        "estado_fisico": "Bueno",
-                                        "estado_sanitario": "Bueno",
-                                        "coor_x": "1053823",
-                                        "coor_y": "956015",
-                                        "waypoint": "123456asd",
-                                        "epifitas": "Si",
-                                        "origen": "Nativa",
-                                        "densidad_copa": "Clara",
-                                        "producto": "Madera",
-                                        "margen": "Izquierda",
-                                        "tratamiento": "Tala",
-                                        "resolucion": "Resolucion 0369",
-                                        "inicio_tratamiento": "14/05/2019",
-                                        "fin_tratamiento": "16/05/2019",
-                                        "observaciones": "Árbol localizado sobre la margen"
-                                    },
-                                    "projectId": 2
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Muestra el resultado."
-                    },
-                    "400": {
-                        "description": "Indica que no se mandarón bien los parametros."
-                    },
-                    "405": {
-                        "description": "Metodo no permitido."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

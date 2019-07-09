@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Precipitation;
-use App\Exports\precipitationsExport;
+use App\Exports\PrecipitationsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 

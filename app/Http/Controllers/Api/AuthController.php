@@ -90,7 +90,7 @@ class AuthController extends Controller
         else
             $usuario = User::where('email', '=', $request->email)->get()->first();
 
-        $usuario->setAttribute('risk', Contractor::where('user_id', $usuario->id)->where('role_id', 7)->count() ? true : false);
+        $usuario->setAttribute('risk', Contractor::where('user_id', $usuario->id)->where('role_id', 8)->count() ? true : false);
 
         return response()->json(
             $usuario
@@ -173,7 +173,7 @@ class AuthController extends Controller
         foreach ($request->users as $user) {
             $contractor = new Contractor;
             $contractor->project_id = $request->project_id;
-            $contractor->role_id    = 7;
+            $contractor->role_id    = 8;
             $contractor->user_id    = $user;
             $contractor->save();
         }

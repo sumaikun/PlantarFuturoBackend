@@ -71,3 +71,6 @@ Route::group(['middleware' => 'cors'], function()
 		dd(date("Y m d H:i:s"));
 	});
 });
+
+
+Route::options('{any}', ['middleware' => ['cors'], function () { return response(['status' => 'success']); }])->where('any', '.*');

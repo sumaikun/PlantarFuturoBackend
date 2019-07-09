@@ -210,6 +210,15 @@ class ProjectController extends Controller
         $project->customer_id              = $request->customer_id;
         $project->save();
 
+        if ($project->phase == 3)
+        {
+            $functionalUnit = new FunctionalUnit;
+            $functionalUnit->code       = $project->id;
+            $functionalUnit->type       = Project::find($project->id)->phase == 3 ? "Compensación" : "Licencia";
+            $functionalUnit->project_id = $project->id;
+            $functionalUnit->save();
+        }
+
         return response()->json(["message" => "¡Proyecto registrado!", "id" => $project->id], 200);
     }
 
@@ -878,7 +887,7 @@ class ProjectController extends Controller
     {
         return [$collection->reduce(function ($carry, $item) {
             return $carry + $item->level;
-        }), $collection->count()];
+        }), empty($collection->count()) ? 1 : $collection->count()];
     }
 
     public function getModule($module)
