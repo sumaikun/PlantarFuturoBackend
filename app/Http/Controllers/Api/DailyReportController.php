@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Material;
+use App\Models\DailyReport;
 use Illuminate\Http\Request;
 
-class MaterialController extends Controller
+class DailyReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class MaterialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Material  $material
+     * @param  \App\Models\DailyReport  $dailyReport
      * @return \Illuminate\Http\Response
      */
-    public function show(Material $material)
+    public function show(DailyReport $dailyReport)
     {
         //
     }
@@ -52,10 +52,10 @@ class MaterialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Material  $material
+     * @param  \App\Models\DailyReport  $dailyReport
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material $material)
+    public function edit(DailyReport $dailyReport)
     {
         //
     }
@@ -64,10 +64,10 @@ class MaterialController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Material  $material
+     * @param  \App\Models\DailyReport  $dailyReport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material $material)
+    public function update(Request $request, DailyReport $dailyReport)
     {
         //
     }
@@ -75,10 +75,10 @@ class MaterialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Material  $material
+     * @param  \App\Models\DailyReport  $dailyReport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $material)
+    public function destroy(DailyReport $dailyReport)
     {
         //
     }

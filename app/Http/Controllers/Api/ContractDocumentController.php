@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Tool;
+use App\Models\ContractDocument;
 use Illuminate\Http\Request;
 
-class ToolController extends Controller
+class ContractDocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ToolController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tool  $tool
+     * @param  \App\Models\ContractDocument  $contractDocument
      * @return \Illuminate\Http\Response
      */
-    public function show(Tool $tool)
+    public function show(ContractDocument $contractDocument)
     {
         //
     }
@@ -52,10 +52,10 @@ class ToolController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tool  $tool
+     * @param  \App\Models\ContractDocument  $contractDocument
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tool $tool)
+    public function edit(ContractDocument $contractDocument)
     {
         //
     }
@@ -64,10 +64,10 @@ class ToolController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tool  $tool
+     * @param  \App\Models\ContractDocument  $contractDocument
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tool $tool)
+    public function update(Request $request, ContractDocument $contractDocument)
     {
         //
     }
@@ -75,10 +75,10 @@ class ToolController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tool  $tool
+     * @param  \App\Models\ContractDocument  $contractDocument
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tool $tool)
+    public function destroy(ContractDocument $contractDocument)
     {
         //
     }

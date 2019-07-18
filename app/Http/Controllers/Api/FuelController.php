@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\FuelBill;
+use App\Models\Fuel;
 use Illuminate\Http\Request;
 
-class FuelBillController extends Controller
+class FuelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class FuelBillController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FuelBill  $fuelBill
+     * @param  \App\Models\Fuel  $fuel
      * @return \Illuminate\Http\Response
      */
-    public function show(FuelBill $fuelBill)
+    public function show(Fuel $fuel)
     {
         //
     }
@@ -52,10 +52,10 @@ class FuelBillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FuelBill  $fuelBill
+     * @param  \App\Models\Fuel  $fuel
      * @return \Illuminate\Http\Response
      */
-    public function edit(FuelBill $fuelBill)
+    public function edit(Fuel $fuel)
     {
         //
     }
@@ -64,10 +64,10 @@ class FuelBillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FuelBill  $fuelBill
+     * @param  \App\Models\Fuel  $fuel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FuelBill $fuelBill)
+    public function update(Request $request, Fuel $fuel)
     {
         //
     }
@@ -75,10 +75,10 @@ class FuelBillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FuelBill  $fuelBill
+     * @param  \App\Models\Fuel  $fuel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FuelBill $fuelBill)
+    public function destroy(Fuel $fuel)
     {
         //
     }

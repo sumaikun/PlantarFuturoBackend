@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\MaterialBill;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 
-class MaterialBillController extends Controller
+class ToolController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class MaterialBillController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MaterialBill  $materialBill
+     * @param  \App\Models\Tool  $tool
      * @return \Illuminate\Http\Response
      */
-    public function show(MaterialBill $materialBill)
+    public function show(Tool $tool)
     {
         //
     }
@@ -52,10 +52,10 @@ class MaterialBillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MaterialBill  $materialBill
+     * @param  \App\Models\Tool  $tool
      * @return \Illuminate\Http\Response
      */
-    public function edit(MaterialBill $materialBill)
+    public function edit(Tool $tool)
     {
         //
     }
@@ -64,10 +64,10 @@ class MaterialBillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MaterialBill  $materialBill
+     * @param  \App\Models\Tool  $tool
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MaterialBill $materialBill)
+    public function update(Request $request, Tool $tool)
     {
         //
     }
@@ -75,10 +75,10 @@ class MaterialBillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MaterialBill  $materialBill
+     * @param  \App\Models\Tool  $tool
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MaterialBill $materialBill)
+    public function destroy(Tool $tool)
     {
         //
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Fuel;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 
-class FuelController extends Controller
+class ContractController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class FuelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Fuel  $fuel
+     * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function show(Fuel $fuel)
+    public function show(Contract $contract)
     {
         //
     }
@@ -52,10 +52,10 @@ class FuelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Fuel  $fuel
+     * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fuel $fuel)
+    public function edit(Contract $contract)
     {
         //
     }
@@ -64,10 +64,10 @@ class FuelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Fuel  $fuel
+     * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fuel $fuel)
+    public function update(Request $request, Contract $contract)
     {
         //
     }
@@ -75,10 +75,10 @@ class FuelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Fuel  $fuel
+     * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fuel $fuel)
+    public function destroy(Contract $contract)
     {
         //
     }

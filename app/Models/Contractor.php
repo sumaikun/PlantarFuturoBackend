@@ -23,4 +23,9 @@ class Contractor extends Model
     {
         return $this->belongsTo('App\Models\Project');
     }
+
+    function assistants()
+    {
+        return $this->hasMany('App\Models\Assistant');
+    }
 }

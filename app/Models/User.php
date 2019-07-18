@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Responsability');
     }
+
+    function contracts()
+    {
+        return $this->hasMany('App\Models\Contract');
+    }
 }

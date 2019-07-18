@@ -354,7 +354,7 @@ class AuthController extends Controller
         $user->address          = $request->address;
         $user->position_id      = $request->position_id;
         $user->email            = $request->email;
-        $user->password         = bcrypt('$request->password');
+        $user->password         = bcrypt($request->password);
         $user->document_type_id = $request->document_type_id;
         $user->save();
 

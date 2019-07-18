@@ -15,7 +15,7 @@ class CreateFuelBillsTable extends Migration
     {
         Schema::create('fuel_bills', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->float('price')->nullable();
             $table->date('bill_date')->nullable();
             $table->longText('voucher')->nullable();

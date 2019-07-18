@@ -15,10 +15,11 @@ class CreateToolAsignationsTable extends Migration
     {
         Schema::create('tool_asignations', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('state', ['Recibido', 'Pendiente']);
+            $table->char('state', 1)->nullable(); //1: Recibido, 2: Pendiente
             $table->date('checkin')->nullable();
             $table->date('checkout')->nullable();
-            $table->longText('translate_notes')->nullable();
+            $table->longText('transfer_notes')->nullable();
+            $table->longText('evidence_photo')->nullable();
 
             //Foreigns
             $table->integer('project_id')->unsigned();

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialBillsTable extends Migration
+class CreateDailyReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateMaterialBillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('material_bills', function (Blueprint $table) {
+        Schema::create('daily_reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('quantity')->nullable();
-            $table->float('price')->nullable();
-            $table->date('bill_date')->nullable();
-            $table->longText('voucher')->nullable();
+            $table->string('responsible')->nullable();
+            $table->string('field_assistant')->nullable();
+            $table->string('location')->nullable();
+            $table->dateTime('report_date')->nullable();
+            $table->smallInteger('people_number')->nullable();
+            $table->char('type')->nullable();
+
             //Foreigns
-            $table->integer('material_id')->unsigned();
-            $table->foreign('material_id')->references('id')->on('materials');
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');
             $table->timestamps();
@@ -35,6 +36,6 @@ class CreateMaterialBillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material_bills');
+        Schema::dropIfExists('daily_reports');
     }
 }

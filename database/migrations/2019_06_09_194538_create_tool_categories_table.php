@@ -15,8 +15,7 @@ class CreateToolCategoriesTable extends Migration
     {
         Schema::create('tool_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->char('fuel', 1);
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

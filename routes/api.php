@@ -66,6 +66,10 @@ Route::group(['middleware' => 'cors'], function()
 
 	Route::get 		('project/risks/{id}', 'Api\ProjectController@risks');	
 
+	/*SST Report*/
+	Route::resource ('sst', 'Api\SSTReportController');
+	Route::resource ('sst/visitor', 'Api\VisitorController');
+
 	Route::get('timezone', function()
 	{
 		dd(date("Y m d H:i:s"));

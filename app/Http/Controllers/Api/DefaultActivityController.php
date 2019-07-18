@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\ToolAsignation;
+use App\Models\DefaultActivity;
 use Illuminate\Http\Request;
 
-class ToolAsignationController extends Controller
+class DefaultActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ToolAsignationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ToolAsignation  $toolAsignation
+     * @param  \App\Models\DefaultActivity  $defaultActivity
      * @return \Illuminate\Http\Response
      */
-    public function show(ToolAsignation $toolAsignation)
+    public function show(DefaultActivity $defaultActivity)
     {
         //
     }
@@ -52,10 +52,10 @@ class ToolAsignationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ToolAsignation  $toolAsignation
+     * @param  \App\Models\DefaultActivity  $defaultActivity
      * @return \Illuminate\Http\Response
      */
-    public function edit(ToolAsignation $toolAsignation)
+    public function edit(DefaultActivity $defaultActivity)
     {
         //
     }
@@ -64,10 +64,10 @@ class ToolAsignationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ToolAsignation  $toolAsignation
+     * @param  \App\Models\DefaultActivity  $defaultActivity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ToolAsignation $toolAsignation)
+    public function update(Request $request, DefaultActivity $defaultActivity)
     {
         //
     }
@@ -75,10 +75,10 @@ class ToolAsignationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ToolAsignation  $toolAsignation
+     * @param  \App\Models\DefaultActivity  $defaultActivity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ToolAsignation $toolAsignation)
+    public function destroy(DefaultActivity $defaultActivity)
     {
         //
     }

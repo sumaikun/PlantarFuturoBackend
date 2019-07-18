@@ -15,19 +15,18 @@ class CreateToolsTable extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('code', 10);
-            $table->string('name');
+            $table->char('code', 10)->nullable();
+            $table->string('name')->nullable();
             $table->longText('description')->nullable();
-            $table->string('type');
-            $table->string('model');
-            $table->integer('quantity');
-            $table->string('customer');
-            $table->enum('condition', ['Buena', 'Media', 'Mala']);
-            $table->string('provider');
-            $table->string('remaining_service');
+            $table->char('type', 1)->nullable();
+            $table->string('model')->nullable();
+            $table->string('customer')->nullable();
+            $table->string('workfront')->nullable();
+            $table->enum('condition', ['Buena', 'Media', 'Mala'])->nullable();
+            $table->string('provider')->nullable();
+            $table->string('remaining_service')->nullable();
             $table->date('buy_date')->nullable();
             $table->float('price')->nullable();
-            $table->longText('notes')->nullable();
             //Foreigns
             $table->integer('tool_category_id')->unsigned();
             $table->foreign('tool_category_id')->references('id')->on('tool_categories');
