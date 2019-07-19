@@ -367,7 +367,10 @@ class ProjectController extends Controller
         foreach ($contractors as $contractor)
         {
             if (!in_array($contractor->user, $users))
+            {
+                $contractor->user->setAttribute('contractor_id', $contractor->id);
                 $users[] = $contractor->user;
+            }
         }
         return ( $users ) ? $users : response()->json(null, 204);
     }

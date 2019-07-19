@@ -19,7 +19,7 @@ class CreateVisitorsTable extends Migration
             $table->string('document')->nullable();
             $table->string('entity')->nullable();
             $table->string('position')->nullable();
-            $table->boolean('state')->default(0);
+            $table->char('state', 1);
 
             //Foreigns
             $table->integer('project_id')->unsigned();

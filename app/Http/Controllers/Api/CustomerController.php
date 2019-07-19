@@ -7,7 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 
 /**
-* @OA\Server(url="http://localhost:8000")
+* @OA\Server(url="http://plantarfuturo.com/test")
 */
 
 class CustomerController extends Controller

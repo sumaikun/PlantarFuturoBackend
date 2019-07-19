@@ -68,7 +68,10 @@ Route::group(['middleware' => 'cors'], function()
 
 	/*SST Report*/
 	Route::resource ('sst', 'Api\SSTReportController');
-	Route::resource ('sst/visitor', 'Api\VisitorController');
+	Route::get 		('sst/assistants/{id}', 'Api\SSTReportController@listAssistants');
+	Route::get 		('sst/visitors/{id}', 'Api\SSTReportController@listVisitors');
+
+	Route::resource ('visitor', 'Api\VisitorController');
 
 	Route::get('timezone', function()
 	{

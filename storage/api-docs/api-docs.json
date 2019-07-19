@@ -15,7 +15,7 @@
             "url": "http://plantarfuturo.com/ws"
         },
         {
-            "url": "http://localhost:8000"
+            "url": "http://plantarfuturo.com/test"
         },
         {
             "url": "http://localhost:8000"
@@ -3883,120 +3883,6 @@
                 "operationId": "App\\Http\\Controllers\\Api\\SSTReportController::store",
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "properties": {
-                                    "report_date": {
-                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
-                                        "type": "date",
-                                        "example": "2019-05-26 13:45"
-                                    },
-                                    "location": {
-                                        "description": "Lugar del reporte",
-                                        "type": "string",
-                                        "example": "Proyecto X"
-                                    },
-                                    "goal": {
-                                        "description": "objetivo",
-                                        "type": "string",
-                                        "example": "Llevar a cabo exitosamente la primera fase del proyecto X"
-                                    },
-                                    "responsible": {
-                                        "description": "Responsable",
-                                        "type": "string",
-                                        "example": "Marlon Gamba"
-                                    },
-                                    "notes": {
-                                        "description": "Comentarios",
-                                        "type": "string",
-                                        "example": "N/A"
-                                    },
-                                    "progress_img1": {
-                                        "description": "Foto de avance 1",
-                                        "type": "string",
-                                        "example": ""
-                                    },
-                                    "progress_img2": {
-                                        "description": "Foto de avance 2",
-                                        "type": "string",
-                                        "example": ""
-                                    },
-                                    "progress_img3": {
-                                        "description": "Foto de avance 3",
-                                        "type": "string",
-                                        "example": ""
-                                    },
-                                    "progress_img4": {
-                                        "description": "Foto de avance 4",
-                                        "type": "string",
-                                        "example": ""
-                                    },
-                                    "project_id": {
-                                        "description": "Id del proyecto",
-                                        "type": "integer"
-                                    },
-                                    "assistants": {
-                                        "description": "Lista de asistencia",
-                                        "type": "array",
-                                        "items": {
-                                            "properties": {
-                                                "assistance": {
-                                                    "description": "Asistencia (1: Si, 0: No)",
-                                                    "type": "boolean",
-                                                    "example": "1"
-                                                },
-                                                "checkin": {
-                                                    "description": "Hora de entrada (hh:mm)",
-                                                    "type": "string",
-                                                    "example": "09:05"
-                                                },
-                                                "checkout": {
-                                                    "description": "Hora de salida (hh:mm)",
-                                                    "type": "string",
-                                                    "example": "18:15"
-                                                },
-                                                "reason": {
-                                                    "description": "Motivo de ausencia",
-                                                    "type": "string",
-                                                    "example": "El trabajador no pudo llegar a trabajar por paro"
-                                                },
-                                                "notes": {
-                                                    "description": "Comentarios",
-                                                    "type": "string",
-                                                    "example": "El trabajador aunque cumplio el horario, se tomo 30 minutos extra de almuerzo sin avisar"
-                                                },
-                                                "user_id": {
-                                                    "description": "Id del usuario",
-                                                    "type": "integer",
-                                                    "example": "2"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "visitors": {
-                                        "description": "Lista de visitantes",
-                                        "type": "array",
-                                        "items": {
-                                            "properties": {
-                                                "visitor_id": {
-                                                    "description": "Id del Visitante",
-                                                    "type": "integer",
-                                                    "example": "1"
-                                                },
-                                                "notes": {
-                                                    "description": "Comentarios de la visita",
-                                                    "type": "string",
-                                                    "example": "El supervisor del ANLA estuvo revisando los avances del proyecto"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
                         "application/json": {
                             "schema": {
                                 "properties": {
@@ -4079,7 +3965,121 @@
                                                     "type": "string",
                                                     "example": "El trabajador aunque cumplio el horario, se tomo 30 minutos extra de almuerzo sin avisar"
                                                 },
-                                                "user_id": {
+                                                "contractor_id": {
+                                                    "description": "Id del usuario",
+                                                    "type": "integer",
+                                                    "example": "2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "visitors": {
+                                        "description": "Lista de visitantes",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "visitor_id": {
+                                                    "description": "Id del Visitante",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "notes": {
+                                                    "description": "Comentarios de la visita",
+                                                    "type": "string",
+                                                    "example": "El supervisor del ANLA estuvo revisando los avances del proyecto"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "report_date": {
+                                        "description": "Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                                        "type": "date",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "location": {
+                                        "description": "Lugar del reporte",
+                                        "type": "string",
+                                        "example": "Proyecto X"
+                                    },
+                                    "goal": {
+                                        "description": "objetivo",
+                                        "type": "string",
+                                        "example": "Llevar a cabo exitosamente la primera fase del proyecto X"
+                                    },
+                                    "responsible": {
+                                        "description": "Responsable",
+                                        "type": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "notes": {
+                                        "description": "Comentarios",
+                                        "type": "string",
+                                        "example": "N/A"
+                                    },
+                                    "progress_img1": {
+                                        "description": "Foto de avance 1",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "progress_img2": {
+                                        "description": "Foto de avance 2",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "progress_img3": {
+                                        "description": "Foto de avance 3",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "progress_img4": {
+                                        "description": "Foto de avance 4",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer"
+                                    },
+                                    "assistants": {
+                                        "description": "Lista de asistencia",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "assistance": {
+                                                    "description": "Asistencia (1: Si, 0: No)",
+                                                    "type": "boolean",
+                                                    "example": "1"
+                                                },
+                                                "checkin": {
+                                                    "description": "Hora de entrada (hh:mm)",
+                                                    "type": "string",
+                                                    "example": "09:05"
+                                                },
+                                                "checkout": {
+                                                    "description": "Hora de salida (hh:mm)",
+                                                    "type": "string",
+                                                    "example": "18:15"
+                                                },
+                                                "reason": {
+                                                    "description": "Motivo de ausencia",
+                                                    "type": "string",
+                                                    "example": "El trabajador no pudo llegar a trabajar por paro"
+                                                },
+                                                "notes": {
+                                                    "description": "Comentarios",
+                                                    "type": "string",
+                                                    "example": "El trabajador aunque cumplio el horario, se tomo 30 minutos extra de almuerzo sin avisar"
+                                                },
+                                                "contractor_id": {
                                                     "description": "Id del usuario",
                                                     "type": "integer",
                                                     "example": "2"
@@ -4180,7 +4180,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
                                 "properties": {
                                     "report_date": {
@@ -4294,7 +4294,7 @@
                                 "type": "object"
                             }
                         },
-                        "application/json": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "properties": {
                                     "report_date": {
@@ -4422,6 +4422,66 @@
                     },
                     "405": {
                         "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/sst/assistants/{id}": {
+            "get": {
+                "tags": [
+                    "[SST] Informe SST"
+                ],
+                "summary": "Lista de los asistentes del informe SST",
+                "operationId": "App\\Http\\Controllers\\Api\\SSTReportController::listAssistants",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del informe SST",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/sst/visitors/{id}": {
+            "get": {
+                "tags": [
+                    "[SST] Informe SST"
+                ],
+                "summary": "Lista de los visitantes del informe SST",
+                "operationId": "App\\Http\\Controllers\\Api\\SSTReportController::listVisitors",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del informe SST",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consolidado del inventario."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -4780,7 +4840,7 @@
                 }
             }
         },
-        "/api/sst/visitor": {
+        "/api/visitor": {
             "get": {
                 "tags": [
                     "[SST] Visitantes"
@@ -4838,14 +4898,14 @@
                                     },
                                     "state": {
                                         "description": "Estado (1: Activo, 0: Inactivo)",
-                                        "type": "boolean",
+                                        "type": "string",
                                         "example": "1"
                                     },
                                     "project_id": {
                                         "description": "Id del proyecto",
                                         "type": "integer",
                                         "format": "int32",
-                                        "example": "2"
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -4872,7 +4932,7 @@
                 }
             }
         },
-        "/api/sst/visitor/{id}": {
+        "/api/visitor/{id}": {
             "get": {
                 "tags": [
                     "[SST] Visitantes"
@@ -4954,14 +5014,14 @@
                                     },
                                     "state": {
                                         "description": "Estado (1: Activo, 0: Inactivo)",
-                                        "type": "boolean",
+                                        "type": "string",
                                         "example": "1"
                                     },
                                     "project_id": {
                                         "description": "Id del proyecto",
                                         "type": "integer",
                                         "format": "int32",
-                                        "example": "2"
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"

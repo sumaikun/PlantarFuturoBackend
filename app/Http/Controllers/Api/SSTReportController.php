@@ -39,8 +39,6 @@ class SSTReportController extends Controller
         foreach (SSTReport::all() as $SSTReport)
         {
             $SSTReports[] = $SSTReport->setAttribute('project', $SSTReport->project);
-            $SSTReports[] = $SSTReport->setAttribute('assitants', $SSTReport->assistants);
-            $SSTReports[] = $SSTReport->setAttribute('visitors', $SSTReport->report_visitors);
         }
 
         return ( $SSTReports ) ? $SSTReports : response()->json(null, 204);
@@ -53,143 +51,6 @@ class SSTReportController extends Controller
             summary="Registrar informe SST",
 
             @OA\RequestBody(
-                @OA\MediaType(
-                    mediaType="application/x-www-form-urlencoded",
-                    @OA\Schema(
-                        @OA\Property(
-                            property="report_date",
-                            description="Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
-                            example="2019-05-26 13:45",
-                            type="date",
-                        ),
-
-                        @OA\Property(
-                            property="location",
-                            description="Lugar del reporte",
-                            example="Proyecto X",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="goal",
-                            description="objetivo",
-                            example="Llevar a cabo exitosamente la primera fase del proyecto X",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="responsible",
-                            description="Responsable",
-                            example="Marlon Gamba",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="notes",
-                            description="Comentarios",
-                            example="N/A",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="progress_img1",
-                            description="Foto de avance 1",
-                            example="",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="progress_img2",
-                            description="Foto de avance 2",
-                            example="",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="progress_img3",
-                            description="Foto de avance 3",
-                            example="",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="progress_img4",
-                            description="Foto de avance 4",
-                            example="",
-                            type="string",
-                        ),
-
-                        @OA\Property(
-                            property="project_id",
-                            type="integer",
-                            description="Id del proyecto",
-                        ),
-
-                        @OA\Property(
-                            property="assistants",
-                            type="array",
-                            @OA\Items(
-                                @OA\Property(
-                                    property="assistance",
-                                    type="boolean",
-                                    description="Asistencia (1: Si, 0: No)",
-                                    example="1"
-                                ),
-                                @OA\Property(
-                                    property="checkin",
-                                    type="string",
-                                    description="Hora de entrada (hh:mm)",
-                                    example="09:05"
-                                ),
-                                @OA\Property(
-                                    property="checkout",
-                                    type="string",
-                                    description="Hora de salida (hh:mm)",
-                                    example="18:15"
-                                ),
-                                @OA\Property(
-                                    property="reason",
-                                    type="string",
-                                    description="Motivo de ausencia",
-                                    example="El trabajador no pudo llegar a trabajar por paro"
-                                ),
-                                @OA\Property(
-                                    property="notes",
-                                    type="string",
-                                    description="Comentarios",
-                                    example="El trabajador aunque cumplio el horario, se tomo 30 minutos extra de almuerzo sin avisar"
-                                ),
-                                @OA\Property(
-                                    property="user_id",
-                                    type="integer",
-                                    description="Id del usuario",
-                                    example="2"
-                                ),
-                            ),
-                            description="Lista de asistencia"
-                        ),
-
-                        @OA\Property(
-                            property="visitors",
-                            type="array",
-                            @OA\Items(
-                                @OA\Property(
-                                    property="visitor_id",
-                                    type="integer",
-                                    description="Id del Visitante",
-                                    example="1"
-                                ),
-                                @OA\Property(
-                                    property="notes",
-                                    type="string",
-                                    description="Comentarios de la visita",
-                                    example="El supervisor del ANLA estuvo revisando los avances del proyecto"
-                                ),
-                            ),
-                            description="Lista de visitantes"
-                        ),
-                    )
-                ),
                 @OA\MediaType(
                     mediaType="application/json",
                     @OA\Schema(
@@ -297,7 +158,144 @@ class SSTReportController extends Controller
                                     example="El trabajador aunque cumplio el horario, se tomo 30 minutos extra de almuerzo sin avisar"
                                 ),
                                 @OA\Property(
-                                    property="user_id",
+                                    property="contractor_id",
+                                    type="integer",
+                                    description="Id del usuario",
+                                    example="2"
+                                ),
+                            ),
+                            description="Lista de asistencia"
+                        ),
+
+                        @OA\Property(
+                            property="visitors",
+                            type="array",
+                            @OA\Items(
+                                @OA\Property(
+                                    property="visitor_id",
+                                    type="integer",
+                                    description="Id del Visitante",
+                                    example="1"
+                                ),
+                                @OA\Property(
+                                    property="notes",
+                                    type="string",
+                                    description="Comentarios de la visita",
+                                    example="El supervisor del ANLA estuvo revisando los avances del proyecto"
+                                ),
+                            ),
+                            description="Lista de visitantes"
+                        ),
+                    )
+                ),
+                @OA\MediaType(
+                    mediaType="application/x-www-form-urlencoded",
+                    @OA\Schema(
+                        @OA\Property(
+                            property="report_date",
+                            description="Fecha y hora del reporte (YYYY-MM-DD hh:mm)",
+                            example="2019-05-26 13:45",
+                            type="date",
+                        ),
+
+                        @OA\Property(
+                            property="location",
+                            description="Lugar del reporte",
+                            example="Proyecto X",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="goal",
+                            description="objetivo",
+                            example="Llevar a cabo exitosamente la primera fase del proyecto X",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="responsible",
+                            description="Responsable",
+                            example="Marlon Gamba",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="notes",
+                            description="Comentarios",
+                            example="N/A",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="progress_img1",
+                            description="Foto de avance 1",
+                            example="",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="progress_img2",
+                            description="Foto de avance 2",
+                            example="",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="progress_img3",
+                            description="Foto de avance 3",
+                            example="",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="progress_img4",
+                            description="Foto de avance 4",
+                            example="",
+                            type="string",
+                        ),
+
+                        @OA\Property(
+                            property="project_id",
+                            type="integer",
+                            description="Id del proyecto",
+                        ),
+
+                        @OA\Property(
+                            property="assistants",
+                            type="array",
+                            @OA\Items(
+                                @OA\Property(
+                                    property="assistance",
+                                    type="boolean",
+                                    description="Asistencia (1: Si, 0: No)",
+                                    example="1"
+                                ),
+                                @OA\Property(
+                                    property="checkin",
+                                    type="string",
+                                    description="Hora de entrada (hh:mm)",
+                                    example="09:05"
+                                ),
+                                @OA\Property(
+                                    property="checkout",
+                                    type="string",
+                                    description="Hora de salida (hh:mm)",
+                                    example="18:15"
+                                ),
+                                @OA\Property(
+                                    property="reason",
+                                    type="string",
+                                    description="Motivo de ausencia",
+                                    example="El trabajador no pudo llegar a trabajar por paro"
+                                ),
+                                @OA\Property(
+                                    property="notes",
+                                    type="string",
+                                    description="Comentarios",
+                                    example="El trabajador aunque cumplio el horario, se tomo 30 minutos extra de almuerzo sin avisar"
+                                ),
+                                @OA\Property(
+                                    property="contractor_id",
                                     type="integer",
                                     description="Id del usuario",
                                     example="2"
@@ -369,22 +367,24 @@ class SSTReportController extends Controller
         {
             $newAssistant = new Assistant;
 
-            $newAssistant->assistance    = $assistant->assistance;
-            $newAssistant->checkin       = date('H:i', strtotime($assistant->checkin));
-            $newAssistant->checkout      = date('H:i', strtotime($assistant->checkout));
-            $newAssistant->reason        = $assistant->reason;
-            $newAssistant->notes         = $assistant->notes;
-            $newAssistant->contractor_id = $assistant->contractor_id;
+            $newAssistant->assistance    = $assistant['assistance'];
+            $newAssistant->checkin       = date('H:i', strtotime($assistant['checkin']));
+            $newAssistant->checkout      = date('H:i', strtotime($assistant['checkout']));
+            $newAssistant->reason        = $assistant['reason'];
+            $newAssistant->notes         = $assistant['notes'];
+            $newAssistant->contractor_id = $assistant['contractor_id'];
             $newAssistant->sst_report_id = $SSTReport->id;
+            $newAssistant->save();
         }
 
         foreach ($request->visitors as $visitor)
         {
             $reportVisitor = new ReportVisitor;
 
-            $reportVisitor->notes         = $visitor->notes;
-            $reportVisitor->visitor_id    = $visitor->visitor_id;
+            $reportVisitor->notes         = $visitor['notes'];
+            $reportVisitor->visitor_id    = $visitor['visitor_id'];
             $reportVisitor->sst_report_id = $SSTReport->id;
+            $reportVisitor->save();
         }
 
         return response()->json(["message" => "¡Informe SST registrado correctamente!", "id" => $SSTReport->id], 200);
@@ -417,11 +417,67 @@ class SSTReportController extends Controller
     {
         foreach (SSTReport::where('project_id', $id)->get() as $SSTReport)
         {
-            $SSTReports[$id] = $SSTReport->setAttribute('project', $SSTReport->project);
-            $SSTReports[$id] = $SSTReport->setAttribute('assitants', $SSTReport->assistants);
-            $SSTReports[$id] = $SSTReport->setAttribute('visitors', $SSTReport->report_visitors);
+            $SSTReports[] = $SSTReport->setAttribute('project', $SSTReport->project);
         }
         return ( $SSTReports ) ? $SSTReports : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"[SST] Informe SST"},
+            path="/api/sst/assistants/{id}",
+            summary="Lista de los asistentes del informe SST",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del informe SST",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+            @OA\Response(
+                response=200,
+                description="Consolidado del inventario."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    public function listAssistants($id)
+    {
+        $assistants = SSTReport::find($id)->assistants;
+        return ( $assistants ) ? $assistants : response()->json(null, 204);
+    }
+
+    /**
+        @OA\Get(
+            tags={"[SST] Informe SST"},
+            path="/api/sst/visitors/{id}",
+            summary="Lista de los visitantes del informe SST",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del informe SST",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+            @OA\Response(
+                response=200,
+                description="Consolidado del inventario."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+    public function listVisitors($id)
+    {
+        $visitors = SSTReport::find($id)->report_visitors;
+        return ( $visitors ) ? $visitors : response()->json(null, 204);
     }
 
     /**
@@ -438,7 +494,7 @@ class SSTReportController extends Controller
             ),
             @OA\RequestBody(
                 @OA\MediaType(
-                    mediaType="application/x-www-form-urlencoded",
+                    mediaType="application/json",
                     @OA\Schema(
                         @OA\Property(
                             property="report_date",
@@ -575,7 +631,7 @@ class SSTReportController extends Controller
                     )
                 ),
                 @OA\MediaType(
-                    mediaType="application/json",
+                    mediaType="application/x-www-form-urlencoded",
                     @OA\Schema(
                         @OA\Property(
                             property="report_date",
@@ -756,25 +812,28 @@ class SSTReportController extends Controller
             {
                 $newAssistant = new Assistant;
 
-                $newAssistant->assistance    = $assistant->assistance;
-                $newAssistant->checkin       = date('H:i', strtotime($assistant->checkin));
-                $newAssistant->checkout      = date('H:i', strtotime($assistant->checkout));
-                $newAssistant->reason        = $assistant->reason;
-                $newAssistant->notes         = $assistant->notes;
-                $newAssistant->contractor_id = $assistant->contractor_id;
+                $newAssistant->assistance    = $assistant['assistance'];
+                $newAssistant->checkin       = date('H:i', strtotime($assistant['checkin']));
+                $newAssistant->checkout      = date('H:i', strtotime($assistant['checkout']));
+                $newAssistant->reason        = $assistant['reason'];
+                $newAssistant->notes         = $assistant['notes'];
+                $newAssistant->contractor_id = $assistant['contractor_id'];
                 $newAssistant->sst_report_id = $SSTReport->id;
+                $newAssistant->save();
             }
         }
 
         if (isset($request->visitors))
         {
+            ReportVisitor::where('sst_report_id', $SSTReport->id)->delete();
             foreach ($request->visitors as $visitor)
             {
                 $reportVisitor = new ReportVisitor;
 
-                $reportVisitor->notes         = $visitor->notes;
-                $reportVisitor->visitor_id    = $visitor->visitor_id;
+                $reportVisitor->notes         = $visitor['notes'];
+                $reportVisitor->visitor_id    = $visitor['visitor_id'];
                 $reportVisitor->sst_report_id = $SSTReport->id;
+                $reportVisitor->save();
             }
         }
 

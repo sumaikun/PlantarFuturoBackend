@@ -12,7 +12,7 @@ class VisitorController extends Controller
     /**
         @OA\Get(
             tags={"[SST] Visitantes"},
-            path="/api/sst/visitor",
+            path="/api/visitor",
             summary="Mostrar lista de visitantes",
             @OA\Response(
                 response=200,
@@ -41,7 +41,7 @@ class VisitorController extends Controller
     /**
         @OA\POST(
             tags={"[SST] Visitantes"},
-            path="/api/sst/visitor",
+            path="/api/visitor",
             summary="Registrar Visitante",
             @OA\RequestBody(
                 required=false,
@@ -84,7 +84,7 @@ class VisitorController extends Controller
 
                         @OA\Property(
                             property="state",
-                            type="boolean",
+                            type="string",
                             description="Estado (1: Activo, 0: Inactivo)",
                             example="1"
                         ),
@@ -92,7 +92,7 @@ class VisitorController extends Controller
                         @OA\Property(
                             property="project_id",
                             description="Id del proyecto",
-                            example="2",
+                            example="1",
                             type="integer",
                             format="int32"
                         ),
@@ -139,7 +139,7 @@ class VisitorController extends Controller
     /**
         @OA\Get(
             tags={"[SST] Visitantes"},
-            path="/api/sst/visitor/{id}",
+            path="/api/visitor/{id}",
             summary="Ver visitantes por proyecto",
             @OA\Parameter(
                 name="id",
@@ -175,7 +175,7 @@ class VisitorController extends Controller
     /**
         @OA\PUT(
             tags={"[SST] Visitantes"},
-            path="/api/sst/visitor/{id}",
+            path="/api/visitor/{id}",
             summary="Editar Visitante",
             @OA\Parameter(
                 name="id",
@@ -226,7 +226,7 @@ class VisitorController extends Controller
 
                         @OA\Property(
                             property="state",
-                            type="boolean",
+                            type="string",
                             description="Estado (1: Activo, 0: Inactivo)",
                             example="1"
                         ),
@@ -234,7 +234,7 @@ class VisitorController extends Controller
                         @OA\Property(
                             property="project_id",
                             description="Id del proyecto",
-                            example="2",
+                            example="1",
                             type="integer",
                             format="int32"
                         ),
@@ -264,8 +264,9 @@ class VisitorController extends Controller
         )
     */
 
-    public function update(Request $request, Visitor $visitor)
+    public function update(Request $request, $id)
     {
+        $visitor = Visitor::find($id);
         $visitor->name       = $request->name;
         $visitor->document   = $request->document;
         $visitor->entity     = $request->entity;

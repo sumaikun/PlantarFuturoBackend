@@ -16,11 +16,11 @@ class SSTReport extends Model
 
     function assistants()
     {
-    	return $this->hasMany('App\Models\Assistant');
+    	return $this->hasMany('App\Models\Assistant', 'sst_report_id');
     }
 
     function report_visitors()
     {
-        return $this->hasMany('App\Models\ReportVisitor');
+        return $this->hasMany('App\Models\ReportVisitor', 'sst_report_id');
     }
 }
