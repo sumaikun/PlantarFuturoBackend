@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000"
+            "url": "http://plantarfuturo.com/test"
         },
         {
             "url": "http://localhost:8000"
@@ -15,10 +15,13 @@
             "url": "http://plantarfuturo.com/ws"
         },
         {
-            "url": "http://plantarfuturo.com/test"
+            "url": "http://localhost:8000"
         },
         {
             "url": "http://localhost:8000"
+        },
+        {
+            "url": "http://plantarfuturo.com/ws"
         },
         {
             "url": "http://swagger.local"
@@ -520,6 +523,631 @@
                 "responses": {
                     "200": {
                         "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/daily-report": {
+            "get": {
+                "tags": [
+                    "[Plant & Civil] Reporte diario"
+                ],
+                "summary": "Mostrar lista de reportes diarios",
+                "operationId": "App\\Http\\Controllers\\Api\\DailyReportController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los reportes."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Plant & Civil] Reporte diario"
+                ],
+                "summary": "Registrar Reporte diario",
+                "operationId": "App\\Http\\Controllers\\Api\\DailyReportController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "responsible": {
+                                        "description": "Responsable del reporte diario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "field_assistant": {
+                                        "description": "Auxiliar de campo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "location": {
+                                        "description": "Sitio",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Huerta N1"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha del reporte (YYYY-MM-DD)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "people_number": {
+                                        "description": "Numero de personas en campo",
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "10"
+                                    },
+                                    "type": {
+                                        "description": "Tipo (1: Establecimiento, 2: Mantenimiento)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "activities": {
+                                        "description": "Lista de actividades",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "default_activity_id": {
+                                                    "description": "Id de la actividad",
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "hours": {
+                                                    "description": "Cantidad de horas",
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "quantity": {
+                                                    "description": "Cantidad de unidad de medida",
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "responsible": {
+                                        "description": "Responsable del reporte diario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "field_assistant": {
+                                        "description": "Auxiliar de campo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "location": {
+                                        "description": "Sitio",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Huerta N1"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha del reporte (YYYY-MM-DD)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "people_number": {
+                                        "description": "Numero de personas en campo",
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "10"
+                                    },
+                                    "type": {
+                                        "description": "Tipo (1: Establecimiento, 2: Mantenimiento)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "activities": {
+                                        "description": "Lista de actividades",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "default_activity_id": {
+                                                    "description": "Id de la actividad",
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "hours": {
+                                                    "description": "Cantidad de horas",
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "quantity": {
+                                                    "description": "Cantidad de unidad de medida",
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reporte registrado."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/daily-report/{id}": {
+            "get": {
+                "tags": [
+                    "[Plant & Civil] Reporte diario"
+                ],
+                "summary": "Ver reporte diario",
+                "operationId": "App\\Http\\Controllers\\Api\\DailyReportController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del reporte",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los reportes."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Plant & Civil] Reporte diario"
+                ],
+                "summary": "Editar Reporte diario",
+                "operationId": "App\\Http\\Controllers\\Api\\DailyReportController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary Key) del Reporte diario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "responsible": {
+                                        "description": "Responsable del reporte diario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "field_assistant": {
+                                        "description": "Auxiliar de campo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "location": {
+                                        "description": "Sitio",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Huerta N1"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha del reporte (YYYY-MM-DD)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "people_number": {
+                                        "description": "Numero de personas en campo",
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "10"
+                                    },
+                                    "type": {
+                                        "description": "Tipo (1: Establecimiento, 2: Mantenimiento)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "activities": {
+                                        "description": "Lista de actividades",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "default_activity_id": {
+                                                    "description": "Id de la actividad",
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "hours": {
+                                                    "description": "Cantidad de horas",
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "quantity": {
+                                                    "description": "Cantidad de unidad de medida",
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "responsible": {
+                                        "description": "Responsable del reporte diario",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Marlon Gamba"
+                                    },
+                                    "field_assistant": {
+                                        "description": "Auxiliar de campo",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Pedro Alarcon"
+                                    },
+                                    "location": {
+                                        "description": "Sitio",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Huerta N1"
+                                    },
+                                    "report_date": {
+                                        "description": "Fecha del reporte (YYYY-MM-DD)",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-05-26 13:45"
+                                    },
+                                    "people_number": {
+                                        "description": "Numero de personas en campo",
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "10"
+                                    },
+                                    "type": {
+                                        "description": "Tipo (1: Establecimiento, 2: Mantenimiento)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    },
+                                    "activities": {
+                                        "description": "Lista de actividades",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "default_activity_id": {
+                                                    "description": "Id de la actividad",
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "hours": {
+                                                    "description": "Cantidad de horas",
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "quantity": {
+                                                    "description": "Cantidad de unidad de medida",
+                                                    "type": "integer",
+                                                    "example": "20"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reporte registrado."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/daily-report/project/{id}": {
+            "get": {
+                "tags": [
+                    "[Plant & Civil] Reporte diario"
+                ],
+                "summary": "Ver reportes diarios de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\DailyReportController::showByProject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los reportes."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/default-activity": {
+            "get": {
+                "tags": [
+                    "[Plantación] Actividad"
+                ],
+                "summary": "Mostrar lista de actvidades",
+                "operationId": "App\\Http\\Controllers\\Api\\DefaultActivityController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los actividades."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[Plantación] Actividad"
+                ],
+                "summary": "Registrar Actividad",
+                "operationId": "App\\Http\\Controllers\\Api\\DefaultActivityController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre de la actividad",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Rocería"
+                                    },
+                                    "measuring_unit": {
+                                        "description": "Unidad de la medida de la actividad",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "m2"
+                                    },
+                                    "activity_type_id": {
+                                        "description": "Id del tipo de actividad (1: Establecimiento, 2: Mantenimiento, 3: Civil)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Actividad registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/default-activity/{id}": {
+            "get": {
+                "tags": [
+                    "[Plantación] Actividad"
+                ],
+                "summary": "Ver Actividades segun tipo",
+                "operationId": "App\\Http\\Controllers\\Api\\DefaultActivityController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del tipo (1: Establecimiento, 2: Mantenimiento, 3: Civil, 4: Plantación)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los actividades."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[Plantación] Actividad"
+                ],
+                "summary": "Editar Actividad",
+                "operationId": "App\\Http\\Controllers\\Api\\DefaultActivityController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary Key) de la Actividad",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre de la actividad",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Rocería"
+                                    },
+                                    "measuring_unit": {
+                                        "description": "Unidad de la medida de la actividad",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "m2"
+                                    },
+                                    "activity_type_id": {
+                                        "description": "Id del tipo de actividad (1: Establecimiento, 2: Mantenimiento, 3: Civil, 4: Plantación)",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Actividad editada."
                     },
                     "400": {
                         "description": "Request mal mandado."
@@ -4512,6 +5140,478 @@
                 "responses": {
                     "200": {
                         "description": "Consolidado del inventario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/tool": {
+            "get": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Mostrar lista de herramientas",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::index",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los herramientas."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Registrar una nueva Herramienta",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::store",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la Herramienta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "MQ0001"
+                                    },
+                                    "name": {
+                                        "description": "Nombre de la herramienta",
+                                        "type": "string",
+                                        "example": "Motosierra"
+                                    },
+                                    "description": {
+                                        "description": "Descripción",
+                                        "type": "string",
+                                        "example": "Herramienta necesaria para el aprovechamiento de los arboles"
+                                    },
+                                    "type": {
+                                        "description": "Tipo de herramienta (0: NO consume combustible 1: SI consume combustible)",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "model": {
+                                        "description": "Modelo",
+                                        "type": "string",
+                                        "example": "Modelo 2015"
+                                    },
+                                    "customer": {
+                                        "description": "Cliente",
+                                        "type": "string",
+                                        "example": "Cliente"
+                                    },
+                                    "workfront": {
+                                        "description": "Frente de trabajo",
+                                        "type": "string",
+                                        "example": "frente de trabajo #1"
+                                    },
+                                    "condition": {
+                                        "description": "Condicion (1: Buena, 2: Media, 3: Mala(",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "provider": {
+                                        "description": "Proveedor",
+                                        "type": "string",
+                                        "example": "ElectroMaquinaria S.A.S"
+                                    },
+                                    "remaining_service": {
+                                        "description": "Servicio restante",
+                                        "type": "string",
+                                        "example": "5 temporadas"
+                                    },
+                                    "buy_date": {
+                                        "description": "Fecha de la compra de la herramienta (YYYY-MM-DD)",
+                                        "type": "date",
+                                        "example": "2019-07-15"
+                                    },
+                                    "price": {
+                                        "description": "Valor inicial",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "2563000"
+                                    },
+                                    "tool_category_id": {
+                                        "description": "Id de la categoria de herramientas",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "2563000"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/tool/{id}": {
+            "get": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Ver Herramienta",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la herramienta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los herramientas."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Editar Herramienta",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id (Primary Key) de la Herramienta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "code": {
+                                        "description": "Codigo de la Herramienta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "MQ0001"
+                                    },
+                                    "name": {
+                                        "description": "Nombre de la herramienta",
+                                        "type": "string",
+                                        "example": "Motosierra"
+                                    },
+                                    "description": {
+                                        "description": "Descripción",
+                                        "type": "string",
+                                        "example": "Herramienta necesaria para el aprovechamiento de los arboles"
+                                    },
+                                    "type": {
+                                        "description": "Tipo de herramienta (0: NO consume combustible 1: SI consume combustible)",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "model": {
+                                        "description": "Modelo",
+                                        "type": "string",
+                                        "example": "Modelo 2015"
+                                    },
+                                    "customer": {
+                                        "description": "Cliente",
+                                        "type": "string",
+                                        "example": "Cliente"
+                                    },
+                                    "workfront": {
+                                        "description": "Frente de trabajo",
+                                        "type": "string",
+                                        "example": "frente de trabajo #1"
+                                    },
+                                    "condition": {
+                                        "description": "Condicion (1: Buena, 2: Media, 3: Mala(",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "provider": {
+                                        "description": "Proveedor",
+                                        "type": "string",
+                                        "example": "ElectroMaquinaria S.A.S"
+                                    },
+                                    "remaining_service": {
+                                        "description": "Servicio restante",
+                                        "type": "string",
+                                        "example": "5 temporadas"
+                                    },
+                                    "buy_date": {
+                                        "description": "Fecha de la compra de la herramienta (YYYY-MM-DD)",
+                                        "type": "date",
+                                        "example": "2019-07-15"
+                                    },
+                                    "price": {
+                                        "description": "Valor inicial",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "2563000"
+                                    },
+                                    "tool_category_id": {
+                                        "description": "Id de la categoria de herramientas",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "2563000"
+                                    },
+                                    "project_id": {
+                                        "description": "Id del proyecto",
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/tool/project/{id}": {
+            "get": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Mostrar lista de herramientas de un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::toolsByProject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los herramientas."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/tool/project/pending/{id}": {
+            "get": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Mostrar lista de herramientas trasladadas de otro proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::toolsPendingByProject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del proyecto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los herramientas."
+                    },
+                    "204": {
+                        "description": "No hay resultados que mostrar."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/tool/transfer": {
+            "post": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Traslado de herramientas a un proyecto",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::toolTransfer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "starting_project": {
+                                        "description": "Id del proyecto de partida",
+                                        "type": "integer"
+                                    },
+                                    "project_destination": {
+                                        "description": "Id del proyecto destino",
+                                        "type": "integer"
+                                    },
+                                    "transfer_date": {
+                                        "description": "Fecha del traslado de la herramienta (YYYY-MM-DD)",
+                                        "type": "date"
+                                    },
+                                    "tools": {
+                                        "description": "Users ID's",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "items": {}
+                                        }
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "project_id": 3,
+                                    "transfer_date": "2019-07-15",
+                                    "tools": [
+                                        1,
+                                        2
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/tool/receiving": {
+            "post": {
+                "tags": [
+                    "[CR] Herramienta"
+                ],
+                "summary": "Recepcion de una herramienta",
+                "operationId": "App\\Http\\Controllers\\Api\\ToolController::recievingTool",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "tool_asignation_id": {
+                                        "description": "Id de la asignacion de la herramienta",
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "1"
+                                    },
+                                    "transfer_notes": {
+                                        "description": "Observaciones sobre el estado de la herramienta al momento del translado",
+                                        "type": "string",
+                                        "example": "Se evidencia que la herramienta a pesar de estar un poco desgastada, se mantiene en buen estado."
+                                    },
+                                    "evidence_photo": {
+                                        "description": "Foto de evidencia",
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proyecto registrada."
+                    },
+                    "400": {
+                        "description": "Request mal mandado."
+                    },
+                    "401": {
+                        "description": "Ingreso no autorizado."
+                    },
+                    "405": {
+                        "description": "metodo HTTP no permitido."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

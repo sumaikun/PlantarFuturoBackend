@@ -15,7 +15,7 @@ class CreateToolAsignationsTable extends Migration
     {
         Schema::create('tool_asignations', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('state', 1)->nullable(); //1: Recibido, 2: Pendiente
+            $table->char('state', 1)->nullable(); //1: Recibido, 2: Pendiente 3: Trasladado
             $table->date('checkin')->nullable();
             $table->date('checkout')->nullable();
             $table->longText('transfer_notes')->nullable();

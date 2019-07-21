@@ -18,9 +18,9 @@ class CreateDailyReportsTable extends Migration
             $table->string('responsible')->nullable();
             $table->string('field_assistant')->nullable();
             $table->string('location')->nullable();
-            $table->dateTime('report_date')->nullable();
+            $table->date('report_date')->nullable();
             $table->smallInteger('people_number')->nullable();
-            $table->char('type')->nullable();
+            $table->char('type', 1)->nullable();
 
             //Foreigns
             $table->integer('project_id')->unsigned();

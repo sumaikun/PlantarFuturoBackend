@@ -70,8 +70,14 @@ Route::group(['middleware' => 'cors'], function()
 	Route::resource ('sst', 'Api\SSTReportController');
 	Route::get 		('sst/assistants/{id}', 'Api\SSTReportController@listAssistants');
 	Route::get 		('sst/visitors/{id}', 'Api\SSTReportController@listVisitors');
-
 	Route::resource ('visitor', 'Api\VisitorController');
+
+
+	/*Plantacion*/
+	Route::resource ('default-activity', 'Api\DefaultActivityController');
+	Route::resource ('daily-report', 'Api\DailyReportController');
+	Route::get 		('daily-report/project/{id}', 'Api\DailyReportController@showByProject');
+
 
 	Route::get('timezone', function()
 	{
