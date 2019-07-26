@@ -1687,6 +1687,35 @@ class ForestUnitController extends Controller
     public function show(ForestUnit $forestUnit)
     {
         $forestUnit->setAttribute('functional_unit', $forestUnit->functional_unit);
+        $path = '/home/plantarf/public_html/ws/assets/images/';
+        if (isset($forestUnit->id_image) && !empty($forestUnit->id_image))
+        {
+            $imageName = "ID-IF-".$forestUnit->id.".png";
+            $fileName = '/home/plantarf/public_html/ws/assets/images/' . $imageName;
+            $this->base64ToImage($forestUnit->id_image, $fileName, $imageName);
+            $forestUnit->setAttribute('idImage', 'http://plantarfuturo.com/ws/assets/images/' . $imageName);
+        }
+        if (isset($forestUnit->general_image) && !empty($forestUnit->general_image))
+        {
+            $imageName = "General-IF-".$forestUnit->id.".png";
+            $fileName = '/home/plantarf/public_html/ws/assets/images/' . $imageName;
+            $this->base64ToImage($forestUnit->general_image, $fileName, $imageName);
+            $forestUnit->setAttribute('generalImage', 'http://plantarfuturo.com/ws/assets/images/' . $imageName);
+        }
+        if (isset($forestUnit->reference_image) && !empty($forestUnit->reference_image))
+        {
+            $imageName = "Reference-IF-".$forestUnit->id.".png";
+            $fileName = '/home/plantarf/public_html/ws/assets/images/' . $imageName;
+            $this->base64ToImage($forestUnit->reference_image, $fileName, $imageName);
+            $forestUnit->setAttribute('referenceImage', 'http://plantarfuturo.com/ws/assets/images/' . $imageName);
+        }
+        if (isset($forestUnit->after_image) && !empty($forestUnit->after_image))
+        {
+            $imageName = "After-IF-".$forestUnit->id.".png";
+            $fileName = '/home/plantarf/public_html/ws/assets/images/' . $imageName;
+            $this->base64ToImage($forestUnit->after_image, $fileName, $imageName);
+            $forestUnit->setAttribute('afterImage', 'http://plantarfuturo.com/ws/assets/images/' . $imageName);
+        }
 
         return ( $forestUnit ) ? $forestUnit : response()->json(null, 204);
     }
@@ -1728,10 +1757,12 @@ class ForestUnitController extends Controller
             $forestUnit->setAttribute('date', $forestUnit->updated_at->format("d/m/Y"));
         else
             $forestUnit->setAttribute('date', date("d/m/Y", $forestUnit->updated_at));
+        
         $forestUnit->setAttribute('dap', round(($forestUnit->cap_cm / pi()) / 100, 2));
         $basalArea = (pi() / 4) * pow($forestUnit->dap, 2);
         $forestUnit->setAttribute('commercial_volume_m3', round($forestUnit->commercial_heigth_m * $basalArea * 0.7, 2));
         $forestUnit->setAttribute('total_volume_m3', round($forestUnit->total_heigth_m * $basalArea * 0.7, 2));
+
         $path = '/home/plantarf/public_html/ws/assets/images/';
         if (isset($forestUnit->id_image) && !empty($forestUnit->id_image))
         {

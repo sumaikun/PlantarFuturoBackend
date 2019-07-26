@@ -27,6 +27,7 @@ Route::group(['middleware' => 'cors'], function()
 	Route::get      ('project/users/{id}',					'Api\ProjectController@users');
 	Route::get 		('project/export/{id}',		  			'Api\ProjectController@export');
 	Route::post 	('project/massive',						'Api\ProjectController@massive');
+	Route::post 	('project/xy',							'Api\ProjectController@massiveXY');
 	Route::resource ('functional-unit',						'Api\FunctionalUnitController');
 	Route::get 	    ('functional-unit/forest-units/{id}',	'Api\FunctionalUnitController@forestUnits');
 	Route::resource ('forest-unit',							'Api\ForestUnitController');

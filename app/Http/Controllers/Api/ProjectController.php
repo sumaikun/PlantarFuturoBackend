@@ -322,14 +322,13 @@ class ProjectController extends Controller
     */
     public function forestUnits($id)
     {
+    	$forestUnits = [];
         foreach (Project::find($id)->functional_units as $functionalUnit)
         {
-            if ($functionalUnit->forest_units)
-            {
-                $forestUnits[] = $functionalUnit->forest_units;
-            }
+        	$functionalForestUnits = ForestUnit::select('id','code','common_name','scientific_name','family','cap_cm','total_heigth_m','commercial_heigth_m','x_cup_diameter_m','y_cup_diameter_m','north_coord','east_coord','waypoint','epiphytes','condition','health_status','origin','cup_density','products','margin','treatment','state','resolution','start_treatment','end_treatment','functional_unit_id','note','created_at','updated_at')->where('functional_unit_id', $functionalUnit->id)->get();
+                $forestUnits[] = $functionalForestUnits;
         }
-        return ( $forestUnits ) ? $forestUnits : response()->json(null, 204);
+        return ( !empty($forestUnits) ) ? $forestUnits : response()->json(null, 204);
     }
 
     /**
@@ -363,15 +362,13 @@ class ProjectController extends Controller
     public function users($id)
     {
         $contractors = Contractor::where('project_id', $id)->get();
-        $users = [];
+        $userIds = [];
         foreach ($contractors as $contractor)
         {
-            if (!in_array($contractor->user, $users))
-            {
-                $contractor->user->setAttribute('contractor_id', $contractor->id);
-                $users[] = $contractor->user;
-            }
+            if (!in_array($contractor->user->id, $userIds))
+                array_push($userIds, $contractor->user->id);
         }
+        $users = User::whereIn('id', $userIds)->get();
         return ( $users ) ? $users : response()->json(null, 204);
     }
 
@@ -823,7 +820,6 @@ class ProjectController extends Controller
         
         foreach ($request->excelData as $unit)
         {
-            $forestUnit = new ForestUnit;
             try
             {
                 $functionalUnit = FunctionalUnit::where('code', $unit["uf"])->where('project_id', $request->projectId)->first();
@@ -836,12 +832,20 @@ class ProjectController extends Controller
 
                     $functionalUnit->save();
                 }
-
-                if ($this->validateCode($functionalUnit->id, $unit["arbol"]))
+				
+				$forestUnit = ForestUnit::where('code', $unit["arbol"])->where('functional_unit_id', $functionalUnit->id)->first();
+                
+                if (!$forestUnit)
                 {
+                	$forestUnit = new ForestUnit;
+                	if (!$this->validateCode($functionalUnit->id, $unit["arbol"]))
+                		return;
+                }
+
+                
                     $forestUnit->code                = isset($unit["arbol"]) ? $unit["arbol"] : null;
                     $forestUnit->common_name         = isset($unit["comun"]) ? $unit["comun"] : null;
-                    $forestUnit->scientific_name     = isset($unit["cientifico"]) ? $unit["cientifico"] : null;
+                    $forestUnit->scientific_name     = isset($unit["especie"]) ? $unit["especie"] : null;
                     $forestUnit->family              = isset($unit["familia"]) ? $unit["familia"] : null;
                     $forestUnit->cap_cm              = isset($unit["cap"]) ? $unit["cap"] : null;
                     $forestUnit->total_heigth_m      = isset($unit["altura_total"]) ? $unit["altura_total"] : null;
@@ -867,7 +871,6 @@ class ProjectController extends Controller
                     $forestUnit->functional_unit_id  = $functionalUnit->id;
 
                     $forestUnit->save();
-                }
                 
             }
             catch (Exception $e)
@@ -876,6 +879,102 @@ class ProjectController extends Controller
             }
         }
         return response()->json(["message" => "¡Carga masiva exitosa!"], 200);
+    }
+
+    /**
+        @OA\POST(
+            tags={"Proyecto"},
+            path="/api/project/xy",
+            summary="Carga masiva de coordenadas",
+            @OA\Parameter(
+                name="id",
+                in="path",
+                description="id del proyecto",
+                example= "1",
+                required= true,
+                @OA\Schema(type="integer", format="int32")
+            ),
+            @OA\RequestBody(
+                @OA\MediaType(
+                    mediaType="application/json",
+                    @OA\Schema(
+                        @OA\Property(
+                            property="arbol",
+                            type="string"
+                        ),
+                        @OA\Property(
+                            property="coor_x",
+                            type="string"
+                        ),
+                        @OA\Property(
+                            property="coor_y",
+                            type="string"
+                        ),
+                        example={
+                            "excelData": 
+                            { 
+                                "arbol": "F4",
+                                "coor_x": "1053823",
+                                "coor_y": "956015",
+                            },
+                            "projectId": 2
+                        }
+                    )
+                )
+            ),
+            @OA\Response(
+                response=200,
+                description="Muestra el resultado."
+            ),
+            @OA\Response(
+                response=400,
+                description="Indica que no se mandarón bien los parametros."
+            ),
+            @OA\Response(
+                response=405,
+                description="Metodo no permitido."
+            ),
+            @OA\Response(
+                response="default",
+                description="Ha ocurrido un error."
+            )
+        )
+    */
+
+    public function massiveXY(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'excelData' => 'required|array',
+            'projectId'  => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+
+            $validatorErrors = array();
+
+            foreach ($validator->errors()->getMessages() as $item)
+            {
+                array_push($validatorErrors, $item[0]);
+            }
+
+            return response()->json($validatorErrors, 400);
+        }
+        
+        foreach ($request->excelData as $unit)
+        {
+            try
+            {
+                $forestUnit = ForestUnit::where('code', $unit["arbol"])->first();
+                $forestUnit->north_coord         = isset($unit["coor_x"]) ? $unit["coor_x"] : null;
+                $forestUnit->east_coord          = isset($unit["coor_y"]) ? $unit["coor_y"] : null;
+                $forestUnit->save();
+            }
+            catch (Exception $e)
+            {
+                
+            }
+        }
+        return response()->json(["message" => "¡Carga de coordenadas exitosa!"], 200);
     }
 
     public function validateCode($functional_unit_id, $code)

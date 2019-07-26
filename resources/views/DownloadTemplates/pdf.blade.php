@@ -78,9 +78,9 @@
 	<tr>
 		<td style="border-left: 1px solid #000000" height="15" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000">Coordenadas:</font></td>
 		<td style="border-bottom: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000">x:</font></td>
-		<td style="border-bottom: 1px solid #000000" align="left" valign=middle bgcolor="#FFFFFF" sdval="1142274" sdnum="1033;0;0"><font color="#000000">{{ $project->east_coord }}</font></td>
+		<td style="border-bottom: 1px solid #000000" align="left" valign=middle bgcolor="#FFFFFF" sdval="1142274" sdnum="1033;0;0"><font color="#000000">{{ $east_coord }}</font></td>
 		<td style="border-bottom: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF">y: </td>
-		<td style="border-bottom: 1px solid #000000" align="left" valign=middle bgcolor="#FFFFFF" sdval="1155849" sdnum="1033;0;0"><font color="#000000">{{ $project->north_coord }}</font></td>
+		<td style="border-bottom: 1px solid #000000" align="left" valign=middle bgcolor="#FFFFFF" sdval="1155849" sdnum="1033;0;0"><font color="#000000">{{ $north_coord }}</font></td>
 		<td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000">Responsable:    </font></td>
 		<td style="border-bottom: 1px solid #000000; border-right: 1px solid #000000" colspan=3 align="center" valign=bottom bgcolor="#FFFFFF" sdnum="1033;0;0.00"><font color="#000000">{{ $project->responsible }}</font></td>
 		</tr>
@@ -131,8 +131,8 @@
 		</tr>
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000" height="15" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000">Di&aacute;metro de copa (m):</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="left" valign=bottom ><font color="#000000"><b>X: </b>{{ $x_cup_diameter_m }}<b> Y: </b>{{ $y_cup_diameter_m }}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000"><br></font></td>
-		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="center" valign=bottom ><font color="#000000"><b>X: </b>{{ $x_cup_diameter_m }}<b> Y: </b>{{ $y_cup_diameter_m }}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="left" valign=bottom><font color="#000000"><br></font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom bgcolor="#FFFFFF"><font color="#000000"><br></font></td>
 			<td style="border-top: 1px solid #000000; border-left: 1px solid #000000" align="left" valign=middle bgcolor="#FFFFFF">
@@ -215,9 +215,6 @@
 				@if(isset($generalImage))
 					<img src="http://plantarfuturo.com/ws/assets/images/{{ $generalImage }}" height="200" style="width: 15%;">
 				@endif
-				@if(isset($referenceImage))
-					<img src="http://plantarfuturo.com/ws/assets/images/{{ $referenceImage }}" height="200" style="width: 15%;">
-				@endif
 			@elseif($project->phase == 2)
 				@if(isset($idImage))
 					<img src="http://plantarfuturo.com/ws/assets/images/{{ $idImage }}" height="200" style="width: 20%;">
@@ -232,6 +229,11 @@
 			@endif
 		</td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=5 rowspan=17 align="center" valign=middle bgcolor="#FFFFFF">
+			@if($project->phase == 1)
+				@if(isset($referenceImage))
+					<img src="http://plantarfuturo.com/ws/assets/images/{{ $referenceImage }}" height="200" style="width: 15%;">
+				@endif
+			@endif
 			@if($project->phase == 2)
 				@if(isset($afterImage))
 					<img src="http://plantarfuturo.com/ws/assets/images/{{ $afterImage }}" height="200">
